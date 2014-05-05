@@ -1,4 +1,4 @@
-wmpm2014
-========
+wmpm2014 - Group 2 - FlightFinder
+==================================
 
-WMPM2014 Playground
+This repository contains project files for the course WMPM at TU Vienna.
