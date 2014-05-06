@@ -1,6 +1,6 @@
 DATE & TIME		TASK DESCRIPTION				DURATION
 =========================================================================================
-27/05/2014		ProjectProposal						2h
+27/04/2014		ProjectProposal						2h
 30/04/2014		MR1_Meeting							1h
 01/05/2014		ProjectDesign_Meeting				4h
 05/05/2014		Skype Meeting						0.5h
