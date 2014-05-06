@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+  <camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
+    <route>
+        <from uri="hazelcast"/>
+        <recipientList>
+            <simple></simple>
+        </recipientList>
+        <aggregate strategyRef="agregationStrategy" customId="true" id="DepartureAgregation">
+            <correlationExpression>
+                <simple></simple>
+            </correlationExpression>
+            <completionPredicate>
+                <simple></simple>
+            </completionPredicate>
+            <completionTimeout>
+                <simple></simple>
+            </completionTimeout>
+            <completionSize>
+                <simple></simple>
+            </completionSize>
+            <optimisticLockRetryPolicy/>
+            <pollEnrich uri="jdbc:"/>
+            <bean customId="true" id="transformToHTML"/>
+            <to uri="mail"/>
+        </aggregate>
+        <sort>
+            <simple></simple>
+        </sort>
+        <filter customId="true" id="Best_2_Offers">
+            <simple></simple>
+            <recipientList>
+                <simple></simple>
+            </recipientList>
+            <to uri="facebook"/>
+            <to uri="twitter"/>
+        </filter>
+    </route>
+</camelContext>
+
+</beans>

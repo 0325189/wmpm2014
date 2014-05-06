@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+  <camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
+    <route shutdownRoute="Default">
+        <from uri="ftp"/>
+        <choice>
+            <when>
+                <simple>${header.CamelFileName} regex '^.*xml$'</simple>
+                <split customId="true" id="SplitOffers">
+                    <simple></simple>
+                    <to uri="jms:Offers"/>
+                </split>
+            </when>
+            <when>
+                <simple>${header.CamelFileName} regex '^.*(csv|csl)$'</simple>
+                <transform customId="true" id="CSV2XML">
+                    <simple>CSV2XML</simple>
+                </transform>
+                <split customId="true" id="SplitOffers">
+                    <simple></simple>
+                    <to uri="jms:Offers"/>
+                </split>
+            </when>
+            <otherwise>
+                <to uri="jms:BadMessage"/>
+                <stop/>
+            </otherwise>
+        </choice>
+    </route>
+    <route>
+        <from uri="http://"/>
+        <transform customId="true" id="JSON2XML">
+            <simple></simple>
+        </transform>
+        <split customId="true" id="SplitOffers">
+            <simple></simple>
+            <to uri="jms:Offers"/>
+        </split>
+    </route>
+    <route>
+        <from uri="SMTP"/>
+        <split customId="true" id="SplitAttachments">
+            <simple></simple>
+            <choice>
+                <when>
+                    <simple>${header.CamelFileName} regex '^.*xml$'</simple>
+                    <to uri="jms:Offers"/>
+                </when>
+                <when>
+                    <simple>${header.CamelFileName} regex '^.*(csv|csl)$'</simple>
+                    <transform customId="true" id="CSV2XML">
+                        <simple></simple>
+                    </transform>
+                    <to uri="jms:Offers"/>
+                </when>
+                <otherwise>
+                    <to uri="jms:BadMessage"/>
+                    <stop/>
+                </otherwise>
+            </choice>
+        </split>
+    </route>
+</camelContext>
+
+</beans>
