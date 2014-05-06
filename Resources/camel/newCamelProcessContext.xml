@@ -7,7 +7,7 @@
 
   <camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
     <route>
-        <from uri="jms:Offers"/>
+        <from uri="activemq:Offers"/>
         <filter customId="true" id="FilterMessages">
             <simple></simple>
             <pollEnrich uri="file:HotelOffers"/>

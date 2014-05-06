@@ -8,12 +8,15 @@
   <camelContext trace="false" xmlns="http://camel.apache.org/schema/spring">
     <route shutdownRoute="Default">
         <from uri="ftp"/>
+        <validate customId="true" id="validateFile">
+            <simple></simple>
+        </validate>
         <choice>
             <when>
                 <simple>${header.CamelFileName} regex '^.*xml$'</simple>
                 <split customId="true" id="SplitOffers">
                     <simple></simple>
-                    <to uri="jms:Offers"/>
+                    <to uri="activemq:Offers"/>
                 </split>
             </when>
             <when>
@@ -23,11 +26,11 @@
                 </transform>
                 <split customId="true" id="SplitOffers">
                     <simple></simple>
-                    <to uri="jms:Offers"/>
+                    <to uri="activemq:Offers"/>
                 </split>
             </when>
             <otherwise>
-                <to uri="jms:BadMessage"/>
+                <to uri="activemq:BadMessage"/>
                 <stop/>
             </otherwise>
         </choice>
@@ -37,29 +40,35 @@
         <transform customId="true" id="JSON2XML">
             <simple></simple>
         </transform>
+        <validate customId="true" id="validateFile">
+            <simple></simple>
+        </validate>
         <split customId="true" id="SplitOffers">
             <simple></simple>
-            <to uri="jms:Offers"/>
+            <to uri="activemq:Offers"/>
         </split>
     </route>
     <route>
-        <from uri="SMTP"/>
+        <from uri="imap"/>
         <split customId="true" id="SplitAttachments">
             <simple></simple>
+            <validate customId="true" id="validateFiles">
+                <simple></simple>
+            </validate>
             <choice>
                 <when>
                     <simple>${header.CamelFileName} regex '^.*xml$'</simple>
-                    <to uri="jms:Offers"/>
+                    <to uri="activemq:Offers"/>
                 </when>
                 <when>
                     <simple>${header.CamelFileName} regex '^.*(csv|csl)$'</simple>
                     <transform customId="true" id="CSV2XML">
                         <simple></simple>
                     </transform>
-                    <to uri="jms:Offers"/>
+                    <to uri="activemq:Offers"/>
                 </when>
                 <otherwise>
-                    <to uri="jms:BadMessage"/>
+                    <to uri="activemq:BadMessage"/>
                     <stop/>
                 </otherwise>
             </choice>
