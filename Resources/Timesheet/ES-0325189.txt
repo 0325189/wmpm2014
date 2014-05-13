@@ -1,19 +1,20 @@
 DATE & TIME			TASK DESCRIPTION											DURATION
 =========================================================================================
-2014-04-23			Team Meeting (SB, IG, ES)									2,0 h	
-2014-04-25			Team Meeting (SB, MS, ES)									2,0 h
-2014-04-27			Project Proposal - BPM										2,0 h
-2014-04-27			Project Proposal - SampleApp								1,0 h
-2014-04-30			Management Review 1 / IR1									1,0 h
-2014-05-01			Team Meeting (Team)											4,0 h
-2014-05-05			Skype Meeting												0,5 h
-2014-05-05			GitHub creation; Links for IDE and task management			1,5 h
-2014-05-06			Skype Meeting												0,5 h
-2014-05-06			Project Proposal - new BPM for PP (Bonita)					4,0 h
-2014-05-06			Feedback 													0,5 h
-2014-05-09			Camel architecture study									1,0 h
-2014-05-10			Camel examples 												1,5 h
-2014-05-13			Software project definition									1,0 h 
+2014-04-23			Team Meeting (SB, IG, ES)									2,00 h	
+2014-04-25			Team Meeting (SB, MS, ES)									2,00 h
+2014-04-27			Project Proposal - BPM										2,00 h
+2014-04-27			Project Proposal - SampleApp								1,00 h
+2014-04-30			Management Review 1 / IR1									1,00 h
+2014-05-01			Team Meeting (Team)											4,00 h
+2014-05-05			Skype Meeting												0,50 h
+2014-05-05			GitHub creation; Links for IDE and task management			1,50 h
+2014-05-06			Skype Meeting												0,50 h
+2014-05-06			Project Proposal - new BPM for PP (Bonita)					4,00 h
+2014-05-06			Feedback 													0,50 h
+2014-05-09			Camel architecture study									1,00 h
+2014-05-10			Camel examples 												1,50 h
+2014-05-13			Software project definition									1,00 h 
+2014-05-13			Skype meeting												0,75 h
 
 
 
@@ -25,4 +26,4 @@ DATE & TIME			TASK DESCRIPTION											DURATION
 
 
 =========================================================================================
-						TOTAL WORKING HOURS:									22,50 h
+						TOTAL WORKING HOURS:									23,25 h
