@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>at.ac.tuwien.wmpm2014</groupId>
+  <artifactId>wmpm2014-sample-camel-app</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <!-- Define the used camel version --> 
+  <properties>
+  	<camel.version>2.13.0</camel.version>
+  </properties>
+  
+  <!-- Dependencies for our project -->
+  <dependencies>
+  	<dependency>
+  		<groupId>org.apache.camel</groupId>
+  		<artifactId>camel-core</artifactId>
+  		<version>${camel.version}</version>
+  	</dependency>
+  	
+  	<dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-csv</artifactId>
+      <version>${camel.version}</version>
+    </dependency>
+    
+  </dependencies>
+  
+  <build>
+  
+  	<defaultGoal>install</defaultGoal>
+  	
+  	<plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+
+      <!-- allows routing to be ran via 'mvn camel:run' -->
+      <plugin>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-maven-plugin</artifactId>
+        <version>2.13.0</version>
+       	
+       	<!-- IMPORTANT !!.. if you don't define the main class where the 
+       		CamelContext is started, this plugin will look for SpringContext first -->
+       		
+       	<configuration>
+        	<mainClass>SampleApp.SampleApp</mainClass>
+        </configuration>
+        
+      </plugin>
+    </plugins>
+    
+  </build>
+</project>
