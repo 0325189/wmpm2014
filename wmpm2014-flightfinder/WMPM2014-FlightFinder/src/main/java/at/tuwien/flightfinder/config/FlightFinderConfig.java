@@ -1,6 +1,8 @@
 package at.tuwien.flightfinder.config;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.RoutesBuilder;
+import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.spring.SpringCamelContext;
 import org.apache.camel.spring.javaconfig.CamelConfiguration;
 import org.apache.camel.spring.javaconfig.Main;
@@ -15,6 +17,8 @@ public class FlightFinderConfig extends CamelConfiguration implements Initializi
 	 */
 	public static void main(String[] args) throws Exception {
 		new Main().run(args);
+		CamelContext context = new DefaultCamelContext();
+		context.addRoutes(new FtpRouteConfig());
 	}
 	
 	/**
