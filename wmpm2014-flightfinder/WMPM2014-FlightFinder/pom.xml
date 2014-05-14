@@ -65,8 +65,13 @@
       		<version>4.8.1</version>
       		<scope>test</scope>
     	</dependency>
-    
-  </dependencies>
+
+    	<dependency>
+    		<groupId>org.apache.camel</groupId>
+    		<artifactId>camel-ftp</artifactId>
+    		<version>${camel.version}</version>
+    	</dependency>
+  	</dependencies>
   
   <build>
   
