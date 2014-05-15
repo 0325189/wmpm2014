@@ -15,6 +15,11 @@ DATE & TIME			TASK DESCRIPTION											DURATION
 2014-05-10			Camel examples 												1,50 h
 2014-05-13			Software project definition									1,00 h 
 2014-05-13			Skype meeting												0,75 h
+2014-05-14			Spring and Camel - tryouts 									2,00 h
+2014-05-14			Definition of new project structure that should support
+					Spring and Camel											1,00 h
+2014-05-15			FlightFinderSimple and FlightFinder apps; Spring and 
+					cleanup work on project structure							4,00 h
 
 
 
@@ -26,4 +31,4 @@ DATE & TIME			TASK DESCRIPTION											DURATION
 
 
 =========================================================================================
-						TOTAL WORKING HOURS:									23,25 h
+						TOTAL WORKING HOURS:									30,25 h
