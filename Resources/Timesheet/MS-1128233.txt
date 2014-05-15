@@ -6,6 +6,9 @@ DATE & TIME		TASK DESCRIPTION				DURATION
 05/05/2014		Skype Meeting						0.5h
 06/05/2014		Skype Meeting						0.5h
 06/05/2014		ProjectProposal						4h
+12/05/2014		Research							4h
+13/05/2014		Skype Meeting						1h
+14/05/2014		FtpRoute + activeMQ					4h
 
 
 
@@ -21,4 +24,4 @@ DATE & TIME		TASK DESCRIPTION				DURATION
 
 
 =========================================================================================
-						TOTAL WORKING HOURS:	12h
+						TOTAL WORKING HOURS:	21h
