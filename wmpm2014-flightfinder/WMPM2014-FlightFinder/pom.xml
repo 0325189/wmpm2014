@@ -95,6 +95,13 @@
       		<artifactId>camel-facebook</artifactId>
       		<version>${camel.version}</version>
     	</dependency>
+    	
+    	<!-- Camel XMLJSON -->
+    	<dependency>
+      		<groupId>org.apache.camel</groupId>
+      		<artifactId>camel-xmljson</artifactId>
+      		<version>${camel.version}</version>
+    	</dependency>
 
 		<!-- Simple Logging Facade -->
     	<dependency>
