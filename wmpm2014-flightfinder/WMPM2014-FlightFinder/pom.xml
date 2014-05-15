@@ -132,6 +132,11 @@
       		<artifactId>activemq-client</artifactId>
       		<version>${activemq.version}</version>
     	</dependency>
+    	<dependency>
+      		<groupId>org.apache.activemq</groupId>
+      		<artifactId>activemq-kahadb-store</artifactId>
+      		<version>${activemq.version}</version>
+    	</dependency>
     	
     	<!-- ActiveMQ - Pooled Connection Factory -->
     	<!-- TODO: is this needed for the project?? -->
