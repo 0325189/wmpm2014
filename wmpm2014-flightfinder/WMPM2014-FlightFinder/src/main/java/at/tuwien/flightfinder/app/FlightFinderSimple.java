@@ -4,7 +4,8 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultCamelContext;
-import at.tuwien.flightfinder.config.FtpRouteConfig;
+
+import at.tuwien.flightfinder.routes.FtpRouteConfig;
 
 /**
  * This class starts ONLY the Camel context. Routes and components are added manually.
