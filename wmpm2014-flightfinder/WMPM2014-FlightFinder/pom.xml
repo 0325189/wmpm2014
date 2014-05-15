@@ -174,7 +174,7 @@
         		<artifactId>camel-maven-plugin</artifactId>
         		<version>${camel.version}</version>
        			<configuration>
-          			<mainClass>at.tuwien.flightfinder.FlightFinder</mainClass>          
+          			<mainClass>at.tuwien.flightfinder.app.FlightFinder</mainClass>          
         		</configuration>        
       		</plugin>
     
