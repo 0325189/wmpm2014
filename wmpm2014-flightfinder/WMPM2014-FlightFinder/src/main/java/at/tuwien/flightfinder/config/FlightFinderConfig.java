@@ -1,55 +1,46 @@
 package at.tuwien.flightfinder.config;
 
-import javax.jms.ConnectionFactory;
-
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
-import org.apache.camel.component.jms.JmsComponent;
-import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.spring.SpringCamelContext;
 import org.apache.camel.spring.javaconfig.CamelConfiguration;
-//import org.apache.camel.spring.javaconfig.Main;
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * This is where SpringCamelContext is configured WITHOUT any Spring XML stuff :)
+ * ComponentScan will scan for all classes annotated with "Component" in the defined 
+ * package. Every class containing a Camel route should be annotated and extend RouteBuilder
+ * 
+ * @author seferovic
+ */
+
 @Configuration
-public class FlightFinderConfig {
-
+@ComponentScan("at.tuwien.flightfinder.routes")
+public class FlightFinderConfig extends CamelConfiguration {
+	
 	/**
-	 * @param args
-	 */
-	public static void main(String[] args) throws Exception {
-		CamelContext context = new DefaultCamelContext();
-		context.addRoutes(new FtpRouteConfig());
-
-		ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("vm://localhost");	
-		context.addComponent("jms",JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
-
-		context.start();
-		System.out.println("CamelContext started");
-
-		// wait for 30 seconds (in which the route will watch out for the endpoint)
-		Thread.sleep(30000);
-
-		context.stop();
-		System.out.println("CamelContext stopped");
-
+    * Returns the CamelContext which support Spring
+    */
+	@Override
+	protected CamelContext createCamelContext() throws Exception {
+		return new SpringCamelContext(getApplicationContext());
 	}
-
-	//	/**
-	//    * Returns the CamelContext which support Spring
-	//    */
-	//	protected CamelContext createCamelContext() throws Exception {
-	//		return new SpringCamelContext(getApplicationContext());
-	//	}
-	//	
-	//    protected void setupCamelContext(CamelContext camelContext) throws Exception {
-	//        // nothing here :( yet :)
-
-	//    }
-	//	
-	//	public void afterPropertiesSet() throws Exception {
-	//        // just to make Spring happy do nothing here
-	//    }
+	
+	@Override
+    protected void setupCamelContext(CamelContext camelContext) throws Exception {
+		
+		// Set up CamelContext
+		
+		// Add ActiveMQ component
+		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("vm://localhost");
+		ActiveMQComponent activeMQcomp = new ActiveMQComponent();
+		activeMQcomp.setConnectionFactory(connectionFactory);
+		camelContext.addComponent("activemq", activeMQcomp);
+		
+		// TODO: hazelcast
+    
+    }
 
 }
