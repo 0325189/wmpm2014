@@ -18,12 +18,17 @@ public class FlightFinderSimple {
 	 */
 	public static void main(String[] args) throws Exception {
 		
+		// Set up CamelContext
 		CamelContext context = new DefaultCamelContext();
-		context.addRoutes(new FtpRouteConfig());
 		
+		// Add ActiveMQ component to the context
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("vm://localhost");
 		ActiveMQComponent activeMQcomp = new ActiveMQComponent();
 		activeMQcomp.setConnectionFactory(connectionFactory);
+		context.addComponent("activemq", activeMQcomp);
+		
+		// add routes to the context
+		context.addRoutes(new FtpRouteConfig());
 		
 		// lets run it...
 		context.start();
