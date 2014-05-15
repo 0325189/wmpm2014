@@ -10,9 +10,10 @@
   	<name>WMPM2014 :: FlightFinder</name>
   	<description>FlightFinder integration platform based on Camel</description>
   
-  	<!-- Define the used properties --> 
+  	<!-- Define the used versions as properties --> 
   	<properties>
   		<camel.version>2.13.0</camel.version>
+  		<activemq.version>5.9.1</activemq.version>
   	</properties>
   
   	<!-- Dependencies for our project -->
@@ -76,11 +77,24 @@
     		<artifactId>camel-jms</artifactId>
     		<version>${camel.version}</version>
     	</dependency>
+    	
+    	<!-- ActiveMQ -->
     	<dependency>
-    		<groupId>org.apache.activemq</groupId>
-    		<artifactId>activemq-core</artifactId>
-    		<version>5.3.2</version>
+  			<groupId>org.apache.activemq</groupId>
+  			<artifactId>activemq-camel</artifactId>
+  			<version>${activemq.version}</version>
+		</dependency>	 	
+    	<dependency>
+      		<groupId>org.apache.activemq</groupId>
+      		<artifactId>activemq-broker</artifactId>
+      		<version>${activemq.version}</version>
     	</dependency>
+    	<dependency>
+      		<groupId>org.apache.activemq</groupId>
+      		<artifactId>activemq-client</artifactId>
+      		<version>${activemq.version}</version>
+    	</dependency>
+    	
   	</dependencies>
   
   <build>
