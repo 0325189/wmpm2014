@@ -1,4 +1,4 @@
-package at.tuwien.flightfinder.config;
+package at.tuwien.flightfinder.beans;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 

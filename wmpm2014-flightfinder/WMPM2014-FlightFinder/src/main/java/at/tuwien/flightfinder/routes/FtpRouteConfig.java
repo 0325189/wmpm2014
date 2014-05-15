@@ -2,7 +2,7 @@ package at.tuwien.flightfinder.routes;
 
 import org.apache.camel.builder.RouteBuilder;
 
-import at.tuwien.flightfinder.config.FtpRouteLogger;
+import at.tuwien.flightfinder.beans.FtpRouteLogger;
 
 
 public class FtpRouteConfig extends RouteBuilder{
