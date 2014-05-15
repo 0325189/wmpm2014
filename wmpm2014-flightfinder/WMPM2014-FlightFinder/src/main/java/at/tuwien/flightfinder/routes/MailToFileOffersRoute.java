@@ -1,7 +1,18 @@
 package at.tuwien.flightfinder.routes;
 
+import java.io.FileOutputStream;
+import java.util.Map;
+
+import javax.activation.DataHandler;
+
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.mail.SplitAttachmentsExpression;
 import org.springframework.stereotype.Component;
+
+import at.tuwien.flightfinder.beans.IncommingMailProcessor;
+
 
 /**
  * MailToFileOffersRoute
@@ -18,20 +29,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class MailToFileOffersRoute extends RouteBuilder {
 
-	
-            public void configure() {
+			@Override
+            public void configure() throws Exception {
+				from("imap://88.198.149.250?username=workflow@seferovic.net&password=workflowpassword&delete=false&unseen=false&consumer.delay=10000").
+				split(new SplitAttachmentsExpression()).
+				//process(new IncommingMailProcessor()).
+				to("file:src/data?noop=true");
+				//split(new SplitAttachmentsExpression()).
+				//to("log:newMail");
                
-            	/**
-            	 * Offer Gathering per eMail should connect to a server by using IMAP(s) and poll every 2 sec for new messages
-            	 * 
-            	 * from("pop3://james@mymailserver.com?password=secret&consumer.delay=1000")
-    				.to("log:email")
-    				// use the SplitAttachmentsExpression which will split the message per attachment
-    				.split(new SplitAttachmentsExpression())
-        			// each message going to this mock has a single attachment
-        			.to("mock:split")
-    				.end();
-            	 */
+		
             }
-          
+			
 }
+			
+		
+         
