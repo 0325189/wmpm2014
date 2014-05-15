@@ -6,6 +6,7 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultCamelContext;
 
 import at.tuwien.flightfinder.routes.FtpRouteConfig;
+import at.tuwien.flightfinder.routes.MailToFileOffersRoute;
 
 /**
  * This class starts ONLY the Camel context. Routes and components are added manually.
@@ -30,6 +31,7 @@ public class FlightFinderSimple {
 		
 		// add routes to the context
 		context.addRoutes(new FtpRouteConfig());
+		context.addRoutes(new MailToFileOffersRoute());
 		
 		// lets run it...
 		context.start();
