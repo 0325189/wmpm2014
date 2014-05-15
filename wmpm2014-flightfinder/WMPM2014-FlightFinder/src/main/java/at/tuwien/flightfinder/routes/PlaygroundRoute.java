@@ -25,7 +25,7 @@ public class PlaygroundRoute extends RouteBuilder {
             	
             	from("activemq:testQueue").
             		bean(new SomeOtherBean()).
-            		to("file://target/test?noop=true");
+            		to("file:src/data/output?noop=true");
                
             }
             
