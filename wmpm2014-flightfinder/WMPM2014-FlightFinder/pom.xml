@@ -61,10 +61,10 @@
       		<version>${camel.version}</version>
     	</dependency>
     	
-    	<!-- Camel HTTP -->
+    	<!-- Camel Stream -->
     	<dependency>
       		<groupId>org.apache.camel</groupId>
-      		<artifactId>camel-http</artifactId>
+      		<artifactId>camel-stream</artifactId>
       		<version>${camel.version}</version>
     	</dependency>
     	
