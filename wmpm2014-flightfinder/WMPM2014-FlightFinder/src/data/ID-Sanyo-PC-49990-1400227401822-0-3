@@ -1,0 +1,10 @@
+<offers>
+<offer id="1">
+<departureAirport>VIE</departureAirport>
+<destinationAirport>MUC</destinationAirport>
+<departureTime>0600</departureTime>
+<arrivalTime>0700</arrivalTime>
+<availableSeats class="business" price="50EUR">3</availableSeats>
+<availableSeats class="economy" price="20EUR">14</availableSeats>
+</offer>
+</offers>

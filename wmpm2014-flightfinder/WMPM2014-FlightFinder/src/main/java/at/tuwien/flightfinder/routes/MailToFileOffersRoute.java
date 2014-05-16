@@ -23,7 +23,7 @@ import at.tuwien.flightfinder.beans.IncommingMailProcessor;
  * This route will connect to an eMail server by using IMAP, get attachments,
  * split them and put them into FileOffers queue
  * 
- * @author seferovic
+ * @author sanjin becirovic
  */
 
 @Component
@@ -31,15 +31,10 @@ public class MailToFileOffersRoute extends RouteBuilder {
 
 			@Override
             public void configure() throws Exception {
-				from("imap://88.198.149.250?username=workflow@seferovic.net&password=workflowpassword&delete=false&unseen=false&consumer.delay=10000").
-				split(new SplitAttachmentsExpression()).
-				//process(new IncommingMailProcessor()).
-				to("file:src/data?noop=true");
-				//split(new SplitAttachmentsExpression()).
-				//to("log:newMail");
-               
-		
-            }
+				from("imap://88.198.149.250?username=workflow@seferovic.net&password=workflowpassword&delete=false&unseen=false&consumer.delay=60000").
+				split(new SplitAttachmentsExpression()).process(new IncommingMailProcessor()).to("activemq:fileOffers").
+				log("mail: ${body}").end();
+		}
 			
 }
 			

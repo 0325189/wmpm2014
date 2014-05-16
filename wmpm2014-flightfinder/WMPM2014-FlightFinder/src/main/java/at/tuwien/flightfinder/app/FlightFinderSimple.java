@@ -31,8 +31,9 @@ public class FlightFinderSimple {
 		context.addComponent("activemq", activeMQcomp);
 		
 		// add routes to the context
-		context.addRoutes(new FtpRouteConfig());
+		//context.addRoutes(new FtpRouteConfig());
 		context.addRoutes(new MailToFileOffersRoute());
+		//System.out.println("running route");
 		
 		
 		// lets run it...
