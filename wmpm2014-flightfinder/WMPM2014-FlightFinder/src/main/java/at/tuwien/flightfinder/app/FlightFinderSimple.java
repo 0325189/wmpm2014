@@ -7,6 +7,7 @@ import org.apache.camel.impl.DefaultCamelContext;
 
 import at.tuwien.flightfinder.routes.CbrRecievedFile;
 import at.tuwien.flightfinder.routes.FtpRouteConfig;
+import at.tuwien.flightfinder.routes.HttpRouteConfig;
 import at.tuwien.flightfinder.routes.MailToFileOffersRoute;
 
 /**
@@ -32,8 +33,10 @@ public class FlightFinderSimple {
 		
 		// add routes to the context
 		context.addRoutes(new FtpRouteConfig());
+		context.addRoutes(new HttpRouteConfig());
 		context.addRoutes(new MailToFileOffersRoute());
 		context.addRoutes(new CbrRecievedFile());
+		
 		// lets run it...
 		context.start();
 		System.out.println("CamelContext started");
