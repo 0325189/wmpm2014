@@ -12,8 +12,9 @@ public class FtpRouteConfig extends RouteBuilder{
 	public void configure() throws Exception {	
 		from("ftp://ftp6291381_workflow@www92.world4you.com?password=workflow2014&consumer.delay=60000")
 		.log("Downloading File: ${header.CamelFileName} from the FTP Server")
+		//we should validete smth else??
 		.validate(header("CamelFileName").regex("^.*(csv|csl)$"))
-		.log("Found Message: ${body}").to("activemq:fileOffers").log("${body}has been pushed to the fileOffers queue!");
+		.log("Found Message: ${header.CamelFileName}").to("activemq:fileOffers").log("${header.CamelFileName} has been pushed to the fileOffers queue!");
 		//.process(new FtpRouteLogger())
 	}
 
