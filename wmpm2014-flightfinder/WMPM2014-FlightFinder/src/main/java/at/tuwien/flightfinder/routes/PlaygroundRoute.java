@@ -1,6 +1,7 @@
 package at.tuwien.flightfinder.routes;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.mail.SplitAttachmentsExpression;
 import org.springframework.stereotype.Component;
 
 /**
