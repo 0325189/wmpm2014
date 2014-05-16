@@ -1,5 +1,22 @@
 DATE & TIME		TASK DESCRIPTION				DURATION
 =========================================================================================
+2014-04-23		Team Meeting (SB, IG, ES)					2,00 h	
+2014-04-27		Project Proposal - BPM						1,00 h
+2014-04-30		Management Review 1 / IR1					1,00 h
+2014-05-01		Team Meeting (Team)						4,00 h
+2014-05-05		Environment Setup (JBoss, Maven, Fuse, research)		3,00 h
+2014-05-05		Skype Meeting							0,50 h
+2014-05-06		Skype Meeting							0,50 h
+2014-05-06		Project Proposal - Camel Diagrams				3,00 h
+2014-05-09		Camel components research					3,00 h
+2014-05-13		Skype meeting							0,75 h
+2014-05-14		Spring and Camel - tryouts 					2,00 h
+14/05/2014		FtpRoute + activeMQ						4,00 h
+2014-05-15		HttpRoute(Http, stream reasearch				2,00 h
+
+
+
+
 
 
 
@@ -16,4 +33,4 @@ DATE & TIME		TASK DESCRIPTION				DURATION
 
 
 =========================================================================================
-						TOTAL WORKING HOURS:	
+						TOTAL WORKING HOURS:			26,75 h

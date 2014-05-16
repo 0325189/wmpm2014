@@ -1,14 +1,16 @@
 DATE & TIME		TASK DESCRIPTION				DURATION
 =========================================================================================
 
-
-
-
-
-
-
-
-
+23/04/2014		Graphical Process Model Sketch			1.5 h
+29/04/2014		Presentation for MR1				1.25 h
+30/04/2014		Management Review 1 				1 h
+01/05/2014		ProjectDesign_TeamMeeting			4 h
+05/05/2014		Skype Meeting					0.5 h
+05/05/2014		Environment Setup (JBoss, Maven, ...)		2 h
+06/05/2014		Skype Meeting					0.5 h
+11/05/2014		Research (CamelInAction)			2.5 h
+13/05/2014		Skype Meeting					1 h
+14/05/2014		FtpRoute + activeMQ				4 h
 
 
 
@@ -16,4 +18,4 @@ DATE & TIME		TASK DESCRIPTION				DURATION
 
 
 =========================================================================================
-						TOTAL WORKING HOURS:	
+						TOTAL WORKING HOURS:	18.25 h	
