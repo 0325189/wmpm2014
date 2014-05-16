@@ -8,11 +8,19 @@ import org.springframework.stereotype.Component;
 public class CbrRecievedFile extends RouteBuilder{
 	@Override
 	public void configure() throws Exception {	
-		from("activemq:fileOffers")
-		.choice()
-		.when(header("CamelFileName").endsWith(".xml")).log("XML file found on CBR: ${header.CamelFileName}").split().tokenizeXML("Event", "Header").to("activemq:Offers").endChoice() 
-		.when(header("CamelFileName").regex("^.*(csv|csl)$")).log("CVS file found on CBR: ${header.CamelFileName}").split(body().tokenize("\n")).log("Message from splitter: ${body}").to("activemq:Offers").endChoice()
-		.otherwise().to("activemq:badMessage")
+		from("activemq:fileOffers").
+		choice().
+			when(header("CamelFileName").endsWith(".xml")).
+				log("XML file found on CBR: ${header.CamelFileName}").
+				split().tokenizeXML("Event", "Header").
+				to("activemq:Offers").endChoice().
+			when(header("CamelFileName").regex("^.*(csv|csl)$")).
+				log("CVS file found on CBR: ${header.CamelFileName}").
+				unmarshal().csv().
+				split(body().tokenize("/")).
+				log("Message from splitter: ${body}").
+				to("activemq:Offers").endChoice().
+			otherwise().to("activemq:badMessage")
 		.end();
 
 	}
