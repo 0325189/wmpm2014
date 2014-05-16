@@ -1,14 +1,26 @@
 package at.tuwien.flightfinder.beans;
 
 
+import java.io.StringWriter;
+import java.util.ArrayList;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 
-public class HttpRouteLogger implements Processor {
+public class JSONStream implements Processor {
 
 	public void process(Exchange exchange) throws Exception {
 		System.out.println("Found at: " + exchange.getIn().getHeader("CamelFileName"));
-		System.out.println(exchange.getIn().getBody(String.class));
+		ArrayList<String> list = exchange.getIn().getBody(ArrayList.class);
+		String listString = "";
+
+		for (String s : list)
+		{
+		    listString += s + "\n";
+		}
+		
+		exchange.getOut().setBody(listString);
+
+		
 
 	}
 
