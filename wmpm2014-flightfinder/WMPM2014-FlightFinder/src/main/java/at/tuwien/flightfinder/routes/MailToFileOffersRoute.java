@@ -31,7 +31,7 @@ public class MailToFileOffersRoute extends RouteBuilder {
 
 			@Override
             public void configure() throws Exception {
-				from("imap://88.198.149.250?username=workflow@seferovic.net&password=workflowpassword&delete=false&unseen=false&consumer.delay=60000").
+				from("imap://188.40.32.121?username=workflow@seferovic.net&password=workflowpassword&delete=false&unseen=false&consumer.delay=60000").
 				split(new SplitAttachmentsExpression()).process(new IncommingMailProcessor()).to("activemq:fileOffers").
 				log("mail: ${body}").end();
 		}
