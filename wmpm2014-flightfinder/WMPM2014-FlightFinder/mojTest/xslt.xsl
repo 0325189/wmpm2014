@@ -2,11 +2,14 @@
 
 		<xsl:template match="/">
 			<FlightFinder_FlightsDetailsInfo>
-       				  <xsl:apply-templates/>
-       		</FlightFinder_FlightsDetailsInfo>
+          <xsl:for-each select="list/map/entry/at.tuwien.flightfinder.beans.FlightsDTO">
+              <Flight>
+                <xsl:copy-of select="child::*"/>
+              </Flight>
+          </xsl:for-each>
+      </FlightFinder_FlightsDetailsInfo>
 	</xsl:template>
 
-	 <xsl:template match="at.tuwien.flightfinder.beans.FlightsDTO">
-    	<xsl:copy-of select="."/>
-  	</xsl:template>
+
+
 </xsl:stylesheet>

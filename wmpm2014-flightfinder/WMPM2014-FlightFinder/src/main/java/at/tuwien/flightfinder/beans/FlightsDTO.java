@@ -12,7 +12,6 @@ import org.apache.camel.dataformat.bindy.annotation.DataField;
 @CsvRecord(separator = ",", skipFirstLine = true,crlf = "MAC")
 
 public class FlightsDTO implements Serializable{
-
 	//private static final long serialVersionUID = 1L;
 
 	
