@@ -9,7 +9,8 @@ DATE & TIME		TASK DESCRIPTION				DURATION
 12/05/2014		Research							4h
 13/05/2014		Skype Meeting						1h
 14/05/2014		FtpRoute + activeMQ					4h
-
+16/05/2014		cbr + csv2xml transform				4h
+21/05/2014		csv2xml: xslt-debugging				1h
 
 
 
@@ -24,4 +25,4 @@ DATE & TIME		TASK DESCRIPTION				DURATION
 
 
 =========================================================================================
-						TOTAL WORKING HOURS:	21h
+						TOTAL WORKING HOURS:	26h
