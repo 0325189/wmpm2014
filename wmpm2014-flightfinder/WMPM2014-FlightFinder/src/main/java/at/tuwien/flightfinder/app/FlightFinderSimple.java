@@ -5,11 +5,7 @@ import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultCamelContext;
 
-import at.tuwien.flightfinder.routes.CbrRecievedFile;
-import at.tuwien.flightfinder.routes.FtpRouteConfig;
-import at.tuwien.flightfinder.routes.HttpRouteConfig;
-import at.tuwien.flightfinder.routes.MailToFileOffersRoute;
-import at.tuwien.flightfinder.routes.PlaygroundRoute;
+import at.tuwien.flightfinder.routes.*;
 
 /**
  * This class starts ONLY the Camel context. Routes and components are added manually.
@@ -38,6 +34,7 @@ public class FlightFinderSimple {
 		context.addRoutes(new HttpRouteConfig());
 		context.addRoutes(new MailToFileOffersRoute());
 		context.addRoutes(new CbrRecievedFile());
+		context.addRoutes(new OfferProcessingRoute());
 		
 		// lets run it...
 		context.start();
