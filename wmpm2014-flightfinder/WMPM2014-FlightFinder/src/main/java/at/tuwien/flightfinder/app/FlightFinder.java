@@ -22,6 +22,8 @@ public class FlightFinder extends Main {
 	 */
 	public static void main(String[] args) throws Exception {
 		 AnnotationConfigApplicationContext springContext = new AnnotationConfigApplicationContext(FlightFinderConfig.class);
-		 FlightFinder ffMain = springContext.getBean(FlightFinder.class);		 
+		 FlightFinder ffMain = springContext.getBean(FlightFinder.class);	
+		 ffMain.enableHangupSupport();
+		 ffMain.run();
 	}
 }
