@@ -22,6 +22,7 @@ public class CbrRecievedFile extends RouteBuilder{
 			when(header("CamelFileName").endsWith(".xml")).
 				log("XML file found on CBR: ${header.CamelFileName}").
 				split().tokenizeXML("Flight").streaming().
+				log("XML file ${header.CamelFileName} has been splitted.").
 				to("activemq:Offers").endChoice().
 			when(header("CamelFileName").regex("^.*(csv|csl)$")).
 				log("CVS file found on CBR: ${header.CamelFileName}").
