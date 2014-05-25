@@ -10,13 +10,13 @@ import at.tuwien.flightfinder.beans.EuropeanFlightsFilter;
 @Component
 public class OfferProcessingRoute extends RouteBuilder {
 
-	EuropeanFlightsFilter filter = new EuropeanFlightsFilter();
+	EuropeanFlightsFilter FlightFinderFilteringRules = new EuropeanFlightsFilter();
 	
 	@Override
 	public void configure() throws Exception {
 		
 		from("activemq:Offers")
-		.filter(filter)
+		.filter(FlightFinderFilteringRules)
 		
 		.to("activemq:FilterOffer")
 		///some code

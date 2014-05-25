@@ -10,12 +10,15 @@ DATE & TIME		TASK DESCRIPTION				DURATION
 06/05/2014		Skype Meeting					0.5 h
 11/05/2014		Research (CamelInAction)			2.5 h
 13/05/2014		Skype Meeting					1 h
-14/05/2014		FtpRoute + activeMQ				4 h
-
+14/05/2014		FtpRoute 					4 h
+16/05/2014		Group work 					3 h
+16/05/2014		IR 1						1 h
+21/05/2014		EuropeanFlightsFilter, OfferProcessingRoute	3.5 h
+21/05/2014		Skype Meeting					1 h
 
 
 
 
 
 =========================================================================================
-						TOTAL WORKING HOURS:	18.25 h	
+						TOTAL WORKING HOURS:	26.75 h	
