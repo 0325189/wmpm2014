@@ -1,19 +1,28 @@
 DATE & TIME		TASK DESCRIPTION				DURATION
 =========================================================================================
+2014-04-23		Team Meeting (SB, IG, ES)			2.0 h							
+2014-04-25		Team Meeting (SB, MS, ES)			2.0 h						
+2014-04-27 		Project Proposal 1 				1.0 h
+2014-04-30		MR1 Meeting					1.0 h
+2014-05-01		Team Meeting (entire group)			4.0 h
+2014-05-06		Project Proposal 2				1.0 h
+2014-05-03		Development Environment setup			2.0 h
+2014-05-04		Camel research - examples			4.0 h
+2014-05-16		MailRoute, splitter, validation 		5.0 h
+2014-05-21		csv2xml: xslt map created			1.0 h
+2014-05-27		Offer filtering - european flights		2.0 h
+2014-05-27		offer processing route				2.0 h
+2014-05-28		enrich flight offer							
 
 
 
 
 
 
-
-
-
-
-
+nn-nn-nn		Skype meetings					3.0 h
 
 
 
 
 =========================================================================================
-						TOTAL WORKING HOURS:	
+						TOTAL WORKING HOURS:	30 h
