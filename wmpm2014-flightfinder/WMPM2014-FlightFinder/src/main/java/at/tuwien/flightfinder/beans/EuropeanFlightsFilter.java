@@ -2,14 +2,11 @@ package at.tuwien.flightfinder.beans;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import org.apache.camel.*;
 import org.apache.camel.builder.xml.XPathBuilder;
 
-import static org.apache.camel.builder.PredicateBuilder.not;
 
 public class EuropeanFlightsFilter implements Predicate {
 
@@ -18,36 +15,29 @@ public class EuropeanFlightsFilter implements Predicate {
 
 	@Override
 	public boolean matches(Exchange exchange) {
+		Scanner sc;
 
-		Scanner scanner;
-		try 
-		{
-			scanner = new Scanner(new File("mojTest/IATAEuropeanCodes.csv"));
-			scanner.useDelimiter("/n");
-
-			while (scanner.hasNext())
-			{
-				europeanFlightList.add(scanner.next());
-				System.out.println(scanner.next());
+		try {
+			sc = new Scanner(new File("mojTest/IATAEuropeanCodes.csv"));
+			sc.useDelimiter("\n");
+			while(sc.hasNext()){
+				europeanFlightList.add(sc.nextLine());
 			}
-
-			scanner.close();
-
-		} 
-		catch (FileNotFoundException e) 
-		{
-			// TODO Auto-generated catch block
+			sc.close();
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 
-		String origin = XPathBuilder.xpath("//Origin").evaluate(exchange, String.class);
 
-		System.out.println(origin);
+		String origin = XPathBuilder.xpath("//IATACodeOrigin").evaluate(exchange, String.class);
+		String trimedOrigin = origin.substring(origin.indexOf('>')+1,origin.lastIndexOf('<'));
+		//System.out.println("What is my origin: "+trimedOrigin);
 
 		// boolean matches = XPathBuilder.xpath("Origin").matches(exchange);
 
-		if (europeanFlightList.contains(origin)){
-			System.out.println(origin);
+		if (europeanFlightList.contains(trimedOrigin)){
+			System.out.println("The destination " + trimedOrigin + " has been accepted by the filter!");
+
 			return true;
 		}
 

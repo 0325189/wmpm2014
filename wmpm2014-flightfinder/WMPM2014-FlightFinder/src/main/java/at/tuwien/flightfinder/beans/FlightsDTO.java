@@ -14,31 +14,35 @@ import org.apache.camel.dataformat.bindy.annotation.DataField;
 public class FlightsDTO implements Serializable{
 	//private static final long serialVersionUID = 1L;
 
-	
+
 	@DataField(pos = 1)
 	private String FlightNumber;
-    
+
 	@DataField(pos = 2)
 	private String AirCompany;
-    
 
 	@DataField(pos = 3)
-	private String NameOrigin;
-    
-
-	@DataField(pos = 4)
-	private String Destination;
+	private String IATACodeOrigin;
 	
+	@DataField(pos = 4)
+	private String NameOrigin;
+
 	@DataField(pos = 5)
-	private String FlightDate;
+	private String IATACodeDestination;
 
 	@DataField(pos = 6)
-	private String Class;
+	private String Destination;
 
 	@DataField(pos = 7)
-	private String TicketID;
-	
+	private String FlightDate;
+
 	@DataField(pos = 8)
+	private String Class;
+
+	@DataField(pos = 9)
+	private String TicketID;
+
+	@DataField(pos = 10)
 	private String Price;
 
 }
