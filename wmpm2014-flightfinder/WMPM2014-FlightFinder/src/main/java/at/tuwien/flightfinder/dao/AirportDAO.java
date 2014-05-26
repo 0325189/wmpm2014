@@ -1,22 +1,25 @@
 package at.tuwien.flightfinder.dao;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.*;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import at.tuwien.flightfinder.pojo.Flightoffer;
+import at.tuwien.flightfinder.pojo.Airport;
 import at.tuwien.flightfinder.util.HibernateUtil;
 
-
-public class FlightofferDAO {
+public class AirportDAO {
 	
-	public void addFlightoffer(Flightoffer flightoffer){
+	public void addAirport(Airport airport){
 		Transaction trns = null;
 	    Session session = HibernateUtil.getSessionFactory().openSession();
 	    try {
 	        trns = session.beginTransaction();
-	        session.save(flightoffer);
+	        session.save(airport);
 	        session.getTransaction().commit();
 	    } catch (RuntimeException e) {
 	        if (trns != null) {
@@ -28,13 +31,13 @@ public class FlightofferDAO {
 	        session.close();
 	    }
 	}
-	public void deleteFlightoffer(int offerId){
+	public void deleteAirport(int airportId){
 		 Transaction trns = null;
 	        Session session = HibernateUtil.getSessionFactory().openSession();
 	        try {
 	            trns = session.beginTransaction();
-	            Flightoffer flightoffer = (Flightoffer) session.load(Flightoffer.class, new Integer(offerId));
-	            session.delete(flightoffer);
+	            Airport airport = (Airport) session.load(Airport.class, new Integer(airportId));
+	            session.delete(airport);
 	            session.getTransaction().commit();
 	        } catch (RuntimeException e) {
 	            if (trns != null) {
@@ -46,12 +49,12 @@ public class FlightofferDAO {
 	            session.close();
 	        }
 	}
-	public void updateFlightoffer(Flightoffer flightoffer){
+	public void updateAirport(Airport airport){
 	    Transaction trns = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             trns = session.beginTransaction();
-            session.update(flightoffer);
+            session.update(airport);
             session.getTransaction().commit();
         } catch (RuntimeException e) {
             if (trns != null) {
@@ -64,38 +67,56 @@ public class FlightofferDAO {
         }
 		
 	}
-	public List<Flightoffer> getAllFlightsoffers(){
-		 List<Flightoffer> flightoffers = new ArrayList<Flightoffer>();
+	public List<Airport> getAllAirports(){
+		 List<Airport> airports = new ArrayList<Airport>();
 	        Transaction trns = null;
 	        Session session = HibernateUtil.getSessionFactory().openSession();
 	        try {
 	            trns = session.beginTransaction();
-	            flightoffers = session.createQuery("from Flightoffer").list();
+	            airports = session.createQuery("from Airport").list();
 	        } catch (RuntimeException e) {
 	            e.printStackTrace();
 	        } finally {
 	            session.flush();
 	            session.close();
 	        }
-	        return flightoffers;
+	        return airports;
 	}
-	public Flightoffer getFlightofferById(int offerId){
-		 Flightoffer offer = null;
+	public Airport getAirportById(int airportId){
+		 Airport airport = null;
 	        Transaction trns = null;
 	        Session session = HibernateUtil.getSessionFactory().openSession();
 	        try {
 	            trns = session.beginTransaction();
-	            String queryString = "from Flightoffer where id = :id";
+	            String queryString = "from Airport where id = :id";
 	            Query query = session.createQuery(queryString);
-	            query.setInteger("id", offerId);
-	            offer = (Flightoffer) query.uniqueResult();
+	            query.setInteger("id",airportId);
+	            airport = (Airport) query.uniqueResult();
 	        } catch (RuntimeException e) {
 	            e.printStackTrace();
 	        } finally {
 	            session.flush();
 	            session.close();
 	        }
-	        return offer;
+	        return airport;
+	}
+	public Airport getAirportByIataCode(String iataCode){
+		 Airport airport = null;
+	        Transaction trns = null;
+	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        try {
+	        	  trns = session.beginTransaction();
+		            String queryString = "from Airport where iataCode = :id";
+		            Query query = session.createQuery(queryString);
+		            query.setString("id", iataCode);
+		            airport = (Airport) query.uniqueResult();
+	        } catch (RuntimeException e) {
+	            e.printStackTrace();
+	        } finally {
+	            session.flush();
+	            session.close();
+	        }
+	        return airport;
 	}
 
 }

@@ -1,6 +1,8 @@
 package at.tuwien.flightfinder.pojo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -12,7 +14,7 @@ public class Subscriber {
 	private long id;
 	private String email;
 	private String name;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="airport_id")
 	private Airport airport;
 	
