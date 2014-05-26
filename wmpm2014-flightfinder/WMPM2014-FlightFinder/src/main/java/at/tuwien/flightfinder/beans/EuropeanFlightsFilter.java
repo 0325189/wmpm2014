@@ -9,7 +9,6 @@ import java.util.Scanner;
 import org.apache.camel.*;
 import org.apache.camel.builder.xml.XPathBuilder;
 
-import au.com.bytecode.opencsv.CSVReader;
 import static org.apache.camel.builder.PredicateBuilder.not;
 
 public class EuropeanFlightsFilter implements Predicate {
