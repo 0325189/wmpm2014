@@ -7,7 +7,6 @@ import java.util.Scanner;
 import org.apache.camel.*;
 import org.apache.camel.builder.xml.XPathBuilder;
 
-
 public class EuropeanFlightsFilter implements Predicate {
 
 

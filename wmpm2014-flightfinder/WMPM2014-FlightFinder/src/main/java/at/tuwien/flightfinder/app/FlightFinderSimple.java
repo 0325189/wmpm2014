@@ -35,6 +35,8 @@ public class FlightFinderSimple {
 		context.addRoutes(new MailToFileOffersRoute());
 		context.addRoutes(new CbrRecievedFile());
 		context.addRoutes(new OfferProcessingRoute());
+		context.addRoutes(new PromotionProcessingRoute());
+
 		
 		// lets run it...
 		context.start();

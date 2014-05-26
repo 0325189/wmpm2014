@@ -8,14 +8,15 @@ import org.apache.camel.component.hazelcast.*;
 
 @Component
 public class PromotionProcessingRoute extends RouteBuilder {
-	
+
 	@Override
 	public void configure() throws Exception {
-				
-		//missing pollInterval configuration??
+
+		//missing pollInterval configuration?? how to configure??
+		//http://camel.apache.org/hazelcast-component.html
 		fromF("hazelcast:seda:promotionQueue?pollInterval=1000", HazelcastConstants.QUEUE_PREFIX)
-		   .log("An offer has been pulled from HazelcastQueue.");
-		  
+		.log("An offer has been pulled from HazelcastQueue.");
+
 	}
 
 }
