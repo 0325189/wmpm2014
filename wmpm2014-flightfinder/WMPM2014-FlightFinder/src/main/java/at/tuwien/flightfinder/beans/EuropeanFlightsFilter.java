@@ -19,7 +19,7 @@ public class EuropeanFlightsFilter implements Predicate {
 		Scanner sc;
 
 		try {
-			sc = new Scanner(new File("mojTest/EuropeanCities.csv"));
+			sc = new Scanner(new File("mojTest/IATAEuropeanCodes.csv"));
 			sc.useDelimiter("\n");
 			while(sc.hasNext()){
 				europeanFlightList.add(sc.nextLine());
@@ -29,7 +29,7 @@ public class EuropeanFlightsFilter implements Predicate {
 		}
 
 
-		String origin = XPathBuilder.xpath("//NameOrigin").evaluate(exchange, String.class);
+		String origin = XPathBuilder.xpath("//IATACodeOrigin").evaluate(exchange, String.class);
 		String trimedOrigin = origin.substring(origin.indexOf('>')+1,origin.lastIndexOf('<'));
 		//System.out.println("What is my origin: "+trimedOrigin);
 
