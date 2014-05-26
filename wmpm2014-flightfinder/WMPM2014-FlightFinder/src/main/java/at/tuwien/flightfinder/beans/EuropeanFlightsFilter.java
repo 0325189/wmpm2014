@@ -2,17 +2,16 @@ package at.tuwien.flightfinder.beans;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import org.apache.camel.*;
 import org.apache.camel.builder.xml.XPathBuilder;
 
-import static org.apache.camel.builder.PredicateBuilder.not;
-
 public class EuropeanFlightsFilter implements Predicate {
+
+
 	ArrayList<String> europeanFlightList = new ArrayList();
+
 	@Override
 	public boolean matches(Exchange exchange) {
 		Scanner sc;
@@ -23,6 +22,7 @@ public class EuropeanFlightsFilter implements Predicate {
 			while(sc.hasNext()){
 				europeanFlightList.add(sc.nextLine());
 			}
+			sc.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -35,7 +35,8 @@ public class EuropeanFlightsFilter implements Predicate {
 		// boolean matches = XPathBuilder.xpath("Origin").matches(exchange);
 
 		if (europeanFlightList.contains(trimedOrigin)){
-			System.out.println("The destination "+trimedOrigin+" has been accepted by the filter!");
+			System.out.println("The destination " + trimedOrigin + " has been accepted by the filter!");
+
 			return true;
 		}
 

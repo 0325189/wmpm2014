@@ -1,7 +1,13 @@
 package at.tuwien.flightfinder.beans;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -10,7 +16,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.camel.Exchange;
+import org.apache.camel.InvalidPayloadException;
+import org.apache.camel.Message;
 import org.apache.camel.Processor;
+import org.apache.xalan.xsltc.compiler.sym;
+import org.h2.util.IOUtils;
 import org.w3c.dom.Document;
 
 
@@ -22,27 +32,43 @@ public class IncommingMailProcessor implements Processor {
 	    Map<String, DataHandler> attachments = exchange.getIn().getAttachments();
 	    
 	     if (attachments.size() > 0) {
+	    	 //System.out.println("Found at: " + exchange.getIn().getAttachments());
 	    	 for (String name : attachments.keySet()) {
 	             DataHandler dh = attachments.get(name);
 	            
 	             // get the file name
 	             String filename = dh.getName();
 	             
-	             
+	             //Outbound message
+	             Message msg = exchange.getIn();
+	            
 	             if (validateFileExtn(filename))
 	             {
-		             System.out.println("Validating File " + filename);
+		             //System.out.println("Validating File " + filename);
 		             	
+		             File file = new File(filename);
+	            	 OutputStream outputStream = new FileOutputStream(file);
+	            	 
 		             //validate xml structure
 		             if(filename.endsWith(".xml") && validateXmlStructure(dh.getInputStream()))
 		             {
-		            	 System.out.println("XML File Structure Validated: " + filename);
-			             exchange.getOut().setBody(dh.getContent()); 
+		            	 //System.out.println("XML File Structure Validated: " + filename);
+		            	 
+		            	 IOUtils.copy(dh.getInputStream(), outputStream);
+		            	 msg.setHeader("CamelFileName", filename);
+		            	 msg.setBody(file);
+		            	 
+		            	 exchange.setOut(msg);
+		            	  
 		             }
 		             else if (filename.endsWith(".csv"))
-		            	 exchange.getOut().setBody(dh.getContent());
-		             
-		         }
+		            	 IOUtils.copy(dh.getInputStream(), outputStream);
+			             msg.setHeader("CamelFileName", filename);
+		            	 msg.setBody(file);
+		            	 
+		            	 exchange.setOut(msg);
+
+	             }
 	             else
 	            	 System.out.println("File extension for file "+ filename + "not valid!");
 	             
@@ -87,8 +113,7 @@ public class IncommingMailProcessor implements Processor {
 		
 	}
 	
-	
-	}
+}
 	
 	
 
