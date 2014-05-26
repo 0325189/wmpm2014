@@ -9,14 +9,14 @@ import at.tuwien.flightfinder.beans.EuropeanFlightsFilter;
 
 @Component
 public class OfferProcessingRoute extends RouteBuilder {
-
-	EuropeanFlightsFilter FlightFinderFilteringRules = new EuropeanFlightsFilter();
 	
 	@Override
 	public void configure() throws Exception {
 		
 		from("activemq:Offers")
-		.filter(FlightFinderFilteringRules)
+		.log("${body}").
+		log("Message has been pulled from file offers queue").
+		filter(new EuropeanFlightsFilter())
 		
 		.to("activemq:FilterOffer")
 		///some code

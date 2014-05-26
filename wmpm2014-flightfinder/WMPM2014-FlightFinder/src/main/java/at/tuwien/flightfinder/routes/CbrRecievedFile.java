@@ -19,7 +19,7 @@ public class CbrRecievedFile extends RouteBuilder{
 		
 		from("activemq:fileOffers").
 		choice().
-			when(header("CamelFileName").endsWith(".xml")).
+			when(header("CamelFileName").regex("^.*(xml)$")).
 				log("XML file found on CBR: ${header.CamelFileName}").
 				split().tokenizeXML("Flight").streaming().
 				log("XML file ${header.CamelFileName} has been splitted.").
