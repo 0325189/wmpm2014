@@ -18,11 +18,7 @@ public class EuropeanFlightsFilter implements Predicate {
 	@Override
 	public boolean matches(Exchange exchange) {
 		Scanner sc;
-		
-		//populate the database with european IATA codes
-		Airport airport1 = new Airport("");
-		AirportDAO airportDao1 = new AirportDAO();
-		
+
 		try 
 		{
 			sc = new Scanner(new File("mojTest/IATAEuropeanCodes.csv"));
