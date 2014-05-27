@@ -4,6 +4,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 import org.apache.camel.component.hazelcast.*;
 
+import at.tuwien.flightfinder.beans.Archive;
 import at.tuwien.flightfinder.beans.EuropeanFlightsFilter;
 import at.tuwien.flightfinder.beans.OffersEnricher;
 
@@ -22,7 +23,7 @@ public class OfferProcessingRoute extends RouteBuilder {
 		process(new OffersEnricher()).
 		log("Message has been eriched with hotels and is being pushed to enricher").
 		to("file:mojTest?fileName=test.xml"). //just for testing purpose!
-		//.wireTap
+		wireTap("mock:result", new Archive()).
 		log("Message has been stored using WireTap");
 		//.setHeader(HazelcastConstants.OPERATION, constant(HazelcastConstants.PUT_OPERATION))
 		//.toF("hazelcast:seda:promotionQueue", HazelcastConstants.QUEUE_PREFIX);
