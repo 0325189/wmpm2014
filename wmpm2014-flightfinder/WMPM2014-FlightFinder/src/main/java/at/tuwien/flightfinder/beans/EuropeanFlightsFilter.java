@@ -20,24 +20,17 @@ public class EuropeanFlightsFilter implements Predicate {
 		boolean IataCodeFound = false;
 		String origin = XPathBuilder.xpath("//IATACodeOrigin").evaluate(exchange, String.class);
 		String trimedOrigin = origin.substring(origin.indexOf('>')+1,origin.lastIndexOf('<'));
-		//System.out.println("What is my origin: "+trimedOrigin);
-
-		// boolean matches = XPathBuilder.xpath("Origin").matches(exchange);
-
 		AirportDAO airportDao1 = new AirportDAO();
-		List<Airport> airports = airportDao1.getAllAirports();
-		
-		for(Airport a : airports)
-		{
-			String iataCode = a.getIataCode();
-			if (trimedOrigin.equals(iataCode))
-			{
+	
+		try {
+			if(airportDao1.getAirportByIataCode(trimedOrigin)!=null){
 				System.out.println("The destination " + trimedOrigin + " has been accepted by the filter!");
 				IataCodeFound = true;
 			}
-			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return IataCodeFound;
 	}
-
 }

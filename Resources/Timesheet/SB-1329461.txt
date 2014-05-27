@@ -12,7 +12,7 @@ DATE & TIME		TASK DESCRIPTION				DURATION
 2014-05-21		csv2xml: xslt map created			1.0 h
 2014-05-27		Offer filtering - european flights		2.0 h
 2014-05-27		offer processing route				2.0 h
-2014-05-28		enrich flight offer							
+2014-05-28		flight offer enrichment;			4.0 H							
 
 
 
@@ -25,4 +25,4 @@ nn-nn-nn		Skype meetings					3.0 h
 
 
 =========================================================================================
-						TOTAL WORKING HOURS:	30 h
+						TOTAL WORKING HOURS:	34.0 h
