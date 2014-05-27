@@ -1,0 +1,12 @@
+05-27 15:07:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLIGHTOFFER" not found; SQL statement:
+alter table Flightoffer drop constraint FK_nnctdm0a6qyhk58yhpb23q9kj if exists [42102-178]
+05-27 15:07:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLIGHTOFFER" not found; SQL statement:
+alter table Flightoffer drop constraint FK_2tc29w32p8ruaoqd6s6yqpvcw if exists [42102-178]
+05-27 15:07:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "HOTEL" not found; SQL statement:
+alter table Hotel drop constraint FK_s3o5bi6mbmnylukla2rpv0vl4 if exists [42102-178]
+05-27 15:07:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "SUBSCRIBER" not found; SQL statement:
+alter table Subscriber drop constraint FK_l04ur9sg2hik7lnk2lyemt17p if exists [42102-178]
