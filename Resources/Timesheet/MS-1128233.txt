@@ -11,6 +11,8 @@ DATE & TIME		TASK DESCRIPTION				DURATION
 14/05/2014		FtpRoute + activeMQ					4h
 16/05/2014		cbr + csv2xml transform				4h
 21/05/2014		csv2xml: xslt-debugging				1h
+25/05/2014		csv validator, hazelcast			2h
+27/05/2014		filter, offerEnricher				4h
 
 
 
@@ -25,4 +27,4 @@ DATE & TIME		TASK DESCRIPTION				DURATION
 
 
 =========================================================================================
-						TOTAL WORKING HOURS:	26h
+						TOTAL WORKING HOURS:	32h
