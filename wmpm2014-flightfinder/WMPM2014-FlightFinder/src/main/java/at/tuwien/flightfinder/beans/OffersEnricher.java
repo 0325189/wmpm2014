@@ -59,39 +59,46 @@ public class OffersEnricher implements Processor {
 		
 		//Pulling hotel-data from the database
 		HotelDAO myHotelDAO = new HotelDAO();
-		List<Hotel> hotels = myHotelDAO.getHotelByDestAirport(iataCode);
-		
-		//Iterate through the List of hotels and store its values in the Hotel-tags
-		for(Hotel item:hotels){
-			//Create the Hotel-tag and append it to the document
-			Element hotelNode = doc.createElement("Hotel");
-			hotelsListNode.appendChild(hotelNode);
+		List<Hotel> hotels=null;
+		try {
+			hotels = myHotelDAO.getHotelByDestAirport(iataCode);
+			//Iterate through the List of hotels and store its values in the Hotel-tags
+			for(Hotel item:hotels){
+				//Create the Hotel-tag and append it to the document
+				Element hotelNode = doc.createElement("Hotel");
+				hotelsListNode.appendChild(hotelNode);
+				
+				//Create the NameOfHotel-tag which contains the name of the hotel from the DB
+				Element NameOfHotelNode = doc.createElement("NameOfHotel");
+				hotelNode.appendChild(NameOfHotelNode);
+				//NameOfHotelNode.setTextContent("Hotel Hilton");
+				NameOfHotelNode.setTextContent(item.getName());
+				
+				//Create the starsNumber-tag which contains the number of stars of the hotel retrieved from the DB
+				Element starNode = doc.createElement("starsNumber");
+				hotelNode.appendChild(starNode);
+				//starNode.setTextContent("***");
+				starNode.setTextContent(Integer.toString(item.getStarsNumber()));
 			
-			//Create the NameOfHotel-tag which contains the name of the hotel from the DB
-			Element NameOfHotelNode = doc.createElement("NameOfHotel");
-			hotelNode.appendChild(NameOfHotelNode);
-			//NameOfHotelNode.setTextContent("Hotel Hilton");
-			NameOfHotelNode.setTextContent(item.getName());
-			
-			//Create the starsNumber-tag which contains the number of stars of the hotel retrieved from the DB
-			Element starNode = doc.createElement("starsNumber");
-			hotelNode.appendChild(starNode);
-			//starNode.setTextContent("***");
-			starNode.setTextContent(Integer.toString(item.getStarsNumber()));
-		
+			}
+			//Create the new document
+			TransformerFactory tFact = TransformerFactory.newInstance();
+			Transformer trans = tFact.newTransformer();
+
+			StringWriter writer = new StringWriter();
+			StreamResult result = new StreamResult(writer);
+			DOMSource source = new DOMSource(doc);
+			trans.transform(source, result);
+			//System.out.println(writer.toString());	
+
+			//write the xml-document to message
+			exchange.getOut().setBody(writer.toString());
+		} catch (Exception e) {
+
+			System.out.println("No hotel offer for airport"+iataCode);
 		}
-		//Create the new document
-		TransformerFactory tFact = TransformerFactory.newInstance();
-		Transformer trans = tFact.newTransformer();
-
-		StringWriter writer = new StringWriter();
-		StreamResult result = new StreamResult(writer);
-		DOMSource source = new DOMSource(doc);
-		trans.transform(source, result);
-		//System.out.println(writer.toString());	
-
-		//write the xml-document to message
-		exchange.getOut().setBody(writer.toString());
+		
+	
 	}
 
 }
