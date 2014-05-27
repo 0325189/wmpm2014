@@ -17,8 +17,8 @@ public class EuropeanFlightsFilter implements Predicate {
 
 	@Override
 	public boolean matches(Exchange exchange) {
+		
 		Scanner sc;
-
 		try 
 		{
 			sc = new Scanner(new File("mojTest/IATAEuropeanCodes.csv"));
