@@ -4,26 +4,38 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import org.apache.camel.*;
 import org.apache.camel.builder.xml.XPathBuilder;
 
-public class EuropeanFlightsFilter implements Predicate {
+import at.tuwien.flightfinder.dao.AirportDAO;
+import at.tuwien.flightfinder.pojo.Airport;
 
+public class EuropeanFlightsFilter implements Predicate {
 
 	ArrayList<String> europeanFlightList = new ArrayList();
 
 	@Override
 	public boolean matches(Exchange exchange) {
 		Scanner sc;
-
-		try {
+		
+		//populate the database with european IATA codes
+		Airport airport1 = new Airport("");
+		AirportDAO airportDao1 = new AirportDAO();
+		
+		try 
+		{
 			sc = new Scanner(new File("mojTest/IATAEuropeanCodes.csv"));
 			sc.useDelimiter("\n");
-			while(sc.hasNext()){
+			
+			while(sc.hasNext())
+			{
 				europeanFlightList.add(sc.nextLine());
 			}
 			sc.close();
-		} catch (FileNotFoundException e) {
+		}
+		catch (FileNotFoundException e)
+		{
 			e.printStackTrace();
 		}
 

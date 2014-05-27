@@ -31,8 +31,6 @@ public class Flightoffer {
 	private Double price;
 	@Enumerated(EnumType.STRING)
 	private FlightClass flightClass;
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="flightoffer",fetch=FetchType.EAGER)
-	private List<Hotel> hotels;
 
 
 	public Flightoffer(int flightNumber, Date flightDate, int ticketId,
@@ -101,12 +99,6 @@ public class Flightoffer {
 	}
 	public void setFlightClass(FlightClass flightClass) {
 		this.flightClass = flightClass;
-	}
-	public List<Hotel> getHotels() {
-		return hotels;
-	}
-	public void setHotels(List<Hotel> hotels) {
-		this.hotels = hotels;
 	}
 
 }

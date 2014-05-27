@@ -18,6 +18,7 @@ public class OfferProcessingRoute extends RouteBuilder {
 		log("${body}").
 		log("Message has been pulled from Offers queue").
 		filter(new EuropeanFlightsFilter()).
+		log("Message has been filtered from Offers queue").
 		process(new OffersEnricher()).
 
 		//to("activemq:FilterOffer").

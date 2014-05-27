@@ -15,12 +15,9 @@ public class Hotel {
 	private long id;
 	private String name;
 	private int starsNumber;
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="destAirport_Id")
 	private Airport destinationAirport;
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="FlightO_id")
-	private Flightoffer flightoffer;
 	Hotel(){
 		
 	}
@@ -41,12 +38,6 @@ public class Hotel {
 	}
 	public void setStarsNumber(int starsNumber) {
 		this.starsNumber = starsNumber;
-	}
-	public Flightoffer getFlightoffer() {
-		return flightoffer;
-	}
-	public void setFlightoffer(Flightoffer flightoffer) {
-		this.flightoffer = flightoffer;
 	}
 	public long getId() {
 		return id;
