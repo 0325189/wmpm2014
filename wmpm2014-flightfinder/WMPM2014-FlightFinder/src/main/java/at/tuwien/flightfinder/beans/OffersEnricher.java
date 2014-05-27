@@ -81,23 +81,23 @@ public class OffersEnricher implements Processor {
 				starNode.setTextContent(Integer.toString(item.getStarsNumber()));
 			
 			}
-			//Create the new document
-			TransformerFactory tFact = TransformerFactory.newInstance();
-			Transformer trans = tFact.newTransformer();
-
-			StringWriter writer = new StringWriter();
-			StreamResult result = new StreamResult(writer);
-			DOMSource source = new DOMSource(doc);
-			trans.transform(source, result);
-			//System.out.println(writer.toString());	
-
-			//write the xml-document to message
-			exchange.getOut().setBody(writer.toString());
+			
 		} catch (Exception e) {
 
 			System.out.println("No hotel offer for airport"+iataCode);
 		}
-		
+		//Create the new document
+		TransformerFactory tFact = TransformerFactory.newInstance();
+		Transformer trans = tFact.newTransformer();
+
+		StringWriter writer = new StringWriter();
+		StreamResult result = new StreamResult(writer);
+		DOMSource source = new DOMSource(doc);
+		trans.transform(source, result);
+		//System.out.println(writer.toString());	
+
+		//write the xml-document to message
+		exchange.getOut().setBody(writer.toString());
 	
 	}
 
