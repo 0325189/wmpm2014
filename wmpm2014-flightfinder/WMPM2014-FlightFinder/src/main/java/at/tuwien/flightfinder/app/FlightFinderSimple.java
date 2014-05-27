@@ -27,9 +27,6 @@ public class FlightFinderSimple {
 	 */
 	public static void main(String[] args) throws Exception 
 	{
-		// Populates the databses with European IATA codes
-		PopulateIATACodes();
-		PopuplateHotelData();
 		// Set up CamelContext
 		CamelContext context = new DefaultCamelContext();
 		
@@ -62,45 +59,4 @@ public class FlightFinderSimple {
 
 	}
 	
-	//Populates databses with European IATA codes
-	public static void PopulateIATACodes()
-	{
-		AirportDAO airportDao1 = new AirportDAO();
-		Airport airport = new Airport("");
-		
-		Scanner sc;
-		try 
-		{
-			sc = new Scanner(new File("mojTest/IATAEuropeanCodes.csv"));
-			sc.useDelimiter("\n");
-			
-			while(sc.hasNext())
-			{
-				airport.setIataCode(sc.nextLine());
-				airportDao1.addAirport(airport);
-			}
-			sc.close();
-		}
-		catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
-
-	//Populated databases with hotel data
-	public static void PopuplateHotelData()
-	{
-		AirportDAO airportDao1 = new AirportDAO();
-		HotelDAO hotelDao1 = new HotelDAO();
-		Airport airport1 = airportDao1.getAirportByIataCode("CDG");
-		
-		Hotel hiltonHotel = new Hotel("Hitlon", 5, airport1);
-		Hotel emiratesHotel = new Hotel("Emirates", 7, airport1);
-
-		hotelDao1.addHotel(hiltonHotel);
-		hotelDao1.addHotel(emiratesHotel);
-	}
-	
-
 }
