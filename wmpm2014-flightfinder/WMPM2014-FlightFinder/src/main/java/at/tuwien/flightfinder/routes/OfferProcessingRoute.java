@@ -19,17 +19,15 @@ public class OfferProcessingRoute extends RouteBuilder {
 		log("${body}").
 		log("Message has been pulled from Offers queue").
 		filter(new EuropeanFlightsFilter()).
+		log("Message has been filtered and is being pushed to ernicher").
 		process(new OffersEnricher()).
-
-		//to("activemq:FilterOffer").
-		log("${body}").
-		log("Filtered messages beeing pushed to FilterOffer Queue").
-		//.to("activemq:EnrichedOffer")
-		to("file:mojTest?fileName=test.xml");
-
-		//.wireTap("jms:orderAudit")//use hibernate instead of jms
+		log("Message has been eriched with hotels and is being pushed to enricher").
+		to("file:mojTest?fileName=test.xml"). //just for testing purpose!
+		//.wireTap
+		log("Message has been stored using WireTap");
 		//.setHeader(HazelcastConstants.OPERATION, constant(HazelcastConstants.PUT_OPERATION))
 		//.toF("hazelcast:seda:promotionQueue", HazelcastConstants.QUEUE_PREFIX);
+		//log("Message has been pushed into Hazelcast");
 	}
 
 }

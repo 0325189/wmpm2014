@@ -10,9 +10,9 @@
   <property name="hibernate.connection.password"/>
   <property name="hibernate.show_sql">true</property>
   <property name="hibernate.hbm2ddl.auto">create</property>
-  <mapping class="at.tuwien.flightfinder.POJO.Flightoffer"/>
-  <mapping class="at.tuwien.flightfinder.POJO.Hotel"/>
-  <mapping class="at.tuwien.flightfinder.POJO.Subscriber"/>
-  <mapping class="at.tuwien.flightfinder.POJO.Airport"/>
+  <mapping class="at.tuwien.flightfinder.pojo.Flightoffer"/>
+  <mapping class="at.tuwien.flightfinder.pojo.Hotel"/>
+  <mapping class="at.tuwien.flightfinder.pojo.Subscriber"/>
+  <mapping class="at.tuwien.flightfinder.pojo.Airport"/>
  </session-factory>
 </hibernate-configuration>
