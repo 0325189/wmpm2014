@@ -47,10 +47,10 @@ public class OffersEnricher implements Processor {
 		Node iataCodeNode = nodes.item(2);
 		String iataCode = iataCodeNode.getTextContent();
 		
-		System.out.println("This is body: "+xmlRecords);
-		System.out.println("These is my root element: "+rootElement.getNodeName());
-		System.out.println("These is my iataCodeNode: "+iataCodeNode.getNodeName());
-		System.out.println("This is the value of my IATACode: "+iataCode);
+//		System.out.println("This is body: "+xmlRecords);
+//		System.out.println("These is my root element: "+rootElement.getNodeName());
+//		System.out.println("These is my iataCodeNode: "+iataCodeNode.getNodeName());
+//		System.out.println("This is the value of my IATACode: "+iataCode);
 		
 		
 		//Create the HotelList-tag which contains only hotel-tags but no values
