@@ -12,8 +12,9 @@ DATE & TIME		TASK DESCRIPTION				DURATION
 16/05/2014		cbr + csv2xml transform				4h
 21/05/2014		csv2xml: xslt-debugging				1h
 25/05/2014		csv validator, hazelcast			2h
+26/05/2014		Skype Meeting						2h
 27/05/2014		filter, offerEnricher				4h
-
+27/05/2014		Presentation						1h
 
 
 
@@ -27,4 +28,4 @@ DATE & TIME		TASK DESCRIPTION				DURATION
 
 
 =========================================================================================
-						TOTAL WORKING HOURS:	32h
+						TOTAL WORKING HOURS:	35h
