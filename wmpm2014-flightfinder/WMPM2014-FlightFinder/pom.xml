@@ -115,13 +115,20 @@
       		 <version>1.2.17</version>
     	</dependency>
 
-    	<!-- JUnit -->
-    	<dependency>
-      		<groupId>junit</groupId>
-      		<artifactId>junit</artifactId>
-      		<version>4.8.1</version>
-      		<scope>test</scope>
-    	</dependency>
+    	<!-- Testing -->
+    	 <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-spring</artifactId>
+            <version>${camel.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
 
     	<!-- ActiveMQ -->
     	<dependency>
@@ -213,6 +220,20 @@
   	</dependencies>
   
 	<build>  	
+	
+		<testResources>
+            <testResource>
+                <filtering>false</filtering>
+                <directory>src/main/java/at/tuwien/flightfinder/test</directory>
+                <includes>
+                    <include>**</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </testResource>
+        </testResources>
+        
   		<plugins>
       		
       		<!-- mvn compile -->
@@ -238,6 +259,7 @@
             </plugin>
             
       		<!-- mvn camel:run -->
+      		<!-- FlightFinder with Spring -->
       		<plugin>
         		<groupId>org.apache.camel</groupId>
         		<artifactId>camel-maven-plugin</artifactId>
