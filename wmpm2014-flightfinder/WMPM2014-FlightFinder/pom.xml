@@ -205,6 +205,11 @@
 	  		<artifactId>hibernate-entitymanager</artifactId>
 	  		<version>4.3.5.Final</version>
 	  	</dependency>
+	  	<dependency>
+	  		<groupId>org.apache.camel</groupId>
+	  		<artifactId>camel-velocity</artifactId>
+	  		<version>${camel.version}</version>
+	  	</dependency>
   	</dependencies>
   
 	<build>  	
