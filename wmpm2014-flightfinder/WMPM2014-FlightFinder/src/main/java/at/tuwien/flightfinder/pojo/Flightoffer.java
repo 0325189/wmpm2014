@@ -34,6 +34,7 @@ public class Flightoffer {
 	private int price;
 	@Enumerated(EnumType.STRING)
 	private FlightClass flightClass;
+	private Date insertDate;
 	
 	public Flightoffer(Airport fromAirport, Airport toAirport,
 			String nameOrigin, String nameDestination, String airCompany,
@@ -50,10 +51,11 @@ public class Flightoffer {
 		this.ticketId = ticketId;
 		this.price = price;
 		this.flightClass = flightClass;
+		this.insertDate = new Date();
 	}
 
 	public Flightoffer() {
-		
+		this.insertDate = new Date();
 	}
 
 	public long getId() {
