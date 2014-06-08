@@ -111,7 +111,7 @@ public class FlightofferDAO {
 	            Query query = session.createQuery(queryString);
 	            query.setString("id", iataCode);
 	            airport = (Airport) query.uniqueResult();
-	            String queryString2 = "from Flightoffer where FROM_ID = :id and INSERTDATE = :insertdate ";
+	            String queryString2 = "from Flightoffer where FROM_ID = :id and INSERTDATE >= :insertdate ";
 	            Query query2 = session.createQuery(queryString2);
 	            query2.setDate("insertdate", new Date());
 	            query2.setInteger("id", (int) airport.getId());
@@ -124,5 +124,42 @@ public class FlightofferDAO {
 	        }
 	        return flightoffers;
 	}
+	public List<Flightoffer> getTodaysFlightoffers(){
+		 List<Flightoffer> flightoffers = new ArrayList<Flightoffer>();
+		 Airport airport = null; 
+		 Transaction trns = null;
+	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        try {
+	            trns = session.beginTransaction();
+	            String queryString2 = "from Flightoffer offer where offer.insertDate >= current_date() order by offer.price asc";
+	            Query query2 = session.createQuery(queryString2);
+	            flightoffers = query2.list();
+	        } catch (RuntimeException e) {
+	            e.printStackTrace();
+	        } finally {
+	            session.flush();
+	            session.close();
+	        }
+	        return flightoffers;
+	}
+
+public Flightoffer getTodaysBestFlightoffer(){
+	 Flightoffer flightoffer = new Flightoffer();
+	 Airport airport = null; 
+	 Transaction trns = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            trns = session.beginTransaction();
+            String queryString2 = "from Flightoffer offer where offer.insertDate >= current_date() order by offer.price asc";
+            Query query2 = session.createQuery(queryString2);
+            flightoffer = (Flightoffer) query2.list().get(0);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return flightoffer;
+}
 
 }
