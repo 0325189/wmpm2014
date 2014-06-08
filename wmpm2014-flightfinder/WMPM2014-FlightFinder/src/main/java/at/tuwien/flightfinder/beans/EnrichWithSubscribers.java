@@ -3,12 +3,14 @@ package at.tuwien.flightfinder.beans;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.impl.DefaultMessage;
 
 import at.tuwien.flightfinder.dao.AirportDAO;
 import at.tuwien.flightfinder.dao.FlightofferDAO;
@@ -41,7 +43,7 @@ public class EnrichWithSubscribers implements  Processor {
 			return ((Integer)fo1.getPrice()).compareTo((Integer)fo2.getPrice());
 		}
 	};
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(EnrichWithSubscribers.class);
 
 	public void process(Exchange exchange) {
@@ -51,13 +53,20 @@ public class EnrichWithSubscribers implements  Processor {
 		AirportDAO apDAO = new AirportDAO();
 
 		List <Airport> airportList = apDAO.getAllAirports();
-		//Airport a = apDAO.getAirportByIataCode("VIE");
+//		Airport vie = apDAO.getAirportByIataCode("VIE");
+//		Airport mad = apDAO.getAirportByIataCode("MAD");
+//		List <Airport> airportList = new ArrayList<Airport>();
+//		airportList.add(vie);
+//		airportList.add(mad);
+
+
 
 		for(Airport a: airportList){
+			System.out.println("-------------Begin of the iteration--------------");
 			//Get all flightOffers from today and the list of subscribers to the specific IATA code(Airport)
 			String iata = a.getIataCode();
 			List<Flightoffer> flightofferList = foDAO.getTodaysFlightoffersByDepAirport(iata);
-
+			System.out.println("The size of flightofferList: "+flightofferList.size());
 			//Sort the list of Flight offers
 			Collections.sort(flightofferList, priceComparator);
 
@@ -76,6 +85,10 @@ public class EnrichWithSubscribers implements  Processor {
 				emailList += item.getEmail()+" ; ";
 			}
 
+			//DefaultMessage message = new DefaultMessage(); 
+
+			logger.info("------------------MailingList: "+emailList+"----------------");
+
 			/**
 			 * Header includes allSubscribers and body includes the list of flight offers.
 			 * The body includes a list of all flight offers that will be displayed on the newsletter.
@@ -93,9 +106,22 @@ public class EnrichWithSubscribers implements  Processor {
 				mailHeader.put("From", "FlightFinder <workflow@seferovic.net>");
 				mailHeader.put("Subject", "FlightFinder -- Best offres of the day!");
 
-				exchange.getOut().setHeaders(mailHeader);
-				exchange.getOut().setBody(flightofferList);
+//				exchange.getIn().setHeaders(mailHeader);
+//				exchange.getIn().setBody(flightofferList);
 				
+				//sends the body of the message to Velocity-template for transformation
+				ProducerTemplate template = exchange.getContext().createProducerTemplate();
+				String newsletterBody = (String)template.requestBody("velocity:file:mojTest/newsletter.vm", flightofferList); 
+				exchange.getIn().setHeaders(mailHeader);
+				exchange.getIn().setBody(newsletterBody);
+				
+//				message.setHeaders(mailHeader);
+//				message.setBody(flightofferList);
+//				exchange.setIn(message); 
+				
+				//sends the whole exchange as email iteratively
+				logger.info("SENDING EMAIL");
+				template.send("smtp://188.40.32.121?username=workflow@seferovic.net&password=workflowpassword&contentType=text/html",exchange); //sends multiple messages
 			}	
 
 		}//ForLoop
