@@ -23,11 +23,11 @@ public class OfferProcessingRoute extends RouteBuilder {
 		process(new OffersEnricher()).
 		log("Message has been eriched with hotels and is being pushed to enricher").
 		to("file:mojTest?fileName=test.xml"). //just for testing purpose!
-		wireTap("mock:result", new Archive()).
+		wireTap("mock:test", new Archive()).
 		log("Message has been stored using WireTap");
 		//.setHeader(HazelcastConstants.OPERATION, constant(HazelcastConstants.PUT_OPERATION))
-		//.toF("hazelcast:seda:promotionQueue", HazelcastConstants.QUEUE_PREFIX);
-		//log("Message has been pushed into Hazelcast");
+		//.toF("hazelcast:seda:promotionQueue", HazelcastConstants.QUEUE_PREFIX)
+		//.log("Message has been pushed into Hazelcast");
 	}
 
 }

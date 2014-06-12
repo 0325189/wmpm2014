@@ -10,3 +10,14 @@ alter table Hotel drop constraint FK_s3o5bi6mbmnylukla2rpv0vl4 if exists [42102-
 05-27 15:07:32 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: Table "SUBSCRIBER" not found; SQL statement:
 alter table Subscriber drop constraint FK_l04ur9sg2hik7lnk2lyemt17p if exists [42102-178]
+05-27 22:30:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "MODIFY" not found; SQL statement:
+ALTER TABLE 
+MODIFY COLUMN TICKETID VARCHAR(20) [42102-178]
+05-27 22:30:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "TICKETID" not found; SQL statement:
+ALTER TABLE TICKETID
+MODIFY COLUMN TICKETID VARCHAR(20) [42102-178]
+06-05 15:03:05 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "TRUNCATE FLIGHTOFFER"; expected "TABLE"; SQL statement:
+TRUNCATE FLIGHTOFFER [42001-178]

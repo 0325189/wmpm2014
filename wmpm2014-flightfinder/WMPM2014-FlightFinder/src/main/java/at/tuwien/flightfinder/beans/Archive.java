@@ -82,14 +82,14 @@ public class Archive implements Processor {
 		}
 	
 		
-		flightOffer.setFlightNumber(123);
+		flightOffer.setFlightNumber(trimedFlightNumber);
 		flightOffer.setAirCompany(trimedAirCompany);
 		flightOffer.setFromAirport(airportOrigin);
 		flightOffer.setNameOrigin(trimedNameOrigin);
 		flightOffer.setToAirport(airportDestination);
 		flightOffer.setNameDestination(trimedNameDestination);
 		flightOffer.setFlightDate(trimedFlightDate2);
-		flightOffer.setTicketId(456);
+		flightOffer.setTicketId(trimedTicketId);
 		flightOffer.setPrice(price2);
 		
 		FlightofferDAO flightOfferDAO = new FlightofferDAO();

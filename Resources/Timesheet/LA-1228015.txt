@@ -15,10 +15,12 @@ DATE & TIME		TASK DESCRIPTION				DURATION
 16/05/2014		IR 1						1 h
 21/05/2014		EuropeanFlightsFilter, OfferProcessingRoute	3.5 h
 21/05/2014		Skype Meeting					1 h
+26/05/2014		Skype Meeting 					1 h
+27/05/2014		WireTape created, FlightOffer adjusted		6.5 h
 
 
 
 
 
 =========================================================================================
-						TOTAL WORKING HOURS:	26.75 h	
+						TOTAL WORKING HOURS:	34.25 h	

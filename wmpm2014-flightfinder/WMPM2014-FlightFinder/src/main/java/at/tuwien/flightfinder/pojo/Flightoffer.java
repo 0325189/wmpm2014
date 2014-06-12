@@ -28,16 +28,17 @@ public class Flightoffer {
 	private String nameOrigin;
 	private String nameDestination;
 	private String airCompany;
-	private int flightNumber;
+	private String flightNumber;
 	private Date flightDate;
-	private int ticketId;
+	private String ticketId;
 	private int price;
 	@Enumerated(EnumType.STRING)
 	private FlightClass flightClass;
+	private Date insertDate;
 	
 	public Flightoffer(Airport fromAirport, Airport toAirport,
 			String nameOrigin, String nameDestination, String airCompany,
-			int flightNumber, Date flightDate, int ticketId, int price,
+			String flightNumber, Date flightDate, String ticketId, int price,
 			FlightClass flightClass) {
 		super();
 		this.fromAirport = fromAirport;
@@ -50,10 +51,11 @@ public class Flightoffer {
 		this.ticketId = ticketId;
 		this.price = price;
 		this.flightClass = flightClass;
+		this.insertDate = new Date();
 	}
 
 	public Flightoffer() {
-		
+		this.insertDate = new Date();
 	}
 
 	public long getId() {
@@ -104,11 +106,11 @@ public class Flightoffer {
 		this.airCompany = airCompany;
 	}
 
-	public int getFlightNumber() {
+	public String getFlightNumber() {
 		return flightNumber;
 	}
 
-	public void setFlightNumber(int flightNumber) {
+	public void setFlightNumber(String flightNumber) {
 		this.flightNumber = flightNumber;
 	}
 
@@ -120,11 +122,11 @@ public class Flightoffer {
 		this.flightDate = flightDate;
 	}
 
-	public int getTicketId() {
+	public String getTicketId() {
 		return ticketId;
 	}
 
-	public void setTicketId(int ticketId) {
+	public void setTicketId(String ticketId) {
 		this.ticketId = ticketId;
 	}
 
