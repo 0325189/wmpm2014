@@ -6,7 +6,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
 import at.tuwien.flightfinder.beans.EnrichWithSubscribers;
-import at.tuwien.flightfinder.beans.MultipleMessageTest;
+//import at.tuwien.flightfinder.beans.MultipleMessageTest;
 import at.tuwien.flightfinder.dao.AirportDAO;
 import at.tuwien.flightfinder.dao.FlightofferDAO;
 import at.tuwien.flightfinder.dao.SubscriberDAO;
