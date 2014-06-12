@@ -14,7 +14,7 @@ public class TwitterFacebookRoute extends RouteBuilder{
 	private String facebookEndpoint = "facebook://postStatusMessage?inBody=message&userId=519619911476769" +
         "&oAuthAppId=505613226207091" +
         "&oAuthAppSecret=50a4083b2dd5d425734cb1004b839f4a" +
-        "&oAuthAccessToken=CAACEdEose0cBAKG3IxpHnZAGIYGKKG0FAUU2ZBFrplOyJDiwWfaeyTzTscj3I5ZCoXNZBNXJYJ8L5mP02btGC9zccOwV0APw3oYTRDZAdyGjpR2995pqJ3CDXXhUsTtsIWDG9SNUD3FKxn4nTEMoPDBkekbkWCI2XK2stBpOaAuD0EHvSl3fTGum6NxNDc0Y4OweyUNdd1gZDZD";
+        "&oAuthAccessToken=CAACEdEose0cBANjgTnxDvHuvzy5iSS3z3lONZCUyrV19GZArW8sMfZAxBrZBtGqRdjOM7Y2EfyF9KSaSip682lqDQh4rJRZBFQqt6VLtZCbqvANMriSvsNRyomJHtMXag48xvlVZAAhypGF2BclQJX7ZBXdaZC0ZAk1XZA3oVHBvw1oYkTB0i9ev8baIwZAN9ERCUNwZD";
 	
 	private String twitterEndpoint = "twitter://timeline/user?consumerKey=hIYlzKUmLbuU89ZcpweGu0v4k" +
             "&consumerSecret=UP823D2If4WzOdsvBL9IQe3PjHHFm20eB2gTTJ7oXRjCDhqaLj" +

@@ -40,12 +40,12 @@ public class FlightFinderSimple {
 		
 		// add routes to the context
 
-		//context.addRoutes(new FtpRouteConfig());
-		//context.addRoutes(new HttpRouteConfig());
-		//context.addRoutes(new MailToFileOffersRoute());
-		//context.addRoutes(new CbrRecievedFile());
-		//context.addRoutes(new OfferProcessingRoute());
-		//context.addRoutes(new NewsletterMailRoute());
+		context.addRoutes(new FtpRouteConfig());
+		context.addRoutes(new HttpRouteConfig());
+		context.addRoutes(new MailToFileOffersRoute());
+		context.addRoutes(new CbrRecievedFile());
+		context.addRoutes(new OfferProcessingRoute());
+		context.addRoutes(new NewsletterMailRoute());
 		context.addRoutes(new TwitterFacebookRoute());
 
 		
@@ -61,31 +61,5 @@ public class FlightFinderSimple {
 		System.out.println("CamelContext stopped");
 
 	}
-	
-	/*public static void fillDb()
-	{
-		FlightofferDAO foDAO = new FlightofferDAO();
-		AirportDAO aDAO = new AirportDAO();
-		
-		Airport fromAirport = aDAO.getAirportByIataCode("CDG");
-		Airport toAirport = aDAO.getAirportByIataCode("MAD");
-		
-		Flightoffer flightOffer = new Flightoffer();
-		
-		flightOffer.setFromAirport(fromAirport);
-		flightOffer.setToAirport(toAirport);
-		flightOffer.setNameOrigin("Paris");
-		flightOffer.setNameDestination("Madrid");
-		flightOffer.setAirCompany("Lufthansa");
-		flightOffer.setFlightNumber("001");
-		flightOffer.setFlightDate(new Date());
-		flightOffer.setTicketId("12345");
-		flightOffer.setPrice(99);
-		flightOffer.setFlightClass(FlightClass.Business);
-		
-		
-		foDAO.addFlightoffer(flightOffer);
-		
-	}*/
 	
 }

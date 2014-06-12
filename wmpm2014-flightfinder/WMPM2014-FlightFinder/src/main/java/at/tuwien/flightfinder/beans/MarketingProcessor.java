@@ -23,14 +23,14 @@ public class MarketingProcessor implements Processor{
 		FlightofferDAO foDAO = new FlightofferDAO();
 		
 		//Get Todays Single Best Flight Offer from db
-		/*Flightoffer todaysSingleBestFlightOffer = foDAO.getTodaysSingleBestFlightoffer();
+		Flightoffer todaysSingleBestFlightOffer = foDAO.getTodaysBestFlightoffer();
 		
 		String todaysSingleBestFlightOfferString = "FROM: " + todaysSingleBestFlightOffer.getNameOrigin() + " "+
 												   "TO: " + todaysSingleBestFlightOffer.getNameDestination() + " "+
 												   "CLASS: " + todaysSingleBestFlightOffer.getFlightClass() + " "+
-												   "FOR ONLY EUR:" + todaysSingleBestFlightOffer.getPrice();*/
+												   "FOR ONLY EUR:" + todaysSingleBestFlightOffer.getPrice();
 		
-		//exchange.getOut().setBody(todaysSingleBestFlightOfferString);
+		exchange.getOut().setBody(todaysSingleBestFlightOfferString);
 		
 		
 	}
