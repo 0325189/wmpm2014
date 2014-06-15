@@ -18,3 +18,6 @@ MODIFY COLUMN TICKETID VARCHAR(20) [42102-178]
 org.h2.jdbc.JdbcSQLException: Table "TICKETID" not found; SQL statement:
 ALTER TABLE TICKETID
 MODIFY COLUMN TICKETID VARCHAR(20) [42102-178]
+06-05 15:03:05 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "TRUNCATE FLIGHTOFFER"; expected "TABLE"; SQL statement:
+TRUNCATE FLIGHTOFFER [42001-178]
