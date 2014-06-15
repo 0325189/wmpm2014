@@ -1,11 +1,20 @@
 package at.tuwien.flightfinder.app;
 
 
+import java.util.Date;
+
+import javax.swing.Box.Filler;
+
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultCamelContext;
 
+import at.tuwien.flightfinder.dao.AirportDAO;
+import at.tuwien.flightfinder.dao.FlightofferDAO;
+import at.tuwien.flightfinder.pojo.Airport;
+import at.tuwien.flightfinder.pojo.FlightClass;
+import at.tuwien.flightfinder.pojo.Flightoffer;
 import at.tuwien.flightfinder.routes.*;
 
 /**
@@ -31,18 +40,19 @@ public class FlightFinderSimple {
 		
 		// add routes to the context
 
-		//context.addRoutes(new FtpRouteConfig());
-		//context.addRoutes(new HttpRouteConfig());
-		//context.addRoutes(new MailToFileOffersRoute());
-		//context.addRoutes(new CbrRecievedFile());
-		//context.addRoutes(new OfferProcessingRoute());
+		context.addRoutes(new FtpRouteConfig());
+		context.addRoutes(new HttpRouteConfig());
+		context.addRoutes(new MailToFileOffersRoute());
+		context.addRoutes(new CbrRecievedFile());
+		context.addRoutes(new OfferProcessingRoute());
 		context.addRoutes(new NewsletterMailRoute());
+		context.addRoutes(new TwitterFacebookRoute());
 
 		
 		// lets run it...
 		context.start();
 		System.out.println("CamelContext started");
-
+		//fillDb();
 		// wait for 30 seconds
 		Thread.sleep(30000);
 
