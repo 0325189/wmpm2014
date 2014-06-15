@@ -2,8 +2,6 @@ package at.tuwien.flightfinder.routes;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
-import org.apache.camel.component.hazelcast.*;
-
 import at.tuwien.flightfinder.beans.Archive;
 import at.tuwien.flightfinder.beans.EuropeanFlightsFilter;
 import at.tuwien.flightfinder.beans.OffersEnricher;
