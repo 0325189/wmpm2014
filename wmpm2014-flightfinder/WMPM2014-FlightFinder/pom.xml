@@ -68,13 +68,6 @@
       		<version>${camel.version}</version>
     	</dependency>
     	
-    	<!-- Camel Hazelcast -->
-    	<dependency>
-      		<groupId>org.apache.camel</groupId>
-      		<artifactId>camel-hazelcast</artifactId>
-      		<version>${camel.version}</version>
-    	</dependency>
-    	
     	<!-- Camel JDBC -->
     	<dependency>
       		<groupId>org.apache.camel</groupId>
