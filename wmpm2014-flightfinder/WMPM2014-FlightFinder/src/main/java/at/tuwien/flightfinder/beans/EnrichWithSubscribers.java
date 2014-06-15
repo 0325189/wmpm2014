@@ -28,8 +28,12 @@ import org.slf4j.LoggerFactory;
  * in its body and format header with a list of subscribers ready to be processed by the camel smtp-endpoint.
  *
  */
+/**
+ * @author ivan
+ *
+ */
 public class EnrichWithSubscribers implements  Processor {
-
+/*
 	//ProducerTemplate
 	ProducerTemplate producer;
 
@@ -43,12 +47,14 @@ public class EnrichWithSubscribers implements  Processor {
 			return ((Integer)fo1.getPrice()).compareTo((Integer)fo2.getPrice());
 		}
 	};
-
+*/
 	private static final Logger logger = LoggerFactory.getLogger(EnrichWithSubscribers.class);
 
 	public void process(Exchange exchange) {
 
-		FlightofferDAO foDAO = new FlightofferDAO();
+		Flightoffer offer = (Flightoffer) exchange.getIn().getBody();
+		System.out.println(offer.getPrice());
+	/*	FlightofferDAO foDAO = new FlightofferDAO();
 		SubscriberDAO suDAO = new SubscriberDAO();
 		AirportDAO apDAO = new AirportDAO();
 
@@ -89,10 +95,10 @@ public class EnrichWithSubscribers implements  Processor {
 
 			logger.info("------------------MailingList: "+emailList+"----------------");
 
-			/**
+			*//**
 			 * Header includes allSubscribers and body includes the list of flight offers.
 			 * The body includes a list of all flight offers that will be displayed on the newsletter.
-			 */
+			 *//*
 			if(flightofferList.isEmpty() || emailList.isEmpty()){
 				logger.info("There are no Flightoffers or Subscribers for the Airport: "+iata+". No Email will be sent!");
 			}else{
@@ -123,10 +129,9 @@ public class EnrichWithSubscribers implements  Processor {
 				logger.info("SENDING EMAIL");
 				template.send("smtp://188.40.32.121?username=workflow@seferovic.net&password=workflowpassword&contentType=text/html",exchange); //sends multiple messages
 			}	
-
 		}//ForLoop
 
-
+*/
 
 	}//Method
 }
