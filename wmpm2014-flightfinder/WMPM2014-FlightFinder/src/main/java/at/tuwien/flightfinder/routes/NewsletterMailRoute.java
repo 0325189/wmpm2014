@@ -19,6 +19,8 @@ public class NewsletterMailRoute extends RouteBuilder {
 
 		//you can send me java.util.list of subscribers via JPA
 		from("timer:newsletter?period=100000"). //can be set to specific time "time=yyyy-MM-dd HH:mm:ss" or just set the period to one day "period=86400000"
+		beanRef("flightOfferDAO", "getTodaysFlightoffers").
+		split(body()).
 		process(new EnrichWithSubscribers()).
 		log("--------FINISHED-------");
 			

@@ -1,11 +1,21 @@
 package at.tuwien.flightfinder.app;
 
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.camel.util.jndi.JndiContext;
 
+import at.tuwien.flightfinder.dao.AirportDAO;
+import at.tuwien.flightfinder.dao.FlightofferDAO;
+import at.tuwien.flightfinder.dao.SubscriberDAO;
+import at.tuwien.flightfinder.pojo.FlightClass;
+import at.tuwien.flightfinder.pojo.Flightoffer;
 import at.tuwien.flightfinder.routes.*;
 
 /**
@@ -21,7 +31,12 @@ public class FlightFinderSimple {
 	public static void main(String[] args) throws Exception 
 	{
 		// Set up CamelContext
-		CamelContext context = new DefaultCamelContext();
+		JndiContext jndiContext = new JndiContext();
+		jndiContext.bind("airportDAO", new AirportDAO());
+		jndiContext.bind("flightOfferDAO", new FlightofferDAO());
+
+		CamelContext context = new DefaultCamelContext(jndiContext);
+
 		
 		// Add ActiveMQ component to the context
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("vm://localhost");
@@ -50,6 +65,7 @@ public class FlightFinderSimple {
 		context.stop();
 		System.out.println("CamelContext stopped");
 
+	
 	}
 	
 }
