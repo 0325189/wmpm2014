@@ -3,6 +3,7 @@ package at.tuwien.flightfinder.dao;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.hibernate.*;
@@ -124,16 +125,57 @@ public class FlightofferDAO {
 	        }
 	        return flightoffers;
 	}
-	public List<Flightoffer> getTodaysFlightoffers(){
-		 List<Flightoffer> flightoffers = new ArrayList<Flightoffer>();
+	public ArrayList<ArrayList<Flightoffer>> getTodaysFlightoffers(){
+		
+		List<Flightoffer> flightOffersList = new ArrayList<Flightoffer>();
+		ArrayList<Flightoffer> temp = new ArrayList<Flightoffer>();
+		
+		HashMap<String,ArrayList<Flightoffer>> temp_storage = new HashMap<String,ArrayList<Flightoffer>>();
+		
+		
+		ArrayList<ArrayList<Flightoffer>> flightoffers = new ArrayList<ArrayList<Flightoffer>>();
+		 
 		 Airport airport = null; 
 		 Transaction trns = null;
 	        Session session = HibernateUtil.getSessionFactory().openSession();
 	        try {
 	            trns = session.beginTransaction();
-	            String queryString2 = "from Flightoffer offer where offer.insertDate >= current_date() order by offer.price asc";
+	            String queryString2 = "from Flightoffer offer where offer.insertDate >= current_date() order by offer.fromAirport, offer.price asc";
 	            Query query2 = session.createQuery(queryString2);
-	            flightoffers = query2.list();
+	            flightOffersList = query2.list();
+	            
+	            
+	            
+	            for (Flightoffer offer : flightOffersList) {
+	            	
+	                if(temp_storage.isEmpty())
+	                {
+	            		ArrayList temp_list = new ArrayList<Flightoffer>();
+
+	                	temp_list.add(offer);
+	                	temp_storage.put(offer.getFromAirport().getIataCode(), temp_list);
+	                }
+	                else if(!temp_storage.containsKey(offer.getFromAirport().getIataCode())) {
+	            		ArrayList temp_list = new ArrayList<Flightoffer>();
+
+	                	temp_list.add(offer);
+	                	temp_storage.put(offer.getFromAirport().getIataCode(), temp_list);
+	                }
+	                else if(temp_storage.containsKey(offer.getFromAirport().getIataCode())) {
+	            		ArrayList temp_list = new ArrayList<Flightoffer>();
+
+	                	temp_list = temp_storage.get(offer.getFromAirport().getIataCode());
+	                	temp_list.add(offer);
+	                	temp_storage.put(offer.getFromAirport().getIataCode(), temp_list);
+	                	
+	                }
+	            	
+				}
+	            
+	            for(String key : temp_storage.keySet()){
+	            	flightoffers.add(temp_storage.get(key));
+	            }
+	            
 	        } catch (RuntimeException e) {
 	            e.printStackTrace();
 	        } finally {
