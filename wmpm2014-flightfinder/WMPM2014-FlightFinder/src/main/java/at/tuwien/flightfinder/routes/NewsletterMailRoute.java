@@ -5,6 +5,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
 import at.tuwien.flightfinder.beans.EnrichWithSubscribers;
+import at.tuwien.flightfinder.dao.FlightofferDAO;
 
 
 /**
@@ -18,10 +19,13 @@ public class NewsletterMailRoute extends RouteBuilder {
 	public void configure() throws Exception {
 
 		//you can send me java.util.list of subscribers via JPA
-		from("timer:newsletter?period=100000"). //can be set to specific time "time=yyyy-MM-dd HH:mm:ss" or just set the period to one day "period=86400000"
-		beanRef("flightOfferDAO", "getTodaysFlightoffers").
+		from("timer:newsletter?period=10000"). //can be set to specific time "time=yyyy-MM-dd HH:mm:ss" or just set the period to one day "period=86400000"
+		routeId("Route-Newsletter").
+		log("timer fired..").
+		bean( new FlightofferDAO(), "getTodaysFlightoffers").
 		split(body()).
-		process(new EnrichWithSubscribers()).
+		// velocity (body is a list)
+		//process(new EnrichWithSubscribers()).
 		log("--------FINISHED-------");
 			
 
