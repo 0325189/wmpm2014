@@ -52,8 +52,11 @@ public class EnrichWithSubscribers implements  Processor {
 
 	public void process(Exchange exchange) {
 
-		Flightoffer offer = (Flightoffer) exchange.getIn().getBody();
-		System.out.println(offer.getPrice());
+		List<Flightoffer> offer = (List<Flightoffer>) exchange.getIn().getBody();
+		
+		for (Flightoffer flightoffer : offer) {
+			System.out.println(flightoffer.getNameOrigin());
+		}
 	/*	FlightofferDAO foDAO = new FlightofferDAO();
 		SubscriberDAO suDAO = new SubscriberDAO();
 		AirportDAO apDAO = new AirportDAO();

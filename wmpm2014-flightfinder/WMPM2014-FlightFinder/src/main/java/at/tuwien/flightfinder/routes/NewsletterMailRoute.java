@@ -25,8 +25,9 @@ public class NewsletterMailRoute extends RouteBuilder {
 		bean( new FlightofferDAO(), "getTodaysFlightoffers").
 		split(body()).
 		// velocity (body is a list)
-		//process(new EnrichWithSubscribers()).
-		log("--------FINISHED-------");
+		process(new EnrichWithSubscribers()).
+		
+		log("{$body}");
 			
 
 	}
