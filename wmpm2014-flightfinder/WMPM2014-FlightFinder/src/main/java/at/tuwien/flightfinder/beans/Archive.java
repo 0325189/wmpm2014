@@ -20,55 +20,93 @@ public class Archive implements Processor {
 		Flightoffer flightOffer = new Flightoffer();
 		
 		System.out.println(exchange.getIn().getBody());
+					
 		
-		//FlightNumber
-		String flightNumber = XPathBuilder.xpath("//FlightNumber").evaluate(exchange, String.class);
-		String trimedFlightNumber = flightNumber.substring(flightNumber.indexOf('>')+1,flightNumber.lastIndexOf('<'));
+		String trimedFlightNumber;
 		
-		//AirCompany 
-		String airCompany = XPathBuilder.xpath("//AirCompany").evaluate(exchange, String.class);
-		String trimedAirCompany = airCompany.substring(airCompany.indexOf('>')+1,airCompany.lastIndexOf('<'));
+		String trimedAirCompany;
 		
 		
-		//IATACodeOrigin
-		String iataCodeOrigin = XPathBuilder.xpath("//IATACodeOrigin").evaluate(exchange, String.class); 
-		String trimedIATACodeOrigin = iataCodeOrigin.substring(iataCodeOrigin.indexOf('>')+1,iataCodeOrigin.lastIndexOf('<'));
+		Airport airportOrigin;
 		
-		AirportDAO airportDao = new AirportDAO();
-		Airport airportOrigin = airportDao.getAirportByIataCode(trimedIATACodeOrigin);
+		String trimedNameOrigin;
 		
-		//NameOrigin
-		String nameOrigin = XPathBuilder.xpath("//NameOrigin").evaluate(exchange, String.class);
-		String trimedNameOrigin = nameOrigin.substring(nameOrigin.indexOf('>')+1,nameOrigin.lastIndexOf('<'));
+		Airport airportDestination;
 		
-		//IATACodeDestination
-		String iataCodeDestination = XPathBuilder.xpath("//IATACodeDestination").evaluate(exchange, String.class);
-		String trimedIATACodeDestination = iataCodeDestination.substring(iataCodeDestination.indexOf('>')+1,iataCodeDestination.lastIndexOf('<'));
-		
-		Airport airportDestination = airportDao.getAirportByIataCode(trimedIATACodeDestination);
-		
-		//NameDestination
-		String nameDestination = XPathBuilder.xpath("//Destination").evaluate(exchange, String.class);
-		String trimedNameDestination = nameDestination.substring(nameDestination.indexOf('>')+1,nameDestination.lastIndexOf('<'));
+		String trimedNameDestination;
 		
 
-		//FlightDate
-		String flightDate = XPathBuilder.xpath("//FlightDate").evaluate(exchange, String.class);
-		String trimedFlightDate = flightDate.substring(flightDate.indexOf('>')+1,flightDate.lastIndexOf('<'));
+		String trimedFlightDate;
 		
 
-		//Class
-		String nameClass = XPathBuilder.xpath("//Class").evaluate(exchange, String.class);
-		String trimedNameClass = nameClass.substring(nameClass.indexOf('>')+1,nameClass.lastIndexOf('<'));
+		String trimedNameClass;
 		
 
-		//TicketID
-		String ticketId = XPathBuilder.xpath("//TicketID").evaluate(exchange, String.class);
-		String trimedTicketId = ticketId.substring(ticketId.indexOf('>')+1,ticketId.lastIndexOf('<'));
+		String trimedTicketId;
 
-		//Price
-		String price = XPathBuilder.xpath("//Price").evaluate(exchange, String.class);
-		String trimedPrice = price.substring(price.indexOf('>')+1,price.lastIndexOf('<'));
+		String trimedPrice;
+		try {
+			//FlightNumber
+			String flightNumber = XPathBuilder.xpath("//FlightNumber")
+					.evaluate(exchange, String.class);
+			trimedFlightNumber = flightNumber.substring(
+					flightNumber.indexOf('>') + 1,
+					flightNumber.lastIndexOf('<'));
+			//AirCompany 
+			String airCompany = XPathBuilder.xpath("//AirCompany").evaluate(
+					exchange, String.class);
+			trimedAirCompany = airCompany.substring(
+					airCompany.indexOf('>') + 1, airCompany.lastIndexOf('<'));
+			//IATACodeOrigin
+			String iataCodeOrigin = XPathBuilder.xpath("//IATACodeOrigin")
+					.evaluate(exchange, String.class);
+			String trimedIATACodeOrigin = iataCodeOrigin.substring(
+					iataCodeOrigin.indexOf('>') + 1,
+					iataCodeOrigin.lastIndexOf('<'));
+			AirportDAO airportDao = new AirportDAO();
+			airportOrigin = airportDao
+					.getAirportByIataCode(trimedIATACodeOrigin);
+			//NameOrigin
+			String nameOrigin = XPathBuilder.xpath("//NameOrigin").evaluate(
+					exchange, String.class);
+			trimedNameOrigin = nameOrigin.substring(
+					nameOrigin.indexOf('>') + 1, nameOrigin.lastIndexOf('<'));
+			//IATACodeDestination
+			String iataCodeDestination = XPathBuilder.xpath(
+					"//IATACodeDestination").evaluate(exchange, String.class);
+			String trimedIATACodeDestination = iataCodeDestination.substring(
+					iataCodeDestination.indexOf('>') + 1,
+					iataCodeDestination.lastIndexOf('<'));
+			airportDestination = airportDao
+					.getAirportByIataCode(trimedIATACodeDestination);
+			//NameDestination
+			String nameDestination = XPathBuilder.xpath("//Destination")
+					.evaluate(exchange, String.class);
+			trimedNameDestination = nameDestination.substring(
+					nameDestination.indexOf('>') + 1,
+					nameDestination.lastIndexOf('<'));
+			//FlightDate
+			String flightDate = XPathBuilder.xpath("//FlightDate").evaluate(
+					exchange, String.class);
+			trimedFlightDate = flightDate.substring(
+					flightDate.indexOf('>') + 1, flightDate.lastIndexOf('<'));
+			//Class
+			String nameClass = XPathBuilder.xpath("//Class").evaluate(exchange,
+					String.class);
+			trimedNameClass = nameClass.substring(nameClass.indexOf('>') + 1,
+					nameClass.lastIndexOf('<'));
+			//TicketID
+			String ticketId = XPathBuilder.xpath("//TicketID").evaluate(
+					exchange, String.class);
+			trimedTicketId = ticketId.substring(ticketId.indexOf('>') + 1,
+					ticketId.lastIndexOf('<'));
+			//Price
+			String price = XPathBuilder.xpath("//Price").evaluate(exchange,
+					String.class);
+			trimedPrice = price.substring(price.indexOf('>') + 1,
+					price.lastIndexOf('<'));
+		
+		
 		
 		
 		Date trimedFlightDate2 = new SimpleDateFormat("yyyyMMdd").parse(trimedFlightDate);
@@ -94,6 +132,10 @@ public class Archive implements Processor {
 		
 		FlightofferDAO flightOfferDAO = new FlightofferDAO();
 		flightOfferDAO.addFlightoffer(flightOffer);
+		
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	
 }
