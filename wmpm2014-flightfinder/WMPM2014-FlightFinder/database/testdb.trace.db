@@ -1,26 +1,114 @@
-05-27 15:07:32 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Table "FLIGHTOFFER" not found; SQL statement:
-alter table Flightoffer drop constraint FK_nnctdm0a6qyhk58yhpb23q9kj if exists [42102-178]
-05-27 15:07:32 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Table "FLIGHTOFFER" not found; SQL statement:
-alter table Flightoffer drop constraint FK_2tc29w32p8ruaoqd6s6yqpvcw if exists [42102-178]
-05-27 15:07:32 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Table "HOTEL" not found; SQL statement:
-alter table Hotel drop constraint FK_s3o5bi6mbmnylukla2rpv0vl4 if exists [42102-178]
-05-27 15:07:32 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Table "SUBSCRIBER" not found; SQL statement:
-alter table Subscriber drop constraint FK_l04ur9sg2hik7lnk2lyemt17p if exists [42102-178]
-05-27 22:30:03 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Table "MODIFY" not found; SQL statement:
-ALTER TABLE 
-MODIFY COLUMN TICKETID VARCHAR(20) [42102-178]
-05-27 22:30:26 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Table "TICKETID" not found; SQL statement:
-ALTER TABLE TICKETID
-MODIFY COLUMN TICKETID VARCHAR(20) [42102-178]
-06-05 15:03:05 jdbc[4]: exception
-org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "TRUNCATE FLIGHTOFFER"; expected "TABLE"; SQL statement:
-TRUNCATE FLIGHTOFFER [42001-178]
-06-19 14:27:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "HOTEL[*] SELECT * FROM AIRPORT"; expected "HELP, {"; SQL statement:
-HOTEL SELECT * FROM AIRPORT [42001-178]
+06-19 16:35:11 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Cannot parse "TIMESTAMP" constant "2014-06-19 16:228:12.307"; SQL statement:
+INSERT INTO "PUBLIC"."FLIGHTOFFER"("ID","FLIGHTCLASS","FLIGHTDATE","FLIGHTNUMBER","PRICE","TICKETID","FROM_ID","TO_ID","AIRCOMPANY","NAMEDESTINATION","NAMEORIGIN","INSERTDATE")VALUES(?,?,?,?,?,?,?,?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12) [22007-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:167)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:88)
+	at org.h2.value.Value.convertTo(Value.java:862)
+	at org.h2.table.Column.convert(Column.java:151)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:144)
+	at org.h2.command.dml.Insert.update(Insert.java:115)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:158)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:144)
+	at org.h2.result.UpdatableRow.insertRow(UpdatableRow.java:323)
+	at org.h2.jdbc.JdbcResultSet.insertRow(JdbcResultSet.java:2968)
+	at org.h2.server.web.WebApp.editResult(WebApp.java:1086)
+	at org.h2.server.web.WebApp.process(WebApp.java:228)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:171)
+	at org.h2.server.web.WebThread.process(WebThread.java:138)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:724)
+Caused by: java.lang.IllegalArgumentException: 2014-06-19 16:228:12.307
+	at org.h2.util.DateTimeUtils.parseTimeNanos(DateTimeUtils.java:326)
+	at org.h2.value.ValueTimestamp.parseTry(ValueTimestamp.java:140)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:86)
+	... 16 more
+06-19 16:35:11 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Cannot parse "TIMESTAMP" constant "2014-06-19 16:228:12.307"; SQL statement:
+INSERT INTO "PUBLIC"."FLIGHTOFFER"("ID","FLIGHTCLASS","FLIGHTDATE","FLIGHTNUMBER","PRICE","TICKETID","FROM_ID","TO_ID","AIRCOMPANY","NAMEDESTINATION","NAMEORIGIN","INSERTDATE")VALUES(?,?,?,?,?,?,?,?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12) [22007-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:167)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:88)
+	at org.h2.value.Value.convertTo(Value.java:862)
+	at org.h2.table.Column.convert(Column.java:151)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:144)
+	at org.h2.command.dml.Insert.update(Insert.java:115)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:158)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:144)
+	at org.h2.result.UpdatableRow.insertRow(UpdatableRow.java:323)
+	at org.h2.jdbc.JdbcResultSet.insertRow(JdbcResultSet.java:2968)
+	at org.h2.server.web.WebApp.editResult(WebApp.java:1086)
+	at org.h2.server.web.WebApp.process(WebApp.java:228)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:171)
+	at org.h2.server.web.WebThread.process(WebThread.java:138)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:724)
+Caused by: java.lang.IllegalArgumentException: 2014-06-19 16:228:12.307
+	at org.h2.util.DateTimeUtils.parseTimeNanos(DateTimeUtils.java:326)
+	at org.h2.value.ValueTimestamp.parseTry(ValueTimestamp.java:140)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:86)
+	... 16 more
+06-19 16:36:19 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Cannot parse "TIMESTAMP" constant "2014-06-19 16:128:12.305"; SQL statement:
+INSERT INTO "PUBLIC"."FLIGHTOFFER"("ID","FLIGHTCLASS","FLIGHTDATE","FLIGHTNUMBER","PRICE","TICKETID","FROM_ID","TO_ID","AIRCOMPANY","NAMEDESTINATION","NAMEORIGIN","INSERTDATE")VALUES(?,?,?,?,?,?,?,?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12) [22007-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:167)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:88)
+	at org.h2.value.Value.convertTo(Value.java:862)
+	at org.h2.table.Column.convert(Column.java:151)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:144)
+	at org.h2.command.dml.Insert.update(Insert.java:115)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:158)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:144)
+	at org.h2.result.UpdatableRow.insertRow(UpdatableRow.java:323)
+	at org.h2.jdbc.JdbcResultSet.insertRow(JdbcResultSet.java:2968)
+	at org.h2.server.web.WebApp.editResult(WebApp.java:1086)
+	at org.h2.server.web.WebApp.process(WebApp.java:228)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:171)
+	at org.h2.server.web.WebThread.process(WebThread.java:138)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:724)
+Caused by: java.lang.IllegalArgumentException: 2014-06-19 16:128:12.305
+	at org.h2.util.DateTimeUtils.parseTimeNanos(DateTimeUtils.java:326)
+	at org.h2.value.ValueTimestamp.parseTry(ValueTimestamp.java:140)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:86)
+	... 16 more
+06-19 16:36:19 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Cannot parse "TIMESTAMP" constant "2014-06-19 16:128:12.305"; SQL statement:
+INSERT INTO "PUBLIC"."FLIGHTOFFER"("ID","FLIGHTCLASS","FLIGHTDATE","FLIGHTNUMBER","PRICE","TICKETID","FROM_ID","TO_ID","AIRCOMPANY","NAMEDESTINATION","NAMEORIGIN","INSERTDATE")VALUES(?,?,?,?,?,?,?,?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12) [22007-178]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:167)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:88)
+	at org.h2.value.Value.convertTo(Value.java:862)
+	at org.h2.table.Column.convert(Column.java:151)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:144)
+	at org.h2.command.dml.Insert.update(Insert.java:115)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:254)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:158)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:144)
+	at org.h2.result.UpdatableRow.insertRow(UpdatableRow.java:323)
+	at org.h2.jdbc.JdbcResultSet.insertRow(JdbcResultSet.java:2968)
+	at org.h2.server.web.WebApp.editResult(WebApp.java:1086)
+	at org.h2.server.web.WebApp.process(WebApp.java:228)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:171)
+	at org.h2.server.web.WebThread.process(WebThread.java:138)
+	at org.h2.server.web.WebThread.run(WebThread.java:94)
+	at java.lang.Thread.run(Thread.java:724)
+Caused by: java.lang.IllegalArgumentException: 2014-06-19 16:128:12.305
+	at org.h2.util.DateTimeUtils.parseTimeNanos(DateTimeUtils.java:326)
+	at org.h2.value.ValueTimestamp.parseTry(ValueTimestamp.java:140)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:86)
+	... 16 more
+06-19 16:37:35 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "'106.0' (FLIGHTOFFER: FROM_ID BIGINT)"; SQL statement:
+INSERT INTO "PUBLIC"."FLIGHTOFFER"("ID","FLIGHTCLASS","FLIGHTDATE","FLIGHTNUMBER","PRICE","TICKETID","FROM_ID","TO_ID","AIRCOMPANY","NAMEDESTINATION","NAMEORIGIN","INSERTDATE")VALUES(?,?,?,?,?,?,?,?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12) [22018-178]
+06-19 16:37:35 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "'106.0' (FLIGHTOFFER: FROM_ID BIGINT)"; SQL statement:
+INSERT INTO "PUBLIC"."FLIGHTOFFER"("ID","FLIGHTCLASS","FLIGHTDATE","FLIGHTNUMBER","PRICE","TICKETID","FROM_ID","TO_ID","AIRCOMPANY","NAMEDESTINATION","NAMEORIGIN","INSERTDATE")VALUES(?,?,?,?,?,?,?,?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12) [22018-178]
