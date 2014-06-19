@@ -5,6 +5,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
 import at.tuwien.flightfinder.beans.EnrichWithSubscribers;
+import at.tuwien.flightfinder.pojo.Flightoffer;
 
 
 /**
