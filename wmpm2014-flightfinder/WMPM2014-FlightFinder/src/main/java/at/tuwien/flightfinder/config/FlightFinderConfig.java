@@ -29,8 +29,9 @@ public class FlightFinderConfig extends CamelConfiguration {
 	@Override
     protected void setupCamelContext(CamelContext camelContext) throws Exception {
 		
-		// Set up CamelContext
+		// THERE IS NO OTHER WAY TO 
 		
+		// Set up CamelContext
 		// Add ActiveMQ component
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("vm://localhost");
 		ActiveMQComponent activeMQcomp = new ActiveMQComponent();
@@ -38,5 +39,7 @@ public class FlightFinderConfig extends CamelConfiguration {
 		camelContext.addComponent("activemq", activeMQcomp);
     
     }
+	
+
 
 }

@@ -21,3 +21,6 @@ MODIFY COLUMN TICKETID VARCHAR(20) [42102-178]
 06-05 15:03:05 jdbc[4]: exception
 org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "TRUNCATE FLIGHTOFFER"; expected "TABLE"; SQL statement:
 TRUNCATE FLIGHTOFFER [42001-178]
+06-19 14:27:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "HOTEL[*] SELECT * FROM AIRPORT"; expected "HELP, {"; SQL statement:
+HOTEL SELECT * FROM AIRPORT [42001-178]
