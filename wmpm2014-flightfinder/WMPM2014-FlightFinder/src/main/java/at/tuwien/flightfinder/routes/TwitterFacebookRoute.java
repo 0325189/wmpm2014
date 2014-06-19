@@ -36,7 +36,9 @@ public class TwitterFacebookRoute extends RouteBuilder{
         
         try
         {
-        	from("timer:socialMarketing?period=100000").process(new MarketingProcessor()).multicast().parallelProcessing().to(facebookEndpoint, twitterEndpoint).to("log:Succesful!!!!");
+        	from("timer:socialMarketing?period=100000").
+        	routeId("Route-Social").
+        	process(new MarketingProcessor()).multicast().parallelProcessing().to(facebookEndpoint, twitterEndpoint).to("log:Succesful!!!!");
         }
         catch (Exception ex)
         {
