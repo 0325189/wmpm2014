@@ -24,3 +24,6 @@ TRUNCATE FLIGHTOFFER [42001-178]
 06-19 14:27:00 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "HOTEL[*] SELECT * FROM AIRPORT"; expected "HELP, {"; SQL statement:
 HOTEL SELECT * FROM AIRPORT [42001-178]
+06-19 15:21:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "HOTEL[*] SELECT * FROM SUBSCRIBER"; expected "HELP, {"; SQL statement:
+HOTEL SELECT * FROM SUBSCRIBER [42001-178]
