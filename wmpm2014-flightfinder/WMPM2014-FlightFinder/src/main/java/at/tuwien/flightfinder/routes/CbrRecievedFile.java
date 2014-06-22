@@ -18,6 +18,7 @@ public class CbrRecievedFile extends RouteBuilder{
 
 		
 		from("activemq:fileOffers").
+		routeId("Route-CBR").
 		choice().
 			when(header("CamelFileName").regex("^.*(xml)$")).
 				log("XML file found on CBR: ${header.CamelFileName}").

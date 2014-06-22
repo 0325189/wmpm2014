@@ -14,7 +14,7 @@ public class OfferProcessingRoute extends RouteBuilder {
 	public void configure() throws Exception {
 
 		from("activemq:Offers").
-		log("${body}").
+		routeId("Route-OfferProcess").
 		log("Message has been pulled from Offers queue").
 		filter(new EuropeanFlightsFilter()).
 		log("Message has been filtered and is being pushed to ernicher").

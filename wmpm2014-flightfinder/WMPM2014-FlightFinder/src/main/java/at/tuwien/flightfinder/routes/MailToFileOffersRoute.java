@@ -29,10 +29,23 @@ import at.tuwien.flightfinder.beans.IncommingMailProcessor;
 @Component
 public class MailToFileOffersRoute extends RouteBuilder {
 
+//			@Override
+//            public void configure() throws Exception {
+//				from("imap://188.40.32.121?username=workflow@seferovic.net&password=workflowpassword&delete=false&unseen=false&consumer.delay=60000").
+//				routeId("Route-Mail").
+//				split(new SplitAttachmentsExpression()).process(new IncommingMailProcessor()).to("activemq:fileOffers").end();
+				
 			@Override
-            public void configure() throws Exception {
-				from("imap://188.40.32.121?username=workflow@seferovic.net&password=workflowpassword&delete=false&unseen=false&consumer.delay=60000").
-				split(new SplitAttachmentsExpression()).process(new IncommingMailProcessor()).to("activemq:fileOffers").end();
+	        public void configure() throws Exception {
+				from("imap://188.40.32.121?username=workflow@seferovic.net&password=workflowpassword&delete=false&unseen=false&consumer.delay=60000")
+				.routeId("Route-Mail")
+				.split(new SplitAttachmentsExpression())
+				.choice()
+					.when(header("CamelFileName").endsWith(".xml")).log("XML file").endChoice()
+					.when(header("CamelFileName").endsWith(".csv")).log("CSV file").endChoice()
+					.otherwise().log("invalid file ext").endChoice();
+				
+//				process(new IncommingMailProcessor()).to("activemq:fileOffers").end();
 		}
 			
 }

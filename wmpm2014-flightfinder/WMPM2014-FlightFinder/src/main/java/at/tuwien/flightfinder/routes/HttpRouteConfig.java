@@ -11,8 +11,9 @@ public class HttpRouteConfig extends RouteBuilder {
 	XmlJsonDataFormat xmlJsonFormat = new XmlJsonDataFormat();
 	@Override
 	public void configure() throws Exception {	
-		from("stream:url?url=http://www.tesla-gui.at/http/offers.json&groupLines=100")
-		.process(new JSONStream())
+		from("stream:url?url=http://www.tesla-gui.at/http/offers.json&groupLines=100").
+		routeId("Route-HTTP").
+		process(new JSONStream())
 		.unmarshal(xmlJsonFormat)
 		.log("Found at: ${body}")
 		.to("activemq:fileOffers");
