@@ -6,7 +6,9 @@ import org.springframework.stereotype.Component;
 import org.apache.log4j.Logger;
 
 /*
- * .errorHandler(deadLetterChannel(DeadLetterChannel.DLCH))
+ * Just put 
+ * 		errorHandler(deadLetterChannel(DeadLetterChannel.DLCH).useOriginalMessage());
+ * before "from(..)." of your route.. 
  */
 
 @Component
