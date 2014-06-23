@@ -20,14 +20,14 @@ public class NewsletterMailRoute extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 
-		//you can send me java.util.list of subscribers via JPA
 		from("timer:newsletter?period=60000"). //can be set to specific time "time=yyyy-MM-dd HH:mm:ss" or just set the period to one day "period=86400000"
 		routeId("Route-Newsletter").
-		log("timer fired..").
-		bean( new FlightofferDAO(), "getTodaysFlightoffers").
+		log("--------------------timer fired..--------------------------------").
+		bean( new FlightofferDAO(), "getTodaysFlightoffers").id("flightOfferBean").
 		split(body()).
 		process(new EnrichWithSubscribers()).
-		to("velocity:file:mojTest/newsletter.vm").
+		to("velocity:file:mojTest/newsletter.vm").id("velocityTemplate").
+
 		to("smtp://188.40.32.121?username=workflow@seferovic.net&password=workflowpassword&contentType=text/html").
 		log("-------------------FINISHED--------------------------------------");
 			
