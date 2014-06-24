@@ -1,30 +1,23 @@
 package at.tuwien.flightfinder.test;
 
-import org.apache.camel.CamelExecutionException;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.apache.camel.processor.validation.PredicateValidationException;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
-import at.tuwien.flightfinder.pojo.Flightoffer;
-import at.tuwien.flightfinder.routes.FtpRouteConfig;
-import at.tuwien.flightfinder.routes.NewsletterMailRoute;
-/**
- * FTP Route test
- * 
- * @author Ivan Gusljesevic
- */
-public class FtpRouteTest extends CamelTestSupport {
+import at.tuwien.flightfinder.routes.HttpRouteConfig;
+
+
+public class HttpRouteTest extends CamelTestSupport {
 
 	private static final Logger logger = Logger.getLogger(NewsletterTest.class);
 
 	@Override
 	protected RouteBuilder createRouteBuilder() throws Exception 
 	{
-		return new FtpRouteConfig();
+		return new HttpRouteConfig();
 	}
 
 
@@ -32,14 +25,15 @@ public class FtpRouteTest extends CamelTestSupport {
 
 	//Tests
 	@Test
-	public void testFtpRoute() throws Exception
+	public void testHttpRoute() throws Exception
 	{
 		context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
 
 			@Override
 			public void configure() throws Exception {
 				//consumes from this endpoint
-				replaceFromWith("seda:ftpTest");
+				replaceFromWith("seda:httpTest");
+				weaveById("jsonStream").remove();
 				interceptSendToEndpoint("activemq:*")
 				.skipSendToOriginalEndpoint()
 				.to("mock:activemq");
@@ -52,21 +46,50 @@ public class FtpRouteTest extends CamelTestSupport {
         
 		MockEndpoint activemq= getMockEndpoint("mock:activemq");
 		activemq.expectedMessageCount(1);
-		activemq.expectedBodiesReceived("FTP Test");
-		template.sendBodyAndHeader("seda:ftpTest", "FTP Test", "CamelFileName", "offer.xml");
+		template.sendBodyAndHeader("seda:httpTest", "{"
+  +"\"FlightsDetailsInfo\": {"
+    +"\"Flight\": ["
+ +" {"
+    +"\"FlightNumber\":\"GW937\","
+    +"\"AirCompany\":\"Germanwings\","
+    +"\"IATACodeOrigin\":\"BJS\","
+    +"\"NameOrigin\":\"Beijing\","
+    +"\"IATACodeDestination\":\"LHR\","
+    +"\"Destination\":\"London\","
+    +"\"FlightDate\":20140510,"
+    +"\"Class\":\"Economy\","
+    +"\"TicketID\":\"GW93720140510E70\","
+    +"\"Price\":105"
+  +"},"
+  +"{"
+    +"\"FlightNumber\":\"AA254\","
+    +"\"AirCompany\":\"AustriaAirlines\","
+    +"\"IATACodeOrigin\":\"BJS\","
+    +"\"NameOrigin\":\"Beijing\","
+    +"\"IATACodeDestination\":\"LGW\","
+    +"\"Destination\":\"London\","
+	+"\"FlightDate\":20140510,"
+	+"\"Class\":\"Business\","
+    +"\"TicketID\":\"AA25420140510B20\","
+    +"\"Price\":320"
+  +"}"
++"]"
+  +"}"
++"}", "CamelFileName", "offer.json");
 		assertMockEndpointsSatisfied();
 
 		context.stop();
 	}
 	@Test
-	public void testFtpRouteUnsupertedFileName() throws Exception
+	public void testHttpRouteUnsupertedFileName() throws Exception
 	{
 		context.getRouteDefinitions().get(0).adviceWith(context, new AdviceWithRouteBuilder() {
 
 			@Override
 			public void configure() throws Exception {
 				//consumes from this endpoint
-				replaceFromWith("seda:ftpTest");
+				replaceFromWith("seda:httpTest");
+				weaveById("jsonStream").remove();
 				interceptSendToEndpoint("activemq:*")
 				.skipSendToOriginalEndpoint()
 				.to("mock:activemq");
@@ -78,7 +101,7 @@ public class FtpRouteTest extends CamelTestSupport {
 		context.start();
 		MockEndpoint activemq= getMockEndpoint("mock:activemq");
 		activemq.expectedMessageCount(0);
-		template.sendBodyAndHeader("seda:ftpTest", "FTP Test", "CamelFileName", "öffer.xml");
+		template.sendBodyAndHeader("seda:httpTest", "http not json ", "CamelFileName", "öffer.xml");
 		
 		activemq.assertIsSatisfied();
 		context.stop();
@@ -87,5 +110,4 @@ public class FtpRouteTest extends CamelTestSupport {
 
 
 	}
-
 }

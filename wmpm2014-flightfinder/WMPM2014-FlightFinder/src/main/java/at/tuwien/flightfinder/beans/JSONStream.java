@@ -5,7 +5,10 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-
+/**
+ * Streamed json file to json string transformation 
+ * @author Ivan Gusljesevic
+ */
 public class JSONStream implements Processor {
 
 	public void process(Exchange exchange) throws Exception {

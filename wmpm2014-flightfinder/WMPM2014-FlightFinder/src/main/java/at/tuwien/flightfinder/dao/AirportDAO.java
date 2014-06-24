@@ -11,7 +11,11 @@ import org.hibernate.Transaction;
 
 import at.tuwien.flightfinder.pojo.Airport;
 import at.tuwien.flightfinder.util.HibernateUtil;
-
+/**
+ * Airport DAO with basic CRUD methods and getAirportByIataCode method
+ * which gives possibility to select Airport based on IATA code
+ * @author Ivan Gusljesevic
+ */
 public class AirportDAO {
 	
 	public void addAirport(Airport airport){

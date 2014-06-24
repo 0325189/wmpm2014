@@ -13,7 +13,10 @@ import at.tuwien.flightfinder.pojo.FlightClass;
 import at.tuwien.flightfinder.pojo.Flightoffer;
 
 public class Archive implements Processor {
-
+	/**
+	 * xml flightoffer message parsing and persist to db
+	 * @author Ivan Gusljesevic
+	 */
 	@Override
 	public void process(Exchange exchange) throws Exception {
 		

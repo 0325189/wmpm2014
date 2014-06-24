@@ -11,7 +11,10 @@ import org.hibernate.Transaction;
 import at.tuwien.flightfinder.pojo.Airport;
 import at.tuwien.flightfinder.pojo.Subscriber;
 import at.tuwien.flightfinder.util.HibernateUtil;
-
+/**
+ * Subscriber DAO with basic CRUD methods
+ * @author Ivan Gusljesevic
+ */
 public class SubscriberDAO {
 	public void addSubscriber(Subscriber subscriber){
 		Transaction trns = null;

@@ -9,7 +9,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
+/**
+ * Airport entity
+ * 
+ * @author Ivan Gusljesevic
+ */
 @Entity
 public class Airport {
 	@Id

@@ -11,7 +11,10 @@ import org.hibernate.*;
 import at.tuwien.flightfinder.pojo.Airport;
 import at.tuwien.flightfinder.pojo.Flightoffer;
 import at.tuwien.flightfinder.util.HibernateUtil;
-
+/**
+ * Flightoffer DAO with basic CRUD methods
+ * @author Ivan Gusljesevic
+ */
 
 public class FlightofferDAO {
 	

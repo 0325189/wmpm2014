@@ -10,8 +10,10 @@ import org.hibernate.Transaction;
 import at.tuwien.flightfinder.pojo.Airport;
 import at.tuwien.flightfinder.pojo.Hotel;
 import at.tuwien.flightfinder.util.HibernateUtil;
-
-
+/**
+ * Hotel DAO with basic CRUD methods
+ * @author Ivan Gusljesevic
+ */
 
 public class HotelDAO {
 	

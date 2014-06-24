@@ -7,6 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+/**
+ * Subscriber entity
+ * @author Ivan Gusljesevic
+ */
 @Entity
 public class Subscriber {
 	@Id

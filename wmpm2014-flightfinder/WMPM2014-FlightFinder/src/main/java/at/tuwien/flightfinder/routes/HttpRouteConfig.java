@@ -13,7 +13,7 @@ public class HttpRouteConfig extends RouteBuilder {
 	public void configure() throws Exception {	
 		from("stream:url?url=http://www.tesla-gui.at/http/offers.json&groupLines=100").
 		routeId("Route-HTTP").
-		process(new JSONStream())
+		process(new JSONStream()).id("jsonStream")
 		.unmarshal(xmlJsonFormat)
 		.log("Found at: ${body}")
 		.to("activemq:fileOffers");

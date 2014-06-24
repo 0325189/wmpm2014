@@ -2,7 +2,10 @@ package at.tuwien.flightfinder.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
+/**
+ * Hibernate util, sesson factory initialization 
+ * @author Ivan Gusljesevic
+ */
 public class HibernateUtil {
 	
 	 private static final SessionFactory sessionFactory = buildSessionFactory();
