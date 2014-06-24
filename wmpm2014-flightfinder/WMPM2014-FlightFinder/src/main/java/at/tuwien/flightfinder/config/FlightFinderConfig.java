@@ -3,10 +3,16 @@ package at.tuwien.flightfinder.config;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.apache.camel.CamelContext;
+import org.apache.camel.component.twitter.TwitterComponent;
+import org.apache.camel.component.twitter.TwitterConfiguration;
 import org.apache.camel.spring.SpringCamelContext;
 import org.apache.camel.spring.javaconfig.CamelConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 
 /**
  * This is where SpringCamelContext is configured WITHOUT any Spring XML stuff :)
@@ -15,9 +21,16 @@ import org.springframework.context.annotation.Configuration;
  */
 
 @Configuration
+@Profile("production")
+@PropertySource(value = {"classpath:facebook4j.properties", "classpath:twitter4j.properties"})
 @ComponentScan("at.tuwien.flightfinder")
 public class FlightFinderConfig extends CamelConfiguration {
 	
+	@Autowired
+    Environment prop;
+	
+	private String twitterEndpoint = "twitter://timeline/user";
+
 	/**
     * Returns the CamelContext which support Spring
     */
@@ -37,6 +50,15 @@ public class FlightFinderConfig extends CamelConfiguration {
 		ActiveMQComponent activeMQcomp = new ActiveMQComponent();
 		activeMQcomp.setConnectionFactory(connectionFactory);
 		camelContext.addComponent("activemq", activeMQcomp);
+		
+		System.out.println("Twitter Proper:" + prop.getProperty("FlightFinder_oauth.accessToken"));
+		
+		TwitterComponent twitter = camelContext.getComponent("twitter", TwitterComponent.class);
+		
+		twitter.setAccessToken(prop.getProperty("FlightFinder_oauth.accessToken"));
+		twitter.setAccessTokenSecret(prop.getProperty("FlightFinder_oauth.accessTokenSecret"));
+		twitter.setConsumerKey(prop.getProperty("FlightFinder_oauth.consumerKey"));
+		twitter.setConsumerSecret(prop.getProperty("FlightFinder_oauth.consumerSecret"));
     
     }
 	

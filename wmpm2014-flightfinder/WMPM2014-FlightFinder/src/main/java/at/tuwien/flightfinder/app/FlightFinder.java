@@ -20,6 +20,7 @@ public class FlightFinder extends Main {
 	private static final Logger logger = Logger.getLogger(FlightFinder.class);
 
 	public static void main(String[] args) throws Exception {
+		 System.setProperty("spring.profiles.active", "production");
 		 new AnnotationConfigApplicationContext(FlightFinderConfig.class);
 		 new FlightFinder().runApp();	
 	}

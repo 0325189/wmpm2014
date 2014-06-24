@@ -1,0 +1,5 @@
+FlightNumber,AirCompany,IATACodeOrigin,NameOrigin,IATACodeDestination,Destination,FlightDate,Class,TicketID,Price
+GW937,Germanwings,BJS,Beijing,LHR,London,20140510,Economy,GW93720140510E70,105
+AA254,AustriaAirlines,BJS,Beijing,LGW,London,20140510,Business,AA25420140510B20,320
+AA254,AustriaAirlines,PEK,Beijing,LCY,London,20140510,Economy,AA25420140510E80,110
+LU832,Lufthansa,CDG,Paris,MAD,Madrid,20140612,Business,LU83220140612B25,270
