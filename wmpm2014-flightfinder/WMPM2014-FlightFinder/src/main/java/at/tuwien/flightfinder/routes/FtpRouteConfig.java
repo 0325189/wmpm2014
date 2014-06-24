@@ -19,6 +19,4 @@ public class FtpRouteConfig extends RouteBuilder{
 		to("activemq:fileOffers").
 		log("${header.CamelFileName} has been pushed to the fileOffers queue!");
 	}
-
-
 }
