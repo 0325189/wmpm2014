@@ -26,7 +26,7 @@ public class NewsletterMailRoute extends RouteBuilder {
 		bean( new FlightofferDAO(), "getTodaysFlightoffers").id("flightOfferBean").
 		split(body()).
 		process(new EnrichWithSubscribers()).
-		to("velocity:file:mojTest/newsletter.vm").id("velocityTemplate").
+		to("velocity:file:data/newsletter.vm").id("velocityTemplate").
 
 		to("smtp://188.40.32.121?username=workflow@seferovic.net&password=workflowpassword&contentType=text/html").
 		log("-------------------FINISHED--------------------------------------");

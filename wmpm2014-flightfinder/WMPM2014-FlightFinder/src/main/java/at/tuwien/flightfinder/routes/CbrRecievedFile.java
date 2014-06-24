@@ -30,7 +30,7 @@ public class CbrRecievedFile extends RouteBuilder{
 				unmarshal(bindy).
 				marshal().
 				xstream().
-				to("xslt:file:mojTest/xslt.xsl").
+				to("xslt:file:data/xslt.xsl").
 				split().tokenizeXML("Flight").
 				//to("file:mojTest?fileName=test.xml").endChoice().
 				to("activemq:Offers").endChoice().
