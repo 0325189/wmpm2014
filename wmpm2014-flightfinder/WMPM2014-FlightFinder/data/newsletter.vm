@@ -213,6 +213,11 @@ body, td { font-family: HelveticaNeue, sans-serif; }
                                             <ul>Date: $flightoffer.flightDate</ul>
                                             <ul>TicketID: $flightoffer.ticketId</ul>
                                             <ul>Class: $flightoffer.flightClass</ul>
+                                           #foreach ($hotel in $flightoffer.hotels) 
+                                            <ul>Name of Hotel: $hotel.name</ul>
+                                            <ul>Number of Stars: $hotel.starsNumber</ul>
+                                           #end
+                                            
                                         </multiline>
                                     </div>
                                 </td>
