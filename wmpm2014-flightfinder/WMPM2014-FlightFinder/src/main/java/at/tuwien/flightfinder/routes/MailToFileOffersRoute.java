@@ -38,6 +38,7 @@ public class MailToFileOffersRoute extends RouteBuilder {
 				routeId("Route-Mail").
 				split(new SplitAttachmentsExpression()).
 				process(new IncommingMailProcessor()).
+				log("Attachment body: ${body}").
 				to("activemq:fileOffers").
 				end();
 		}

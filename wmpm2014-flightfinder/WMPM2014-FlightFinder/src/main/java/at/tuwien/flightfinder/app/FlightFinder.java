@@ -1,12 +1,12 @@
 package at.tuwien.flightfinder.app;
 
 import org.apache.log4j.Logger;
-
-import org.apache.camel.main.Main;
+import org.apache.camel.spring.Main;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
 import at.tuwien.flightfinder.config.FlightFinderConfig;
+
 
 /**
  * AnnotationConfigApplicationContext is a Spring standalone application context which accepts annotated classes 
@@ -21,8 +21,13 @@ public class FlightFinder extends Main {
 
 	public static void main(String[] args) throws Exception {
 		 System.setProperty("spring.profiles.active", "production");
-		 new AnnotationConfigApplicationContext(FlightFinderConfig.class);
-		 new FlightFinder().runApp();	
+		 
+		 AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(FlightFinderConfig.class);
+		 
+		 
+		 FlightFinder instance = new FlightFinder();	
+		 instance.setApplicationContext(context);
+		 instance.runApp();
 	}
 	
 	public void runApp() {
