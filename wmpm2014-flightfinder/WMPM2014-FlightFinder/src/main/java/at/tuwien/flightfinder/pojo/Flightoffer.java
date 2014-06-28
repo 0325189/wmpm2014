@@ -14,10 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-/**
- * Flightoffer entity
- * @author Ivan Gusljesevic
- */
+import javax.persistence.Transient;
+
 @Entity
 public class Flightoffer {
 	@Id
@@ -38,8 +36,10 @@ public class Flightoffer {
 	private int price;
 	@Enumerated(EnumType.STRING)
 	private FlightClass flightClass;
+	@Transient
+	private List<Hotel> hotels;
 	private Date insertDate;
-	
+
 	public Flightoffer(Airport fromAirport, Airport toAirport,
 			String nameOrigin, String nameDestination, String airCompany,
 			String flightNumber, Date flightDate, String ticketId, int price,
@@ -56,6 +56,14 @@ public class Flightoffer {
 		this.price = price;
 		this.flightClass = flightClass;
 		this.insertDate = new Date();
+	}
+
+	public List<Hotel> getHotels() {
+		return hotels;
+	}
+
+	public void setHotels(List<Hotel> hotels) {
+		this.hotels = hotels;
 	}
 
 	public Flightoffer() {
@@ -150,5 +158,5 @@ public class Flightoffer {
 		this.flightClass = flightClass;
 	}
 
-	
+
 }

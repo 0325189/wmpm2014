@@ -14,9 +14,11 @@ import org.apache.camel.impl.DefaultMessage;
 
 import at.tuwien.flightfinder.dao.AirportDAO;
 import at.tuwien.flightfinder.dao.FlightofferDAO;
+import at.tuwien.flightfinder.dao.HotelDAO;
 import at.tuwien.flightfinder.dao.SubscriberDAO;
 import at.tuwien.flightfinder.pojo.Airport;
 import at.tuwien.flightfinder.pojo.Flightoffer;
+import at.tuwien.flightfinder.pojo.Hotel;
 import at.tuwien.flightfinder.pojo.Subscriber;
 
 import org.slf4j.Logger;
@@ -45,14 +47,19 @@ public class EnrichWithSubscribers implements  Processor {
 		if(offers.size()>4){
 			offers.subList(4, offers.size()-1).clear();
 		}
+		HotelDAO hotelDao = new HotelDAO();
 
+		for(Flightoffer fo:offers){
+			List<Hotel> hotelList = hotelDao.getHotelByDestAirport(fo.getToAirport().getIataCode());
+			fo.setHotels(hotelList);
+		}//for
+		
 		SubscriberDAO suDAO = new SubscriberDAO();
 		String iata = offers.get(0).getFromAirport().getIataCode();
 
 
 		//Get the list of subscribers
 		List<Subscriber> subscriberList = suDAO.getSubscriberByOrignAirport(iata);
-
 
 		//Create a String with addresses of all Subscribers
 		String emailList = "";
@@ -85,16 +92,17 @@ public class EnrichWithSubscribers implements  Processor {
 			exchange.getIn().setHeaders(mailHeader);
 			exchange.getIn().setBody(offers);
 
+
 			//				message.setHeaders(mailHeader);
 			//				message.setBody(flightofferList);
 			//				exchange.setIn(message); 
 
 			//sends the whole exchange as email iteratively
-			logger.info("SENDING EMAIL");
+			//logger.info("SENDING EMAIL");
 		}	
-	}//ForLoop
+	}
 
-}//Method
+}
 
 
 
