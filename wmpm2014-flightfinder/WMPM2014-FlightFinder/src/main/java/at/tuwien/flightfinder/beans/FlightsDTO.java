@@ -23,7 +23,7 @@ public class FlightsDTO implements Serializable{
 
 	@DataField(pos = 3)
 	private String IATACodeOrigin;
-	
+
 	@DataField(pos = 4)
 	private String NameOrigin;
 

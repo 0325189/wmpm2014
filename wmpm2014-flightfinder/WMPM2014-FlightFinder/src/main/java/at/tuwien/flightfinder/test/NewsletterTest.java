@@ -99,7 +99,7 @@ public class NewsletterTest extends CamelTestSupport {
 		newsletter.expectedBodiesReceived(listOfList);
 		newsletter.expectedHeaderReceived("Subject", "FlightFinder -- Best offres of the day!");
 		newsletter.expectedHeaderReceived("From", "FlightFinder <workflow@seferovic.net>");
-		newsletter.expectedHeaderReceived("To", "e1128233@student.tuwien.ac.at");
+		newsletter.expectedHeaderReceived("To", "martin.skakala@alanova.at");
 
 		
 		
