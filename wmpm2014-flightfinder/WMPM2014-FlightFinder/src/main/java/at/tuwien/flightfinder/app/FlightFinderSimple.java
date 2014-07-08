@@ -50,21 +50,21 @@ public class FlightFinderSimple {
 		
 		// add routes to the context
 
-		//context.addRoutes(new FtpRouteConfig());
+		context.addRoutes(new FtpRouteConfig());
 		//context.addRoutes(new HttpRouteConfig());
 		//context.addRoutes(new MailToFileOffersRoute());
-		//context.addRoutes(new CbrRecievedFile());
+		context.addRoutes(new CbrRecievedFile());
 		//context.addRoutes(new OfferProcessingRoute());
 		//context.addRoutes(new NewsletterMailRoute());
-		context.addRoutes(new TwitterFacebookRoute());
+		//context.addRoutes(new TwitterFacebookRoute());
 
 		
 		// lets run it...
 		context.start();
 		System.out.println("CamelContext started");
 		//fillDb();
-		// wait for 30 seconds
-		Thread.sleep(30000);
+		// wait for 50 seconds
+		Thread.sleep(5000);
 
 		// lets end it
 		context.stop();

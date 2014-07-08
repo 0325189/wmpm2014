@@ -9,43 +9,50 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import java.io.Serializable;
+
+import javax.xml.bind.annotation.*;
+
+import org.apache.camel.dataformat.bindy.annotation.DataField;
+import org.apache.camel.dataformat.bindy.annotation.Link;
 /**
  * Airport entity
  * 
  * @author Ivan Gusljesevic
  */
 @Entity
-public class Airport {
+@XmlTransient
+public class Airport implements Serializable{
+	
+	private static final long serialVersionUID = 2L;
+
 	@Id
 	@GeneratedValue
+	@XmlTransient
 	private long id;
-	@Column(unique = true)
-	private String iataCode;
+	
+	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="destinationAirport", fetch=FetchType.EAGER)
 	private List<Hotel> hotels;
+	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="fromAirport", fetch=FetchType.EAGER)
 	private List<Flightoffer> flightoffers;
+	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="airport", fetch=FetchType.EAGER)
 	private List<Subscriber> subscribers;
-	Airport() {
-		
+	
+	//needed for correct functioning of Bindy
+	public Airport(){	
 	}
-	public Airport(String iataCode){
-		this.iataCode=iataCode;
-		
-	}
+	
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getIataCode() {
-		return iataCode;
-	}
-	public void setIataCode(String iataCode) {
-		this.iataCode = iataCode;
-	}
+
 	public List<Flightoffer> getFlightoffers() {
 		return flightoffers;
 	}
