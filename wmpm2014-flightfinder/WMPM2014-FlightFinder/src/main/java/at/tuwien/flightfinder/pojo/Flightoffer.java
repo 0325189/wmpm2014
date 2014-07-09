@@ -26,11 +26,9 @@ import at.tuwien.flightfinder.beans.XMLDateAdapter;
 
 
 @XmlRootElement(name = "Flight")
-//@XmlAccessorType(XmlAccessType.FIELD)
-@XmlSeeAlso( {DestinationAirport.class, OriginAirport.class, Airport.class} )
+@XmlAccessorType(XmlAccessType.NONE)
 @XmlType(factoryClass=ObjectFactory.class, factoryMethod="createFlightoffers")
 @CsvRecord(separator = ",", skipFirstLine = false,crlf = "MAC")
-
 @Entity
 public class Flightoffer implements Serializable {
 
@@ -38,55 +36,51 @@ public class Flightoffer implements Serializable {
 
 	@Id
 	@GeneratedValue
+	@XmlTransient
 	private long id;
 
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="from_id")
-	@Link
-	private OriginAirport fromAirport;
+	@DataField(pos = 1)
+	private String flightNumber;
+	
+	@DataField(pos = 2)
+	private String airCompany;
 
-
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="to_id")
-	@Link
-	private DestinationAirport toAirport;
-
-
+	@DataField(pos = 3)
+	private String fromIataCode;
+	
 	@DataField(pos = 4)
 	private String nameOrigin;
+	
+	@DataField(pos = 5)
+	private String toIataCode;
 
 	@DataField(pos = 6)
 	private String nameDestination;
 
-	@DataField(pos = 2)
-	private String airCompany;
-
-	@DataField(pos = 1)
-	private String flightNumber;
-
 	@DataField(pos = 7, pattern = "yyyyMMdd")
 	private Date flightDate;
-
-	@DataField(pos = 9)
-	private String ticketId;
-
-	@DataField(pos = 10)
-	private int price;
 
 	@Enumerated(EnumType.STRING)
 	@DataField(pos = 8)
 	private FlightClass flightClass;
+	
+	@DataField(pos = 9)
+	private String ticketId;
+
+	@DataField(pos = 10)
+	private String price;
+
 
 	private List<Hotel> hotels;
 	private Date insertDate;
 
-	public Flightoffer(OriginAirport fromAirport, DestinationAirport toAirport,
+	public Flightoffer(String fromAirport, String toAirport,
 			String nameOrigin, String nameDestination, String airCompany,
-			String flightNumber, Date flightDate, String ticketId, int price,
+			String flightNumber, Date flightDate, String ticketId, String price,
 			FlightClass flightClass) {
 		super();
-		this.fromAirport = fromAirport;
-		this.toAirport = toAirport;
+		this.fromIataCode = fromAirport;
+		this.toIataCode = toAirport;
 		this.nameOrigin = nameOrigin;
 		this.nameDestination = nameDestination;
 		this.airCompany = airCompany;
@@ -99,7 +93,7 @@ public class Flightoffer implements Serializable {
 
 	}
 
-
+	//Konstruktor
 	public Flightoffer() {
 		this.insertDate = new Date();
 	}
@@ -123,28 +117,24 @@ public class Flightoffer implements Serializable {
 		this.id = id;
 	}
 
-	//@XmlMixed
-	//@XmlElementRef(type = OriginAirport.class, name = "IATACodeOrigin")
-	//@XmlAnyElement
-	public OriginAirport getFromAirport() {
-		System.out.println("getterOffer: "+fromAirport.getFromIataCode());
-		return fromAirport;
+
+	@XmlElement(name = "IATACodeOrigin")
+	public String getFromIataCode() {
+		return fromIataCode;
 	}
 
-	public void setFromAirport(OriginAirport airportOrigin) {
-		System.out.println("setterOffer: "+airportOrigin.getFromIataCode());
-		this.fromAirport = airportOrigin;	
+	public void setFromIataCode(String fromIataCode) {
+		this.fromIataCode = fromIataCode;	
 	}
 	
-	//@XmlMixed
-    //@XmlElementRef(type = DestinationAirport.class, name = "IATACodeDestination")
-	//@XmlAnyElement
-	public DestinationAirport getToAirport() {
-		return toAirport;
+
+	@XmlElement(name = "IATACodeDestination")
+	public String getToIataCode() {
+		return toIataCode;
 	}
 
-	public void setToAirport(DestinationAirport toAirport) {
-		this.toAirport = toAirport;
+	public void setToIataCode(String toIataCode) {
+		this.toIataCode = toIataCode;
 	}
 
 	@XmlElement(name = "Origin")
@@ -204,11 +194,11 @@ public class Flightoffer implements Serializable {
 	}
 
 	@XmlElement(name = "Price")
-	public int getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 
@@ -220,16 +210,12 @@ public class Flightoffer implements Serializable {
 	public void setFlightClass(FlightClass flightClass) {
 		this.flightClass = flightClass;
 	}
-//
-//	public boolean isEuropean(Exchange exchange){
-//		AirportDAO airDAO = new AirportDAO();
-//		List<Airport> euIataCodesList = airDAO.getAllAirports();
-//		Boolean flag = false;
-//		for(Airport ap: euIataCodesList){
-//			flag  =  exchange.getIn().getBody(Flightoffer.class).getFromIataCode().contains(ap.getIataCode());
-//		}
-//		return flag;
-//	}
-
-
+	
+	@Override
+	public String toString(){
+		return "id: "+id+"\nfromAirport: "+fromIataCode+"\ntoAirport: "+toIataCode+"\nnameOrigin: "+nameOrigin+"\nnameDestination: "+nameDestination+"\nairCompany: "+airCompany+
+				"\nflightDate: "+flightDate+"\nticketId: "+ticketId+"\nprice: "+price+"\nflightClass: "+flightClass;
+	}
+		
+	
 }

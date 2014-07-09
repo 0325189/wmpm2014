@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import at.tuwien.flightfinder.beans.Archive;
 import at.tuwien.flightfinder.beans.EuropeanFlightsFilter;
 import at.tuwien.flightfinder.beans.OffersEnricher;
+import at.tuwien.flightfinder.dao.FlightofferDAO;
 import at.tuwien.flightfinder.pojo.Flightoffer;
 
 
@@ -15,11 +16,10 @@ public class OfferProcessingRoute extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 
-		from("activemq:Offers").log("${body}").
+		from("activemq:Offers").
 		routeId("Route-OfferProcess").
-		log("Message has been pulled from Offers queue").split(body()).log("------${body}").
-		//filter().xpath("//Flight").
-		filter().method(Flightoffer.class, "isEuropean").
+		log("Message has been pulled from Offers queue").
+		filter().method(FlightofferDAO.class, "lookupEuropeanIata").
 		log("Message has been filtered and is being pushed to ernicher");
 		
 //		process(new OffersEnricher()).
