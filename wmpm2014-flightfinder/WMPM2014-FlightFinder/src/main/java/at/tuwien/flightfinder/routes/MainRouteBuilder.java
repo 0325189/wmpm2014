@@ -168,6 +168,7 @@ public class MainRouteBuilder extends RouteBuilder {
 		filter().method(flightOfferDAO, "lookupEuropeanIata").
 		log("Message has been filtered and is being pushed to enricher").
 		process(new PrintFlightoffer()).
+		pollEnrich("hibernate:at.tuwien.flightfinder.pojo.Hotel").log("ENRICHER--------------${body}").
 
 		//		process(new OffersEnricher()).
 		//		log("Message has been eriched with hotels and is being pushed to enricher").
