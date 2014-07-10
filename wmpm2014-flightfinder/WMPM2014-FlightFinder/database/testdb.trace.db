@@ -1,0 +1,41 @@
+05-27 15:07:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLIGHTOFFER" not found; SQL statement:
+alter table Flightoffer drop constraint FK_nnctdm0a6qyhk58yhpb23q9kj if exists [42102-178]
+05-27 15:07:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "FLIGHTOFFER" not found; SQL statement:
+alter table Flightoffer drop constraint FK_2tc29w32p8ruaoqd6s6yqpvcw if exists [42102-178]
+05-27 15:07:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "HOTEL" not found; SQL statement:
+alter table Hotel drop constraint FK_s3o5bi6mbmnylukla2rpv0vl4 if exists [42102-178]
+05-27 15:07:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "SUBSCRIBER" not found; SQL statement:
+alter table Subscriber drop constraint FK_l04ur9sg2hik7lnk2lyemt17p if exists [42102-178]
+05-27 22:30:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "MODIFY" not found; SQL statement:
+ALTER TABLE 
+MODIFY COLUMN TICKETID VARCHAR(20) [42102-178]
+05-27 22:30:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Table "TICKETID" not found; SQL statement:
+ALTER TABLE TICKETID
+MODIFY COLUMN TICKETID VARCHAR(20) [42102-178]
+06-05 15:03:05 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "TRUNCATE FLIGHTOFFER"; expected "TABLE"; SQL statement:
+TRUNCATE FLIGHTOFFER [42001-178]
+06-19 14:27:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "HOTEL[*] SELECT * FROM AIRPORT"; expected "HELP, {"; SQL statement:
+HOTEL SELECT * FROM AIRPORT [42001-178]
+06-19 15:21:31 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "HOTEL[*] SELECT * FROM SUBSCRIBER"; expected "HELP, {"; SQL statement:
+HOTEL SELECT * FROM SUBSCRIBER [42001-178]
+06-19 16:29:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FLIGHTOFFER"; SQL statement:
+SELECT * FLIGHTOFFER [42000-178]
+07-10 14:02:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "'' (HOTEL: FLIGHTOFFER_ID BIGINT)"; SQL statement:
+INSERT INTO "PUBLIC"."HOTEL"("ID","NAME","STARSNUMBER","DESTAIRPORT_ID","FLIGHTOFFER_ID")VALUES(?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5) [22018-178]
+07-10 14:02:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "'' (HOTEL: FLIGHTOFFER_ID BIGINT)"; SQL statement:
+INSERT INTO "PUBLIC"."HOTEL"("ID","NAME","STARSNUMBER","DESTAIRPORT_ID","FLIGHTOFFER_ID")VALUES(?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5) [22018-178]
+07-10 14:12:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "AIRPORT[*] SELECT * FROM HOTEL"; expected "ALTER, ANALYZE, {"; SQL statement:
+AIRPORT SELECT * FROM HOTEL [42001-178]
