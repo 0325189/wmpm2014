@@ -6,7 +6,9 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import at.tuwien.flightfinder.pojo.Airport;
@@ -16,10 +18,12 @@ import at.tuwien.flightfinder.pojo.Subscriber;
  * @author Ivan Gusljesevic
  */
 @Component
-public class SubscriberDAO extends BaseDAO{
+public class SubscriberDAO {
+	@Autowired
+	SessionFactory sessionFactory;
 	public void addSubscriber(Subscriber subscriber){
 		Transaction trns = null;
-	    Session session = getSession();
+	    Session session = sessionFactory.openSession();
 	    try {
 	        trns = session.beginTransaction();
 	        session.save(subscriber);
@@ -36,7 +40,7 @@ public class SubscriberDAO extends BaseDAO{
 	}
 	public void deleteSubscriber(int subscriberId){
 		 Transaction trns = null;
-	        Session session = getSession();
+	        Session session = sessionFactory.openSession();
 	        try {
 	            trns = session.beginTransaction();
 	            Subscriber subscriber = (Subscriber) session.load(Subscriber.class, new Integer(subscriberId));
@@ -54,7 +58,7 @@ public class SubscriberDAO extends BaseDAO{
 	}
 	public void updateFlightoffer(Subscriber subscriber){
 	    Transaction trns = null;
-        Session session = getSession();
+        Session session = sessionFactory.openSession();
         try {
             trns = session.beginTransaction();
             session.update(subscriber);
@@ -73,7 +77,7 @@ public class SubscriberDAO extends BaseDAO{
 	public List<Subscriber> getAllFlightsoffers(){
 		 List<Subscriber> flightoffers = new ArrayList<Subscriber>();
 	        Transaction trns = null;
-	        Session session = getSession();
+	        Session session = sessionFactory.openSession();
 	        try {
 	            trns = session.beginTransaction();
 	            flightoffers = session.createQuery("from Subscriber").list();
@@ -88,7 +92,7 @@ public class SubscriberDAO extends BaseDAO{
 	public Subscriber getSubscriberById(int offerId){
 		 Subscriber subscriber = null;
 	        Transaction trns = null;
-	        Session session = getSession();
+	        Session session = sessionFactory.openSession();
 	        try {
 	            trns = session.beginTransaction();
 	            String queryString = "from Subscriber where id = :id";
@@ -106,7 +110,7 @@ public class SubscriberDAO extends BaseDAO{
 	public List<Subscriber> getSubscriberByOrignAirport(String iataCode){
 		 Airport airport = null;
 	        Transaction trns = null;
-	        Session session = getSession();
+	        Session session = sessionFactory.openSession();
 	        try {
 	            trns = session.beginTransaction();
 	            String queryString = "from Airport where iataCode = :id";

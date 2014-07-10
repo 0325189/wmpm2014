@@ -5,8 +5,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.apache.camel.Header;
 import org.hibernate.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import at.tuwien.flightfinder.pojo.Airport;
@@ -17,11 +20,13 @@ import at.tuwien.flightfinder.pojo.Flightoffer;
  * @author Ivan Gusljesevic
  */
 @Component
-public class FlightofferDAO extends BaseDAO{
-
+public class FlightofferDAO {
+	@Autowired
+	SessionFactory sessionFactory;
+	
 	public void addFlightoffer(Flightoffer flightoffer){
 		Transaction trns = null;
-		Session session = getSession();
+		Session session = sessionFactory.openSession();
 		try {
 			trns = session.beginTransaction();
 			session.save(flightoffer);
@@ -38,7 +43,7 @@ public class FlightofferDAO extends BaseDAO{
 	}
 	public void deleteFlightoffer(int offerId){
 		Transaction trns = null;
-		Session session = getSession();
+		Session session = sessionFactory.openSession();
 		try {
 			trns = session.beginTransaction();
 			Flightoffer flightoffer = (Flightoffer) session.load(Flightoffer.class, new Integer(offerId));
@@ -56,7 +61,7 @@ public class FlightofferDAO extends BaseDAO{
 	}
 	public void updateFlightoffer(Flightoffer flightoffer){
 		Transaction trns = null;
-		Session session = getSession();
+		Session session = sessionFactory.openSession();
 		try {
 			trns = session.beginTransaction();
 			session.update(flightoffer);
@@ -75,7 +80,7 @@ public class FlightofferDAO extends BaseDAO{
 	public List<Flightoffer> getAllFlightsoffers(){
 		List<Flightoffer> flightoffers = new ArrayList<Flightoffer>();
 		Transaction trns = null;
-		Session session = getSession();
+		Session session = sessionFactory.openSession();
 		try {
 			trns = session.beginTransaction();
 			flightoffers = session.createQuery("from Flightoffer").list();
@@ -90,7 +95,7 @@ public class FlightofferDAO extends BaseDAO{
 	public Flightoffer getFlightofferById(int offerId){
 		Flightoffer offer = null;
 		Transaction trns = null;
-		Session session = getSession();
+		Session session = sessionFactory.openSession();
 		try {
 			trns = session.beginTransaction();
 			String queryString = "from Flightoffer where id = :id";
@@ -109,7 +114,7 @@ public class FlightofferDAO extends BaseDAO{
 		List<Flightoffer> flightoffers = new ArrayList<Flightoffer>();
 		Airport airport = null; 
 		Transaction trns = null;
-		Session session = getSession();
+		Session session = sessionFactory.openSession();
 		try {
 			trns = session.beginTransaction();
 			String queryString = "from Airport where iataCode = :id";
@@ -134,7 +139,7 @@ public class FlightofferDAO extends BaseDAO{
 		boolean flag = false;
 		Airport airport = null; 
 		Transaction trns = null;
-		Session session = getSession();
+		Session session = sessionFactory.openSession();
 		try {
 			trns = session.beginTransaction();
 			String queryString = "from Airport where iataCode = :id";
@@ -165,7 +170,7 @@ public class FlightofferDAO extends BaseDAO{
 
 		Airport airport = null; 
 		Transaction trns = null;
-		Session session = getSession();
+		Session session = sessionFactory.openSession();
 		try {
 			trns = session.beginTransaction();
 			String queryString2 = "from Flightoffer offer where offer.insertDate >= current_date() order by offer.fromIataCode, offer.price asc";
@@ -217,7 +222,7 @@ public class FlightofferDAO extends BaseDAO{
 		Flightoffer flightoffer = new Flightoffer();
 		Airport airport = null; 
 		Transaction trns = null;
-		Session session = getSession();
+		Session session = sessionFactory.openSession();
 		try {
 			trns = session.beginTransaction();
 			String queryString2 = "from Flightoffer offer where offer.insertDate >= current_date() order by offer.price asc";
