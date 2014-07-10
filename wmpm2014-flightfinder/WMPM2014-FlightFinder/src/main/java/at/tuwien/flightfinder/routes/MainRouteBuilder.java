@@ -25,6 +25,7 @@ import at.tuwien.flightfinder.beans.JSONStream;
 import at.tuwien.flightfinder.beans.MarketingProcessor;
 import at.tuwien.flightfinder.beans.PrintFlightoffer;
 import at.tuwien.flightfinder.dao.FlightofferDAO;
+import at.tuwien.flightfinder.dao.HotelDAO;
 
 @Component
 public class MainRouteBuilder extends RouteBuilder {
@@ -33,6 +34,8 @@ public class MainRouteBuilder extends RouteBuilder {
 	Archive archive;
 	@Autowired
 	FlightofferDAO flightOfferDAO;
+	@Autowired
+	HotelDAO hotelDAO;
 	@Autowired
 	EnrichWithSubscribers enrichWithSubscribers;
 	@Autowired
@@ -55,7 +58,7 @@ public class MainRouteBuilder extends RouteBuilder {
 		 **--------------------
 		 */
 
-		errorHandler(deadLetterChannel(MainRouteBuilder.DLCH).useOriginalMessage());
+		//errorHandler(deadLetterChannel(MainRouteBuilder.DLCH).useOriginalMessage());
 		
 		
 		from("stream:url?url=http://www.tesla-gui.at/http/offers.json&groupLines=100").
@@ -152,7 +155,7 @@ public class MainRouteBuilder extends RouteBuilder {
 		//setHeader("iataCode").simple("${body.fromIataCode}")  --> if not working try this!
 		to("activemq:Offers").setHeader("iataCode", simple("${body.fromIataCode}")).process(new PrintFlightoffer()).
 		log("-------------Finished CSV---------").endChoice().
-		otherwise().to("activemq:badMessage")
+		otherwise().to("activemq:dead-letter")
 		.end();
 
 
