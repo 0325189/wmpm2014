@@ -19,24 +19,13 @@ public class PrintFlightoffer implements Processor {
 
 		Flightoffer fo = exchange.getIn().getBody(Flightoffer.class);
 		System.out.println("----Class Type: "+exchange.getIn().getBody().getClass());
-	
+		System.out.println(fo.toString());
 
-		Long id = fo.getId();
-		String fromAirport = fo.getFromAirport().getFromIataCode();
-		String toAirport = fo.getToAirport().getToIataCode();
-		String nameOrigin = fo.getNameOrigin();
-		String nameDestination = fo.getNameDestination();
-		String airCompany = fo.getAirCompany();
-		String flightDate = fo.getFlightClass().toString();
-		String ticketId = fo.getTicketId();
-		int price = fo.getPrice();
-		String flightClass = fo.getFlightDate().toString();
-
-
-		System.out.println("id: "+id+"\nfromAirport: "+fromAirport+"\ntoAirport: "+toAirport+"\nnameOrigin: "+nameOrigin+"\nnameDestination: "+nameDestination+"\nairCompany: "+airCompany+
-				"\nflightDate: "+flightDate+"\nticketId: "+ticketId+"\nprice: "+price+"\nflightClass: "+flightClass);
 
 
 	}
+
+
 }
+
 

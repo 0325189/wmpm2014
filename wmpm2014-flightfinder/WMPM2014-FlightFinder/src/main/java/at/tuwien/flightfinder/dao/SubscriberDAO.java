@@ -7,18 +7,19 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Component;
 
 import at.tuwien.flightfinder.pojo.Airport;
 import at.tuwien.flightfinder.pojo.Subscriber;
-import at.tuwien.flightfinder.util.HibernateUtil;
 /**
  * Subscriber DAO with basic CRUD methods
  * @author Ivan Gusljesevic
  */
-public class SubscriberDAO {
+@Component
+public class SubscriberDAO extends BaseDAO{
 	public void addSubscriber(Subscriber subscriber){
 		Transaction trns = null;
-	    Session session = HibernateUtil.getSessionFactory().openSession();
+	    Session session = getSession();
 	    try {
 	        trns = session.beginTransaction();
 	        session.save(subscriber);
@@ -35,7 +36,7 @@ public class SubscriberDAO {
 	}
 	public void deleteSubscriber(int subscriberId){
 		 Transaction trns = null;
-	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Session session = getSession();
 	        try {
 	            trns = session.beginTransaction();
 	            Subscriber subscriber = (Subscriber) session.load(Subscriber.class, new Integer(subscriberId));
@@ -53,7 +54,7 @@ public class SubscriberDAO {
 	}
 	public void updateFlightoffer(Subscriber subscriber){
 	    Transaction trns = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = getSession();
         try {
             trns = session.beginTransaction();
             session.update(subscriber);
@@ -72,7 +73,7 @@ public class SubscriberDAO {
 	public List<Subscriber> getAllFlightsoffers(){
 		 List<Subscriber> flightoffers = new ArrayList<Subscriber>();
 	        Transaction trns = null;
-	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Session session = getSession();
 	        try {
 	            trns = session.beginTransaction();
 	            flightoffers = session.createQuery("from Subscriber").list();
@@ -87,7 +88,7 @@ public class SubscriberDAO {
 	public Subscriber getSubscriberById(int offerId){
 		 Subscriber subscriber = null;
 	        Transaction trns = null;
-	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Session session = getSession();
 	        try {
 	            trns = session.beginTransaction();
 	            String queryString = "from Subscriber where id = :id";
@@ -105,7 +106,7 @@ public class SubscriberDAO {
 	public List<Subscriber> getSubscriberByOrignAirport(String iataCode){
 		 Airport airport = null;
 	        Transaction trns = null;
-	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Session session = getSession();
 	        try {
 	            trns = session.beginTransaction();
 	            String queryString = "from Airport where iataCode = :id";

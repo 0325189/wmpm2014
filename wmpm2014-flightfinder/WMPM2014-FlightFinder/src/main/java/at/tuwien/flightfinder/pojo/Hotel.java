@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 /**
  * Hotel entity
  * @author Ivan Gusljesevic
@@ -21,6 +22,9 @@ public class Hotel {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="destAirport_Id")
 	private Airport destinationAirport;
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="flightoffer_id")
+	private Flightoffer flightOffer;
 	Hotel(){
 		
 	}
@@ -29,6 +33,18 @@ public class Hotel {
 		this.name = name;
 		this.starsNumber = starsNumber;
 		this.destinationAirport=destAirport;
+	}
+	/**
+	 * @return the flightOffer
+	 */
+	public Flightoffer getFlightOffer() {
+		return flightOffer;
+	}
+	/**
+	 * @param flightOffer the flightOffer to set
+	 */
+	public void setFlightOffer(Flightoffer flightOffer) {
+		this.flightOffer = flightOffer;
 	}
 	public String getName() {
 		return name;

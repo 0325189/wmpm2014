@@ -22,23 +22,19 @@ import org.apache.camel.dataformat.bindy.annotation.Link;
  * @author Ivan Gusljesevic
  */
 @Entity
-@XmlTransient
-public class Airport implements Serializable{
-	
-	private static final long serialVersionUID = 2L;
+public class Airport{
+
 
 	@Id
 	@GeneratedValue
-	@XmlTransient
 	private long id;
 	
+	@Column(unique = true)
+	private String iataCode;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="destinationAirport", fetch=FetchType.EAGER)
 	private List<Hotel> hotels;
-	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="fromAirport", fetch=FetchType.EAGER)
-	private List<Flightoffer> flightoffers;
-	
+		
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="airport", fetch=FetchType.EAGER)
 	private List<Subscriber> subscribers;
 	
@@ -52,13 +48,15 @@ public class Airport implements Serializable{
 	public void setId(long id) {
 		this.id = id;
 	}
+	
+	public String getIataCode() {
+		return iataCode;
+	}
 
-	public List<Flightoffer> getFlightoffers() {
-		return flightoffers;
+	public void setIataCode(String iataCode) {
+		this.iataCode = iataCode;
 	}
-	public void setFlightoffers(List<Flightoffer> flightoffers) {
-		this.flightoffers = flightoffers;
-	}
+
 	public List<Subscriber> getSubscribers() {
 		return subscribers;
 	}

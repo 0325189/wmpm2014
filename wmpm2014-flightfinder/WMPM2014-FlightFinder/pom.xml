@@ -180,6 +180,21 @@
     	<artifactId>camel-jaxb</artifactId>
     	<version>${camel.version}</version>
     </dependency>
+      	<dependency>
+   <groupId>org.javassist</groupId>
+   <artifactId>javassist</artifactId>
+   <version>3.18.0-GA</version>
+</dependency>
+  <dependency>
+           <groupId>org.springframework</groupId>
+           <artifactId>spring-context</artifactId>
+           <version>4.0.0.RELEASE</version>
+     </dependency>
+     <dependency>
+           <groupId>org.springframework</groupId>
+           <artifactId>spring-orm</artifactId>
+           <version>4.0.0.RELEASE</version>
+     </dependency>
   </dependencies>
   <build>
     <plugins>

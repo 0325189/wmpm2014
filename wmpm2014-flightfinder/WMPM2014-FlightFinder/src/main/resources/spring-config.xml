@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:context="http://www.springframework.org/schema/context"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="
+        http://www.springframework.org/schema/beans    
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+   
+    <!-- This sescion tells Spring context where to look for bean classes with appropriate annotations -->
+      <context:component-scan base-package="at.tuwien.flightfinder"></context:component-scan>
+
+      <!-- Configure JDBC Connection-->
+      <bean id="dataSource"
+            class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+            <property name="driverClassName" value="org.h2.Driver" />
+            <property name="url" value="jdbc:h2:./database/testdb;AUTO_SERVER=TRUE;" />
+            <property name="username" value="sa" />
+            <property name="password" value="" />
+      </bean>
+
+      <!-- Configure Hibernate 4 Session Facotry -->
+      <bean id="sessionFactory"
+            class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+
+            <property name="dataSource">
+                  <ref bean="dataSource" />
+            </property>
+
+            <property name="hibernateProperties">
+                  <props>
+                        <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+                        <prop key="hibernate.show_sql">true</prop>
+                        <prop key="hibernate.hbm2ddl.auto">update</prop>
+  						<prop key="hibernate.connection.release_mode">on_close</prop>
+                  </props>
+            </property>
+            <property name="annotatedClasses">
+            <list>
+                  <value>at.tuwien.flightfinder.pojo.Flightoffer</value>
+                  <value>at.tuwien.flightfinder.pojo.Hotel</value>
+                  <value>at.tuwien.flightfinder.pojo.Subscriber</value>
+                  <value>at.tuwien.flightfinder.pojo.Airport</value>
+            </list>
+      </property>
+      </bean>
+</beans>

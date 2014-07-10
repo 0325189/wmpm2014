@@ -17,7 +17,8 @@ public class TwitterFacebookRoute extends RouteBuilder{
 
 	@Autowired
     Environment prop;
-	
+	@Autowired
+	MarketingProcessor marketingProcessor;
 	private String twitterEndpoint = "twitter://timeline/user";
 	private String facebookEndpoint = "facebook://postStatusMessage?inBody=message";
 
@@ -32,7 +33,7 @@ public class TwitterFacebookRoute extends RouteBuilder{
         	from("timer:socialMarketing?period=86400000"). //can be set to specific time "time=yyyy-MM-dd HH:mm:ss" or just set the period to one day "period=86400000"	
         	routeId("Route-Social").
         	log("timer fired..").
-        	process(new MarketingProcessor()).id("MarketingProcessor").
+        	process(marketingProcessor).id("MarketingProcessor").
         	multicast().parallelProcessing().
         	to(facebookEndpoint, twitterEndpoint).
         	to("log:Succesful!!!!");
