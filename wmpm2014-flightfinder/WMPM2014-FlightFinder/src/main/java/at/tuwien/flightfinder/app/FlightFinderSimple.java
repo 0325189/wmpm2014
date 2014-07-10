@@ -54,7 +54,7 @@ public class FlightFinderSimple {
 		//context.addRoutes(new HttpRouteConfig());
 		//context.addRoutes(new MailToFileOffersRoute());
 		context.addRoutes(new CbrRecievedFile());
-		//context.addRoutes(new OfferProcessingRoute());
+		context.addRoutes(new OfferProcessingRoute());
 		//context.addRoutes(new NewsletterMailRoute());
 		//context.addRoutes(new TwitterFacebookRoute());
 

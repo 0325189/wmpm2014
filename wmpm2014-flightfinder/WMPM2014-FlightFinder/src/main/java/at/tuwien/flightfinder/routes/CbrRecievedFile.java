@@ -27,7 +27,7 @@ public class CbrRecievedFile extends RouteBuilder{
 		log("XML file found on CBR: ${header.CamelFileName}").
 		split().tokenizeXML("Flight").unmarshal(jaxb).process(new PrintFlightoffer()).
 		log("XML file ${header.CamelFileName} has been splitted.").
-		to("activemq:Offers").
+		to("activemq:OffersXml").
 		log("-------------Finished XML---------").
 		endChoice().
 
@@ -36,7 +36,7 @@ public class CbrRecievedFile extends RouteBuilder{
 		split(body().tokenize(";")).streaming().log("---before---${body}").
 		log("CSV file ${header.CamelFileName} has been splitted.").
 		unmarshal(bindy).log("---after---${body}").
-		log("XML file ${header.CamelFileName} has been unmarshaled into Flighfinder POJO.").
+		log("CSV file ${header.CamelFileName} has been unmarshaled into Flighfinder POJO.").
 		to("activemq:Offers").
 		log("-------------Finished CSV---------").endChoice().
 		otherwise().to("activemq:badMessage")

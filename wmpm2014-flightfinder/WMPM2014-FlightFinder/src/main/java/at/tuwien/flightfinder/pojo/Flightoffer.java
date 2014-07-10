@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -23,6 +24,7 @@ import org.apache.camel.dataformat.bindy.annotation.DataField;
 import org.apache.camel.dataformat.bindy.annotation.Link;
 
 import at.tuwien.flightfinder.beans.XMLDateAdapter;
+import at.tuwien.flightfinder.dao.AirportDAO;
 
 
 @XmlRootElement(name = "Flight")
@@ -40,13 +42,13 @@ public class Flightoffer implements Serializable {
 	@GeneratedValue
 	private long id;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="from_id")
 	@Link
 	private OriginAirport fromAirport;
 
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="to_id")
 	@Link
 	private DestinationAirport toAirport;
@@ -78,6 +80,7 @@ public class Flightoffer implements Serializable {
 	private FlightClass flightClass;
 
 	private List<Hotel> hotels;
+	
 	private Date insertDate;
 
 	public Flightoffer(OriginAirport fromAirport, DestinationAirport toAirport,
@@ -129,6 +132,18 @@ public class Flightoffer implements Serializable {
 	public OriginAirport getFromAirport() {
 		System.out.println("getterOffer: "+fromAirport.getFromIataCode());
 		return fromAirport;
+	}
+	
+	public boolean isEuropean(Exchange exchange){
+		AirportDAO airDAO = new AirportDAO();
+		List<Airport> euIataCodesList = airDAO.getAllAirports();
+		Boolean flag = false;
+		for(Airport ap: euIataCodesList){
+			OriginAirport oA  =  exchange.getIn().getBody(Flightoffer.class).getFromAirport();
+					if (oA.getFromIataCode().trim().contains(ap.toString()))
+						flag = true;
+		}
+		return flag;
 	}
 
 	public void setFromAirport(OriginAirport airportOrigin) {
@@ -220,16 +235,4 @@ public class Flightoffer implements Serializable {
 	public void setFlightClass(FlightClass flightClass) {
 		this.flightClass = flightClass;
 	}
-//
-//	public boolean isEuropean(Exchange exchange){
-//		AirportDAO airDAO = new AirportDAO();
-//		List<Airport> euIataCodesList = airDAO.getAllAirports();
-//		Boolean flag = false;
-//		for(Airport ap: euIataCodesList){
-//			flag  =  exchange.getIn().getBody(Flightoffer.class).getFromIataCode().contains(ap.getIataCode());
-//		}
-//		return flag;
-//	}
-
-
 }

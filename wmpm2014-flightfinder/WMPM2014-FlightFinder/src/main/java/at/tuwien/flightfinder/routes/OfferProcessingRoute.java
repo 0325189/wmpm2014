@@ -15,9 +15,11 @@ public class OfferProcessingRoute extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 
-		from("activemq:Offers").log("${body}").
+		from("activemq:Offers").
+		//log("${body}").
 		routeId("Route-OfferProcess").
-		log("Message has been pulled from Offers queue").split(body()).log("------${body}").
+		log("Message has been pulled from Offers queue").split(body()).
+		log("------${body}").
 		//filter().xpath("//Flight").
 		filter().method(Flightoffer.class, "isEuropean").
 		log("Message has been filtered and is being pushed to ernicher");
