@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import at.tuwien.flightfinder.pojo.Airport;
@@ -15,11 +17,12 @@ import at.tuwien.flightfinder.pojo.Hotel;
  * @author Ivan Gusljesevic
  */
 @Component
-public class HotelDAO extends BaseDAO{
-	
+public class HotelDAO {
+	@Autowired
+	SessionFactory sessionFactory;
 	public void addHotel(Hotel hotel){
 		Transaction trns = null;
-	    Session session = getSession();
+	    Session session = sessionFactory.openSession();
 	    try {
 	        trns = session.beginTransaction();
 	        session.save(hotel);
@@ -36,7 +39,7 @@ public class HotelDAO extends BaseDAO{
 	}
 	public void deleteHotel(int hotelId){
 		Transaction trns = null;
-        Session session =getSession();
+        Session session =sessionFactory.openSession();
         try {
             trns = session.beginTransaction();
             Hotel hotel= (Hotel) session.load(Hotel.class, new Integer(hotelId));
@@ -55,7 +58,7 @@ public class HotelDAO extends BaseDAO{
 	}
 	public void updateHotel(Hotel hotel){
 		Transaction trns = null;
-        Session session = getSession();
+        Session session = sessionFactory.openSession();
         try {
             trns = session.beginTransaction();
             session.update(hotel);
@@ -73,7 +76,7 @@ public class HotelDAO extends BaseDAO{
 	public List<Hotel> getAllHotels(){
 		 List<Hotel> hotels = new ArrayList<Hotel>();
 	        Transaction trns = null;
-	        Session session = getSession();
+	        Session session = sessionFactory.openSession();
 	        try {
 	            trns = session.beginTransaction();
 	            hotels = session.createQuery("from Hotel").list();
@@ -88,7 +91,7 @@ public class HotelDAO extends BaseDAO{
 	public Hotel getHotelById(int hotelId){
 		 Hotel hotel = null;
 	        Transaction trns = null;
-	        Session session = getSession();
+	        Session session = sessionFactory.openSession();
 	        try {
 	            trns = session.beginTransaction();
 	            String queryString = "from Hotel where id = :id";
@@ -106,7 +109,7 @@ public class HotelDAO extends BaseDAO{
 	public List<Hotel> getHotelByDestAirport(String iataCode){
 		 Airport airport = null;
 	        Transaction trns = null;
-	        Session session = getSession();
+	        Session session = sessionFactory.openSession();
 	        try {
 	            trns = session.beginTransaction();
 	            String queryString = "from Airport where iataCode = :id";

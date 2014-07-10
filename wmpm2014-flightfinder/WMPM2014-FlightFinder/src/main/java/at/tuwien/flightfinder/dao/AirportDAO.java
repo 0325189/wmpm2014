@@ -7,7 +7,9 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import at.tuwien.flightfinder.pojo.Airport;
@@ -17,11 +19,13 @@ import at.tuwien.flightfinder.pojo.Airport;
  * @author Ivan Gusljesevic
  */
 @Component
-public class AirportDAO extends BaseDAO{
+public class AirportDAO {
+	@Autowired
+	SessionFactory sessionFactory;
 	
 	public void addAirport(Airport airport){
 		Transaction trns = null;
-	    Session session = getSession();
+	    Session session = sessionFactory.openSession();
 	    try {
 	        trns = session.beginTransaction();
 	        session.save(airport);
@@ -38,7 +42,7 @@ public class AirportDAO extends BaseDAO{
 	}
 	public void deleteAirport(int airportId){
 		 Transaction trns = null;
-	        Session session = getSession();
+	        Session session = sessionFactory.openSession();
 	        try {
 	            trns = session.beginTransaction();
 	            Airport airport = (Airport) session.load(Airport.class, new Integer(airportId));
@@ -56,7 +60,7 @@ public class AirportDAO extends BaseDAO{
 	}
 	public void updateAirport(Airport airport){
 	    Transaction trns = null;
-        Session session = getSession();
+        Session session = sessionFactory.openSession();
         try {
             trns = session.beginTransaction();
             session.update(airport);
@@ -75,7 +79,7 @@ public class AirportDAO extends BaseDAO{
 	public List<Airport> getAllAirports(){
 		 List<Airport> airports = new ArrayList<Airport>();
 	        Transaction trns = null;
-	        Session session = getSession();
+	        Session session = sessionFactory.openSession();
 	        try {
 	            trns = session.beginTransaction();
 	            airports = session.createQuery("from Airport").list();
@@ -90,7 +94,7 @@ public class AirportDAO extends BaseDAO{
 	public Airport getAirportById(int airportId){
 		 Airport airport = null;
 	        Transaction trns = null;
-	        Session session = getSession();
+	        Session session = sessionFactory.openSession();
 	        try {
 	            trns = session.beginTransaction();
 	            String queryString = "from Airport where id = :id";
@@ -108,7 +112,7 @@ public class AirportDAO extends BaseDAO{
 	public Airport getAirportByIataCode(String iataCode){
 		 Airport airport = null;
 	        Transaction trns = null;
-	        Session session = getSession();
+	        Session session = sessionFactory.openSession();
 	        try {
 	        	  trns = session.beginTransaction();
 		            String queryString = "from Airport where iataCode = :id";

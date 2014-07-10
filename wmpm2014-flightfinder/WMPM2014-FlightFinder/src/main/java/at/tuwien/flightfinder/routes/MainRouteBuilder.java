@@ -12,9 +12,8 @@ import org.apache.camel.component.mail.SplitAttachmentsExpression;
 import org.apache.camel.converter.jaxb.JaxbDataFormat;
 import org.apache.camel.dataformat.bindy.csv.BindyCsvDataFormat;
 import org.apache.camel.dataformat.xmljson.XmlJsonDataFormat;
-import org.apache.camel.processor.aggregate.AggregationStrategy;
 import org.apache.camel.spi.DataFormat;
-import org.apache.log4j.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -27,8 +26,10 @@ import at.tuwien.flightfinder.beans.JSONStream;
 import at.tuwien.flightfinder.beans.MarketingProcessor;
 import at.tuwien.flightfinder.beans.PrintFlightoffer;
 import at.tuwien.flightfinder.beans.PrintListFlightoffer;
+
 import at.tuwien.flightfinder.dao.FlightofferDAO;
-import at.tuwien.flightfinder.pojo.Flightoffer;
+import at.tuwien.flightfinder.dao.HotelDAO;
+
 
 @Component
 public class MainRouteBuilder extends RouteBuilder {
@@ -37,6 +38,8 @@ public class MainRouteBuilder extends RouteBuilder {
 	Archive save2db;
 	@Autowired
 	FlightofferDAO flightOfferDAO;
+	@Autowired
+	HotelDAO hotelDAO;
 	@Autowired
 	EnrichWithSubscribers enrichWithSubscribers;
 	@Autowired
@@ -153,7 +156,7 @@ public class MainRouteBuilder extends RouteBuilder {
 		log("CSV file ${header.CamelFileName} has been unmarshaled into Flighfinder POJO.").
 		to("activemq:Offers").setHeader("iataCode").simple("${body.fromIataCode}").process(new PrintFlightoffer()).
 		log("-------------Finished CSV---------").endChoice().
-		otherwise().to("activemq:badMessage")
+		otherwise().to("activemq:dead-letter")
 		.end();
 
 
