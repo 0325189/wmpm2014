@@ -72,7 +72,7 @@ public class Flightoffer implements Serializable {
 	@DataField(pos = 10)
 	private String price;
 
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="flightOffer", fetch=FetchType.EAGER)
+	@Transient
 	private List<Hotel> hotels;
 	private Date insertDate;
 

@@ -30,3 +30,12 @@ HOTEL SELECT * FROM SUBSCRIBER [42001-178]
 06-19 16:29:21 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT * FLIGHTOFFER"; SQL statement:
 SELECT * FLIGHTOFFER [42000-178]
+07-10 14:02:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "'' (HOTEL: FLIGHTOFFER_ID BIGINT)"; SQL statement:
+INSERT INTO "PUBLIC"."HOTEL"("ID","NAME","STARSNUMBER","DESTAIRPORT_ID","FLIGHTOFFER_ID")VALUES(?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5) [22018-178]
+07-10 14:02:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Data conversion error converting "'' (HOTEL: FLIGHTOFFER_ID BIGINT)"; SQL statement:
+INSERT INTO "PUBLIC"."HOTEL"("ID","NAME","STARSNUMBER","DESTAIRPORT_ID","FLIGHTOFFER_ID")VALUES(?,?,?,?,?) -- (?1, ?2, ?3, ?4, ?5) [22018-178]
+07-10 14:12:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "AIRPORT[*] SELECT * FROM HOTEL"; expected "ALTER, ANALYZE, {"; SQL statement:
+AIRPORT SELECT * FROM HOTEL [42001-178]
