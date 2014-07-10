@@ -20,6 +20,24 @@
             <property name="password" value="" />
       </bean>
 
+	  <!-- setup the Camel hibernate component -->
+	  <bean id="hibernate" class="org.apacheextras.camel.component.hibernate.HibernateComponent">
+	    <property name="sessionFactory" ref="sessionFactory"/>
+	    <property name="transactionStrategy" ref="springTransactionStrategy"/>
+	  </bean>
+	 
+	  <!-- setup hibernate and spring to use transaction -->
+	  <bean id="springTransactionStrategy" class="org.apacheextras.camel.component.hibernate.SpringTransactionStrategy">
+	    <constructor-arg ref="sessionFactory"/>
+	    <constructor-arg ref="transactionTemplate"/>
+	  </bean>
+	  <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+	    <property name="sessionFactory" ref="sessionFactory"/>
+	  </bean>
+	  <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+	    <property name="transactionManager" ref="transactionManager"/>
+	  </bean>
+	  
       <!-- Configure Hibernate 4 Session Facotry -->
       <bean id="sessionFactory"
             class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
