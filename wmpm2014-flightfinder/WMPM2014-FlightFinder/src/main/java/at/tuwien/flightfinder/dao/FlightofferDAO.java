@@ -129,8 +129,7 @@ public class FlightofferDAO extends BaseDAO{
 		}
 		return flightoffers;
 	}
-	public boolean lookupEuropeanIata(@Header ("fromIataCode") String iataCode){
-		System.out.println(iataCode);
+	public boolean lookupEuropeanIata(@Header ("iataCode") String iataCode){
 		boolean flag = false;
 		Airport airport = null; 
 		Transaction trns = null;

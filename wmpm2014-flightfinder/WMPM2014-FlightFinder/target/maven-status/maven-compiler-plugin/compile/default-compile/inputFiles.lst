@@ -1,5 +1,6 @@
 C:\Users\Sanyo\workflow-project\wmpm2014\wmpm2014-flightfinder\WMPM2014-FlightFinder\src\main\java\at\tuwien\flightfinder\beans\EnrichWithSubscribers.java
 C:\Users\Sanyo\workflow-project\wmpm2014\wmpm2014-flightfinder\WMPM2014-FlightFinder\src\main\java\at\tuwien\flightfinder\beans\MarketingProcessor.java
+C:\Users\Sanyo\workflow-project\wmpm2014\wmpm2014-flightfinder\WMPM2014-FlightFinder\src\main\java\at\tuwien\flightfinder\beans\PrintListFlightoffer.java
 C:\Users\Sanyo\workflow-project\wmpm2014\wmpm2014-flightfinder\WMPM2014-FlightFinder\src\main\java\at\tuwien\flightfinder\dao\HotelDAO.java
 C:\Users\Sanyo\workflow-project\wmpm2014\wmpm2014-flightfinder\WMPM2014-FlightFinder\src\main\java\at\tuwien\flightfinder\pojo\FlightClass.java
 C:\Users\Sanyo\workflow-project\wmpm2014\wmpm2014-flightfinder\WMPM2014-FlightFinder\src\main\java\at\tuwien\flightfinder\pojo\Flightoffer.java
@@ -8,6 +9,7 @@ C:\Users\Sanyo\workflow-project\wmpm2014\wmpm2014-flightfinder\WMPM2014-FlightFi
 C:\Users\Sanyo\workflow-project\wmpm2014\wmpm2014-flightfinder\WMPM2014-FlightFinder\src\main\java\at\tuwien\flightfinder\config\FlightFinderConfig.java
 C:\Users\Sanyo\workflow-project\wmpm2014\wmpm2014-flightfinder\WMPM2014-FlightFinder\src\main\java\at\tuwien\flightfinder\dao\AirportDAO.java
 C:\Users\Sanyo\workflow-project\wmpm2014\wmpm2014-flightfinder\WMPM2014-FlightFinder\src\main\java\at\tuwien\flightfinder\pojo\Subscriber.java
+C:\Users\Sanyo\workflow-project\wmpm2014\wmpm2014-flightfinder\WMPM2014-FlightFinder\src\main\java\at\tuwien\flightfinder\beans\HotelAggregationStrategy.java
 C:\Users\Sanyo\workflow-project\wmpm2014\wmpm2014-flightfinder\WMPM2014-FlightFinder\src\main\java\at\tuwien\flightfinder\dao\FlightofferDAO.java
 C:\Users\Sanyo\workflow-project\wmpm2014\wmpm2014-flightfinder\WMPM2014-FlightFinder\src\main\java\at\tuwien\flightfinder\beans\IncommingMailProcessor.java
 C:\Users\Sanyo\workflow-project\wmpm2014\wmpm2014-flightfinder\WMPM2014-FlightFinder\src\main\java\at\tuwien\flightfinder\pojo\Hotel.java

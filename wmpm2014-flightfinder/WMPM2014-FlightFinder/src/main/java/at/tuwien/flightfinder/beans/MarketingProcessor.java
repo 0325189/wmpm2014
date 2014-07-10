@@ -24,9 +24,6 @@ public class MarketingProcessor implements Processor{
 	@Autowired
 	FlightofferDAO flightOfferDAO;
 	
-
-
-
 	public void process(Exchange exchange)
 	{
 		

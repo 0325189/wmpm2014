@@ -12,6 +12,7 @@ import org.apache.camel.component.mail.SplitAttachmentsExpression;
 import org.apache.camel.converter.jaxb.JaxbDataFormat;
 import org.apache.camel.dataformat.bindy.csv.BindyCsvDataFormat;
 import org.apache.camel.dataformat.xmljson.XmlJsonDataFormat;
+import org.apache.camel.processor.aggregate.AggregationStrategy;
 import org.apache.camel.spi.DataFormat;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +21,20 @@ import org.springframework.stereotype.Component;
 
 import at.tuwien.flightfinder.beans.Archive;
 import at.tuwien.flightfinder.beans.EnrichWithSubscribers;
+import at.tuwien.flightfinder.beans.HotelAggregationStrategy;
 import at.tuwien.flightfinder.beans.IncommingMailProcessor;
 import at.tuwien.flightfinder.beans.JSONStream;
 import at.tuwien.flightfinder.beans.MarketingProcessor;
 import at.tuwien.flightfinder.beans.PrintFlightoffer;
+import at.tuwien.flightfinder.beans.PrintListFlightoffer;
 import at.tuwien.flightfinder.dao.FlightofferDAO;
+import at.tuwien.flightfinder.pojo.Flightoffer;
 
 @Component
 public class MainRouteBuilder extends RouteBuilder {
 
 	@Autowired
-	Archive archive;
+	Archive save2db;
 	@Autowired
 	FlightofferDAO flightOfferDAO;
 	@Autowired
@@ -55,7 +59,7 @@ public class MainRouteBuilder extends RouteBuilder {
 		 **--------------------
 		 */
 
-		errorHandler(deadLetterChannel(MainRouteBuilder.DLCH).useOriginalMessage());
+		//errorHandler(deadLetterChannel(MainRouteBuilder.DLCH).useOriginalMessage());
 		
 		
 		from("stream:url?url=http://www.tesla-gui.at/http/offers.json&groupLines=100").
@@ -73,11 +77,9 @@ public class MainRouteBuilder extends RouteBuilder {
 		 **--------------------
 		 */
 
-		//from("file:mojTest?fileName=FlightFinder_FlightsDetailsInfo_v4.csv&noop=true").
 		from("ftp://ftp6291381_workflow@www92.world4you.com?password=workflow2014&consumer.delay=60000&charset=ISO-8859-1").
 		routeId("Route-FTP").
 		log("Downloading File: ${header.CamelFileName} from the FTP Server").
-		//what about routing the faulty file to dead queue?? 
 		validate(header("CamelFileName").regex("^[^ÜüÄäÖö]+$")).
 		log("The file ${header.CamelFileName} has been validated for german special character").
 		to("activemq:fileOffers").
@@ -108,6 +110,8 @@ public class MainRouteBuilder extends RouteBuilder {
 		DataFormat jaxb = new JaxbDataFormat("at.tuwien.flightfinder.pojo");
 
 		from("activemq:fileOffers").
+		wireTap("file://offers_archive").
+		log("Message has been stored using WireTap").
 		routeId("Route-CBR").
 		choice().
 		when(header("CamelFileName").regex("^.*(xml)$")).
@@ -147,10 +151,7 @@ public class MainRouteBuilder extends RouteBuilder {
 			}
 		}).
 		log("CSV file ${header.CamelFileName} has been unmarshaled into Flighfinder POJO.").
-
-
-		//setHeader("iataCode").simple("${body.fromIataCode}")  --> if not working try this!
-		to("activemq:Offers").setHeader("iataCode", simple("${body.fromIataCode}")).process(new PrintFlightoffer()).
+		to("activemq:Offers").setHeader("iataCode").simple("${body.fromIataCode}").process(new PrintFlightoffer()).
 		log("-------------Finished CSV---------").endChoice().
 		otherwise().to("activemq:badMessage")
 		.end();
@@ -166,17 +167,11 @@ public class MainRouteBuilder extends RouteBuilder {
 		routeId("Route-OfferProcess").
 		log("Message has been pulled from Offers queue").
 		filter().method(flightOfferDAO, "lookupEuropeanIata").
-		log("Message has been filtered and is being pushed to enricher").
-		process(new PrintFlightoffer()).
-		pollEnrich("hibernate:at.tuwien.flightfinder.pojo.Hotel").log("ENRICHER--------------${body}").
-
-		//		process(new OffersEnricher()).
-		//		log("Message has been eriched with hotels and is being pushed to enricher").
-		//		wireTap("file://offers_archive?fileName=${date:now:yyyy-MM-dd}.xml&fileExist=Append").
-		bean(archive).
-		log("Message has been stored using WireTap");
-
-
+		bean(save2db).
+		log("Message has been filtered, and saved to database");
+		
+		
+		
 		/**
 		 **--------------------
 		 **NewsletterMailRoute
@@ -184,11 +179,12 @@ public class MainRouteBuilder extends RouteBuilder {
 		 */
 
 
-		from("timer:newsletter?period=60000"). //can be set to specific time "time=yyyy-MM-dd HH:mm:ss" or just set the period to one day "period=86400000"
+		from("timer:newsletter?period=86400000"). //can be set to specific time "time=yyyy-MM-dd HH:mm:ss" or just set the period to one day "period=86400000"
 		routeId("Route-Newsletter").
 		log("--------------------timer fired..--------------------------------").
 		bean(flightOfferDAO , "getTodaysFlightoffers").id("flightOfferBean").
 		split(body()).
+		pollEnrich("bean:hotelDAO?method=getAllHotels", new HotelAggregationStrategy()).process(new PrintListFlightoffer()).
 		process(enrichWithSubscribers).
 		to("velocity:file:data/newsletter.vm").id("velocityTemplate").
 
@@ -203,38 +199,31 @@ public class MainRouteBuilder extends RouteBuilder {
 		 */
 
 
-		loadFacebookKeys();
+		facebookEndpoint += "&userId=" + prop.getProperty("FlightFinder_userId");
+		facebookEndpoint += "&oAuthAppId=" + prop.getProperty("FlightFinder_oAuthAppId");
+		facebookEndpoint += "&oAuthAppSecret=" + prop.getProperty("FlightFinder_oAuthAppSecret");
+		facebookEndpoint += "&oAuthAccessToken=" + prop.getProperty("FlightFinder_oAuthAccessToken");
 
 		//onException(FacebookException.class).redeliveryDelay(60000).maximumRedeliveries(3).continued(true);
 		//onException(TwitterException.class).redeliveryDelay(60000).maximumRedeliveries(3).continued(true);
 
 		from("timer:socialMarketing?period=86400000"). //can be set to specific time "time=yyyy-MM-dd HH:mm:ss" or just set the period to one day "period=86400000"	
 		routeId("Route-Social").
-		log("timer fired..").
+		log("--------------------timer fired..--------------------------------").
 		process(marketingProcessor).id("MarketingProcessor").
 		multicast().parallelProcessing().
 		to(facebookEndpoint, twitterEndpoint).
-		to("log:Succesful!!!!");
+		log("-------------------FINISHED--------------------------------------");
 
-	}
-
-	private void loadFacebookKeys() {
-		facebookEndpoint += "&userId=" + prop.getProperty("FlightFinder_userId");
-		facebookEndpoint += "&oAuthAppId=" + prop.getProperty("FlightFinder_oAuthAppId");
-		facebookEndpoint += "&oAuthAppSecret=" + prop.getProperty("FlightFinder_oAuthAppSecret");
-		facebookEndpoint += "&oAuthAccessToken=" + prop.getProperty("FlightFinder_oAuthAccessToken");
-
-
+	
 
 		/**
-		 **--------------------
-		 **DeadletterChannel
-		 **--------------------
-		 */
+		**--------------------
+		**DeadletterChannel
+		**--------------------
+		*/
 		
 		from(DLCH).log(LoggingLevel.INFO, "Message in dead letter queue");
-
-
 
 	}
 }

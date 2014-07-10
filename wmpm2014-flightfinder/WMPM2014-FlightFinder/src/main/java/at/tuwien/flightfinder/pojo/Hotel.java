@@ -58,4 +58,9 @@ public class Hotel {
 		this.destinationAirport = destinationAirport;
 	}
 	
+	@Override
+	public String toString(){
+		return "Name: " + name + "Stars Number: " + starsNumber;
+	}
+	
 }

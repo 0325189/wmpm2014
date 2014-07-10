@@ -19,8 +19,8 @@
             <property name="username" value="sa" />
             <property name="password" value="" />
       </bean>
-
-	  <!-- setup the Camel hibernate component -->
+      
+      <!-- setup the Camel hibernate component -->
 	  <bean id="hibernate" class="org.apacheextras.camel.component.hibernate.HibernateComponent">
 	    <property name="sessionFactory" ref="sessionFactory"/>
 	    <property name="transactionStrategy" ref="springTransactionStrategy"/>
@@ -38,6 +38,8 @@
 	    <property name="transactionManager" ref="transactionManager"/>
 	  </bean>
 	  
+	  <bean id="hotelDAO" class="at.tuwien.flightfinder.dao.HotelDAO" />
+	 
       <!-- Configure Hibernate 4 Session Facotry -->
       <bean id="sessionFactory"
             class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

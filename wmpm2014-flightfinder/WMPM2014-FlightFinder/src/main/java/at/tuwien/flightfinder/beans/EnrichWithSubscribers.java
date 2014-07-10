@@ -55,12 +55,6 @@ public class EnrichWithSubscribers implements  Processor {
 		}
 		
 
-		for(Flightoffer fo:offers){
-			List<Hotel> hotelList = hotelDao.getHotelByDestAirport(fo.getToIataCode());
-			fo.setHotels(hotelList);
-		}//for
-		
-		
 		String iata = offers.get(0).getFromIataCode();
 
 
@@ -91,20 +85,10 @@ public class EnrichWithSubscribers implements  Processor {
 			mailHeader.put("From", "FlightFinder <workflow@seferovic.net>");
 			mailHeader.put("Subject", "FlightFinder -- Best offres of the day!");
 
-			//				exchange.getIn().setHeaders(mailHeader);
-			//				exchange.getIn().setBody(flightofferList);
-
 			//sends the body of the message to Velocity-template for transformation
 			exchange.getIn().setHeaders(mailHeader);
 			exchange.getIn().setBody(offers);
 
-
-			//				message.setHeaders(mailHeader);
-			//				message.setBody(flightofferList);
-			//				exchange.setIn(message); 
-
-			//sends the whole exchange as email iteratively
-			//logger.info("SENDING EMAIL");
 		}	
 	}
 

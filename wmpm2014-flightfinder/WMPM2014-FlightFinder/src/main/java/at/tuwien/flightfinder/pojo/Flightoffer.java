@@ -1,5 +1,6 @@
 package at.tuwien.flightfinder.pojo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -73,7 +74,8 @@ public class Flightoffer implements Serializable {
 	private String price;
 
 	@Transient
-	private List<Hotel> hotels;
+	private List<Hotel> hotels = new ArrayList<Hotel>();
+	
 	private Date insertDate;
 
 	public Flightoffer(String fromAirport, String toAirport,
@@ -215,8 +217,14 @@ public class Flightoffer implements Serializable {
 	
 	@Override
 	public String toString(){
+		String hba  = "";
+		if(!hotels.isEmpty()){
+			for(Hotel item:hotels){
+				hba += item.getName();
+			}
+		}
 		return "id: "+id+"\nfromAirport: "+fromIataCode+"\ntoAirport: "+toIataCode+"\nnameOrigin: "+nameOrigin+"\nnameDestination: "+nameDestination+"\nairCompany: "+airCompany+
-				"\nflightDate: "+flightDate+"\nticketId: "+ticketId+"\nprice: "+price+"\nflightClass: "+flightClass;
+				"\nflightDate: "+flightDate+"\nticketId: "+ticketId+"\nprice: "+price+"\nflightClass: "+flightClass + "\nhotels: " + hba;
 	}
 		
 	

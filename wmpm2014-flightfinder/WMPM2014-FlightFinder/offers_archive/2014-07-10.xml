@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Flight>
+    <AirCompanyName>Lufthansa</AirCompanyName>
+    <Class>Business</Class>
+    <FlightDate>20140612</FlightDate>
+    <FlightNumber>LU832</FlightNumber>
+    <IATACodeOrigin>CDG</IATACodeOrigin>
+    <Destination>Madrid</Destination>
+    <Origin>Paris</Origin>
+    <Price>270</Price>
+    <TicketID>LU83220140612B25</TicketID>
+    <IATACodeDestination>MAD</IATACodeDestination>
+</Flight>
