@@ -34,10 +34,7 @@ public class Airport{
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="destinationAirport", fetch=FetchType.EAGER)
 	private List<Hotel> hotels;
-	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="fromAirport", fetch=FetchType.EAGER)
-	private List<Flightoffer> flightoffers;
-	
+		
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="airport", fetch=FetchType.EAGER)
 	private List<Subscriber> subscribers;
 	
@@ -60,12 +57,6 @@ public class Airport{
 		this.iataCode = iataCode;
 	}
 
-	public List<Flightoffer> getFlightoffers() {
-		return flightoffers;
-	}
-	public void setFlightoffers(List<Flightoffer> flightoffers) {
-		this.flightoffers = flightoffers;
-	}
 	public List<Subscriber> getSubscribers() {
 		return subscribers;
 	}

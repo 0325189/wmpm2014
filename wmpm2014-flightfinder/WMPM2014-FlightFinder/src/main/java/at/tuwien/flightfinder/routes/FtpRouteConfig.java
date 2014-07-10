@@ -3,8 +3,6 @@ package at.tuwien.flightfinder.routes;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
-import at.tuwien.flightfinder.beans.FtpRouteLogger;
-
 @Component
 public class FtpRouteConfig extends RouteBuilder{
 	

@@ -23,6 +23,8 @@ import at.tuwien.flightfinder.pojo.Subscriber;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
 /**
@@ -34,9 +36,13 @@ import org.slf4j.LoggerFactory;
  * @author ivan
  *
  */
+@Component
 public class EnrichWithSubscribers implements  Processor {
 
-
+	@Autowired
+	HotelDAO hotelDao;
+	@Autowired
+	SubscriberDAO suDAO;
 	private static final Logger logger = LoggerFactory.getLogger(EnrichWithSubscribers.class);
 
 	public void process(Exchange exchange) {
@@ -47,15 +53,15 @@ public class EnrichWithSubscribers implements  Processor {
 		if(offers.size()>4){
 			offers.subList(4, offers.size()-1).clear();
 		}
-		HotelDAO hotelDao = new HotelDAO();
+		
 
 		for(Flightoffer fo:offers){
-			List<Hotel> hotelList = hotelDao.getHotelByDestAirport(fo.getToAirport().getIataCode());
+			List<Hotel> hotelList = hotelDao.getHotelByDestAirport(fo.getToIataCode());
 			fo.setHotels(hotelList);
 		}//for
 		
-		SubscriberDAO suDAO = new SubscriberDAO();
-		String iata = offers.get(0).getFromAirport().getIataCode();
+		
+		String iata = offers.get(0).getFromIataCode();
 
 
 		//Get the list of subscribers

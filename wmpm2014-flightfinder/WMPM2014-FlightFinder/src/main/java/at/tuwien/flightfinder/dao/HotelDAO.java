@@ -6,20 +6,20 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Component;
 
 import at.tuwien.flightfinder.pojo.Airport;
 import at.tuwien.flightfinder.pojo.Hotel;
-import at.tuwien.flightfinder.util.HibernateUtil;
 /**
  * Hotel DAO with basic CRUD methods
  * @author Ivan Gusljesevic
  */
-
-public class HotelDAO {
+@Component
+public class HotelDAO extends BaseDAO{
 	
 	public void addHotel(Hotel hotel){
 		Transaction trns = null;
-	    Session session = HibernateUtil.getSessionFactory().openSession();
+	    Session session = getSession();
 	    try {
 	        trns = session.beginTransaction();
 	        session.save(hotel);
@@ -36,7 +36,7 @@ public class HotelDAO {
 	}
 	public void deleteHotel(int hotelId){
 		Transaction trns = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session =getSession();
         try {
             trns = session.beginTransaction();
             Hotel hotel= (Hotel) session.load(Hotel.class, new Integer(hotelId));
@@ -55,7 +55,7 @@ public class HotelDAO {
 	}
 	public void updateHotel(Hotel hotel){
 		Transaction trns = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = getSession();
         try {
             trns = session.beginTransaction();
             session.update(hotel);
@@ -73,7 +73,7 @@ public class HotelDAO {
 	public List<Hotel> getAllHotels(){
 		 List<Hotel> hotels = new ArrayList<Hotel>();
 	        Transaction trns = null;
-	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Session session = getSession();
 	        try {
 	            trns = session.beginTransaction();
 	            hotels = session.createQuery("from Hotel").list();
@@ -88,7 +88,7 @@ public class HotelDAO {
 	public Hotel getHotelById(int hotelId){
 		 Hotel hotel = null;
 	        Transaction trns = null;
-	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Session session = getSession();
 	        try {
 	            trns = session.beginTransaction();
 	            String queryString = "from Hotel where id = :id";
@@ -106,7 +106,7 @@ public class HotelDAO {
 	public List<Hotel> getHotelByDestAirport(String iataCode){
 		 Airport airport = null;
 	        Transaction trns = null;
-	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Session session = getSession();
 	        try {
 	            trns = session.beginTransaction();
 	            String queryString = "from Airport where iataCode = :id";

@@ -7,20 +7,21 @@ import java.util.List;
 
 import org.apache.camel.Header;
 import org.hibernate.*;
+import org.springframework.stereotype.Component;
 
 import at.tuwien.flightfinder.pojo.Airport;
 import at.tuwien.flightfinder.pojo.Flightoffer;
-import at.tuwien.flightfinder.util.HibernateUtil;
+
 /**
  * Flightoffer DAO with basic CRUD methods
  * @author Ivan Gusljesevic
  */
-
-public class FlightofferDAO {
+@Component
+public class FlightofferDAO extends BaseDAO{
 
 	public void addFlightoffer(Flightoffer flightoffer){
 		Transaction trns = null;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = getSession();
 		try {
 			trns = session.beginTransaction();
 			session.save(flightoffer);
@@ -37,7 +38,7 @@ public class FlightofferDAO {
 	}
 	public void deleteFlightoffer(int offerId){
 		Transaction trns = null;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = getSession();
 		try {
 			trns = session.beginTransaction();
 			Flightoffer flightoffer = (Flightoffer) session.load(Flightoffer.class, new Integer(offerId));
@@ -55,7 +56,7 @@ public class FlightofferDAO {
 	}
 	public void updateFlightoffer(Flightoffer flightoffer){
 		Transaction trns = null;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = getSession();
 		try {
 			trns = session.beginTransaction();
 			session.update(flightoffer);
@@ -74,7 +75,7 @@ public class FlightofferDAO {
 	public List<Flightoffer> getAllFlightsoffers(){
 		List<Flightoffer> flightoffers = new ArrayList<Flightoffer>();
 		Transaction trns = null;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = getSession();
 		try {
 			trns = session.beginTransaction();
 			flightoffers = session.createQuery("from Flightoffer").list();
@@ -89,7 +90,7 @@ public class FlightofferDAO {
 	public Flightoffer getFlightofferById(int offerId){
 		Flightoffer offer = null;
 		Transaction trns = null;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = getSession();
 		try {
 			trns = session.beginTransaction();
 			String queryString = "from Flightoffer where id = :id";
@@ -108,7 +109,7 @@ public class FlightofferDAO {
 		List<Flightoffer> flightoffers = new ArrayList<Flightoffer>();
 		Airport airport = null; 
 		Transaction trns = null;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = getSession();
 		try {
 			trns = session.beginTransaction();
 			String queryString = "from Airport where iataCode = :id";
@@ -133,7 +134,7 @@ public class FlightofferDAO {
 		boolean flag = false;
 		Airport airport = null; 
 		Transaction trns = null;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = getSession();
 		try {
 			trns = session.beginTransaction();
 			String queryString = "from Airport where iataCode = :id";
@@ -164,10 +165,10 @@ public class FlightofferDAO {
 
 		Airport airport = null; 
 		Transaction trns = null;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = getSession();
 		try {
 			trns = session.beginTransaction();
-			String queryString2 = "from Flightoffer offer where offer.insertDate >= current_date() order by offer.fromAirport, offer.price asc";
+			String queryString2 = "from Flightoffer offer where offer.insertDate >= current_date() order by offer.fromIataCode, offer.price asc";
 			Query query2 = session.createQuery(queryString2);
 			flightOffersList = query2.list();
 
@@ -216,7 +217,7 @@ public class FlightofferDAO {
 		Flightoffer flightoffer = new Flightoffer();
 		Airport airport = null; 
 		Transaction trns = null;
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = getSession();
 		try {
 			trns = session.beginTransaction();
 			String queryString2 = "from Flightoffer offer where offer.insertDate >= current_date() order by offer.price asc";
@@ -230,5 +231,4 @@ public class FlightofferDAO {
 		}
 		return flightoffer;
 	}
-
 }

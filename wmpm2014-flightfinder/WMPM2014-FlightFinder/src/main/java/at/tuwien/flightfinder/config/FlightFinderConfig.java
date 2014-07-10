@@ -10,9 +10,11 @@ import org.apache.camel.spring.javaconfig.CamelConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * This is where SpringCamelContext is configured WITHOUT any Spring XML stuff :)
@@ -24,6 +26,8 @@ import org.springframework.core.env.Environment;
 @Profile("production")
 @PropertySource(value = {"classpath:facebook4j.properties", "classpath:twitter4j.properties"})
 @ComponentScan("at.tuwien.flightfinder")
+@EnableTransactionManagement
+@ImportResource({ "classpath:spring-config.xml" })
 public class FlightFinderConfig extends CamelConfiguration {
 	
 	@Autowired

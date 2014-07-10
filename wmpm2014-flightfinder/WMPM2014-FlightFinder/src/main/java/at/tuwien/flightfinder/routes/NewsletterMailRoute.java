@@ -2,6 +2,7 @@ package at.tuwien.flightfinder.routes;
 
 
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import at.tuwien.flightfinder.beans.EnrichWithSubscribers;
@@ -17,15 +18,19 @@ import at.tuwien.flightfinder.dao.FlightofferDAO;
 @Component
 public class NewsletterMailRoute extends RouteBuilder {
 
+	@Autowired
+	EnrichWithSubscribers enrichWithSubscribers;
+	@Autowired
+	FlightofferDAO flightOfferDAO;
 	@Override
 	public void configure() throws Exception {
 
 		from("timer:newsletter?period=60000"). //can be set to specific time "time=yyyy-MM-dd HH:mm:ss" or just set the period to one day "period=86400000"
 		routeId("Route-Newsletter").
 		log("--------------------timer fired..--------------------------------").
-		bean( new FlightofferDAO(), "getTodaysFlightoffers").id("flightOfferBean").
+		bean(flightOfferDAO , "getTodaysFlightoffers").id("flightOfferBean").
 		split(body()).
-		process(new EnrichWithSubscribers()).
+		process(enrichWithSubscribers).
 		to("velocity:file:data/newsletter.vm").id("velocityTemplate").
 
 		to("smtp://188.40.32.121?username=workflow@seferovic.net&password=workflowpassword&contentType=text/html").

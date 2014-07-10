@@ -8,19 +8,20 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Component;
 
 import at.tuwien.flightfinder.pojo.Airport;
-import at.tuwien.flightfinder.util.HibernateUtil;
 /**
  * Airport DAO with basic CRUD methods and getAirportByIataCode method
  * which gives possibility to select Airport based on IATA code
  * @author Ivan Gusljesevic
  */
-public class AirportDAO {
+@Component
+public class AirportDAO extends BaseDAO{
 	
 	public void addAirport(Airport airport){
 		Transaction trns = null;
-	    Session session = HibernateUtil.getSessionFactory().openSession();
+	    Session session = getSession();
 	    try {
 	        trns = session.beginTransaction();
 	        session.save(airport);
@@ -37,7 +38,7 @@ public class AirportDAO {
 	}
 	public void deleteAirport(int airportId){
 		 Transaction trns = null;
-	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Session session = getSession();
 	        try {
 	            trns = session.beginTransaction();
 	            Airport airport = (Airport) session.load(Airport.class, new Integer(airportId));
@@ -55,7 +56,7 @@ public class AirportDAO {
 	}
 	public void updateAirport(Airport airport){
 	    Transaction trns = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = getSession();
         try {
             trns = session.beginTransaction();
             session.update(airport);
@@ -74,7 +75,7 @@ public class AirportDAO {
 	public List<Airport> getAllAirports(){
 		 List<Airport> airports = new ArrayList<Airport>();
 	        Transaction trns = null;
-	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Session session = getSession();
 	        try {
 	            trns = session.beginTransaction();
 	            airports = session.createQuery("from Airport").list();
@@ -89,7 +90,7 @@ public class AirportDAO {
 	public Airport getAirportById(int airportId){
 		 Airport airport = null;
 	        Transaction trns = null;
-	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Session session = getSession();
 	        try {
 	            trns = session.beginTransaction();
 	            String queryString = "from Airport where id = :id";
@@ -107,7 +108,7 @@ public class AirportDAO {
 	public Airport getAirportByIataCode(String iataCode){
 		 Airport airport = null;
 	        Transaction trns = null;
-	        Session session = HibernateUtil.getSessionFactory().openSession();
+	        Session session = getSession();
 	        try {
 	        	  trns = session.beginTransaction();
 		            String queryString = "from Airport where iataCode = :id";
